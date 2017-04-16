@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./layout.xhtml">
+
+    <ui:define name="conteudo">
+        <p:growl id="sms" autoUpdate="true"/>
+
+        <div class="ui-fluid">
+            <h:form id="formCadEstado">
+                <p:scrollPanel mode="native" style="height:450px">
+                    <p:panel header="Relação - Estados">
+                        <p:dataTable id="tabCadEstado" emptyMessage="Nenhum registro encontrado!" paginator="true" 
+                                     reflow="true" paginatorPosition="bottom" var="estado" 
+                                     value="#{estadoController.objetoDao.all}" rows="5">
+                            <p:column headerText="ID" sortBy="#{estado.id}" filterBy="#{estado.id}" style="width: 80px">
+                                <h:outputText value="#{estado.id}"/>
+                            </p:column>
+                            <p:column headerText="Sigla" filterBy="#{estado.sigla}">
+                                <h:outputText value="#{estado.sigla}"/>
+                            </p:column>
+                            <p:column headerText="Descrição" filterBy="#{estado.descricao}">
+                                <h:outputText value="#{estado.descricao}"/>
+                            </p:column>
+                            <!--Botão Editar-->
+                            <p:column headerText="Opções">
+                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                                                 update=":sms">
+                                    <f:attribute name="selEstado" value="#{estado}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        <f:facet name="footer">
+                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
+                                             actionListener="#{estadoController.objetoLimpo()}"
+                                             update=":frmDialogCadEst:pngCadEst"/>
+                        </f:facet>
+                    </p:panel>
+                </p:scrollPanel>
+            </h:form>
+
+            <!--Dialogo de cadastro-->
+            <p:dialog header="Cadastro - Estados" widgetVar="dlg" modal="true" appendTo="@(body)"
+                      responsive="true" closeOnEscape="true" closable="true" resizable="false"
+                      draggable="false" showEffect="fold" hideEffect="drop" position="center">
+                <h:form id="frmDialogCadEst">
+
+                    <p:panelGrid id="pngCadEst" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-12"
+                                 layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:outputLabel for="slg" value="Sigla"/>
+                        <p:inputText id="slg" maxlength="2" size="50" value="#{estadoController.objeto.sigla}"
+                                     required="true" requiredMessage="Sigla é obrigatória!"/>
+                        <p:outputLabel for="desc" value="Descrição"/>
+                        <p:inputText id="desc" maxlength="50" size="50" value="#{estadoController.objeto.descricao}"
+                                     required="true" requiredMessage="Descrição é obrigatória!"/>
+                    </p:panelGrid>
+                    <center>
+                        <p:panelGrid columns="1" columnClasses="ui-grid-col3"
+                                     layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                             actionListener="#{estadoController.salvarRegistro(event)}"
+                                             update=":sms :formCadEstado:tabCadEstado :frmDialogCadEst"/>
+                        </p:panelGrid>
+                    </center>
+                </h:form>
+            </p:dialog>
+        </div>
+    </ui:define>
+
+</ui:composition>

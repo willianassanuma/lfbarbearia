@@ -1,0 +1,54 @@
+body {
+    margin: 0px;
+/*    background-image: url('../img/fundo.jpg')*/
+}
+
+/*#container  {
+    margin: 1em auto;  	
+    width: 98%;  	
+    background: #ffffff;  
+} */
+
+.ui-widget, .ui-widget .ui-widget {
+    font-size: 95% !important;
+}
+
+#topo {
+    position: relative;
+    background-color: #222222;
+    color: white;
+    padding: 20px 20px;
+     border: 15px;
+     border-color: black;
+}
+
+#esquerda { 
+    float: left;
+    width: 300px;
+}
+
+.conteudoCentro {
+    position: fixed;
+    width: 100%;
+    background-color: #dddddd;
+    padding: 5px;
+}
+
+/*Informações do lado esquerdo*/
+.conteudoEsquerda {
+    position: fixed;
+    background-color: #ffffff;
+    padding: 10px 10px;
+    margin-left: 300px;
+}
+
+/*@media (max-width: 768px){
+    #esquerda {
+        overflow: hidden;
+        
+    }
+    
+    #conteudo {
+        position: relative;
+    }
+}*/

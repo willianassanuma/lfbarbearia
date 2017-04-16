@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form>
+
+        <style>
+            a {
+                text-decoration: none;
+            }
+        </style>
+            <p:panelMenu style="width: auto; height: 520px;" rendered="true" model="">
+            <p:submenu label="Cadastros" icon="fa fa-newspaper-o" >
+                <p:menuitem value="Usuario" action="usuario.xhtml" icon="fa fa-user-plus"/>
+                <p:menuitem value="Perfil de Acesso" action="perfilAcesso.xhtml" icon="fa fa-low-vision "/>
+                <p:menuitem value="Cliente" action="cliente.xhtml" icon="fa fa-male" />
+                <p:menuitem value="Fornecedor" action="#" icon="fa fa-users" />
+                <p:menuitem value="Profissional" action="profissional.xhtml" icon="fa fa-handshake-o" />
+                <p:menuitem value="Estado" action="estado.xhtml" icon="fa fa-map" />
+                <p:menuitem value="Cidade" action="cidade.xhtml" icon="fa fa-map-signs" />
+                <p:menuitem value="Condições de pagamento" action="condPagamento.xhtml" icon="fa fa-credit-card-alt" />
+                <p:menuitem value="Insumos" action="insumo.xhtml" icon="fa fa-barcode" />
+                <p:menuitem value="Unidade de Medida" action="unidademedida.xhtml" icon="fa fa-flask" />
+                <p:menuitem value="Serviço" action="servico.xhtml" icon="fa fa-scissors" />
+            </p:submenu>
+            <p:submenu label="Agenda" icon="fa fa-calendar">
+            </p:submenu>
+            <p:submenu label="Relatórios" icon="fa fa-wrench">
+                <p:menuitem value="Cliente" action="#" icon="fa fa-male" />
+            </p:submenu>
+            <p:submenu label="Configurações" icon="fa fa-wrench">
+                <p:menuitem value="Parâmetro" action="parametro.xhtml" icon="fa fa-cog" />
+            </p:submenu>
+
+        </p:panelMenu>
+    </h:form>
+
+</ui:composition>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>LF. Barbearia</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,
+              maximum-scale=1.0, minimum-scale=1.0"/>
+        <link type="text/css" rel="stylesheet" href="resources/css/layout.css"/>
+        <link type="image/x-icon" rel="shortcut icon" href="resources/img/shortCut.png"  />
+        <link type="text/css" rel="stylesheet"  href="resources/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    </h:head>
+
+    <h:body>
+        <!--Remover-->
+        <style>
+            a {
+                color:  #ffffff;
+            }
+        </style>
+        
+        <div id="topo">
+            <ui:insert name="topo">
+                <a href="layout.xhtml">Menu + Logo DO LAYOUT</a>
+                
+            </ui:insert>
+        </div>
+
+        <div id="esquerda">
+            <ui:insert name="esquerda">
+                <ui:include src="menu.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div id="conteudo" class="conteudoEsquerda">
+            <ui:insert name="conteudo">
+
+            </ui:insert>
+        </div>
+
+    </h:body>
+</html>

@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./layout.xhtml">
+
+    <ui:define name="conteudo">
+        <p:growl id="sms" autoUpdate="true"/>
+        <div class="ui-fluid">
+            <h:form id="formCadUnMedida">
+                <p:scrollPanel mode="native" style="height:450px">
+                    <p:panel header="Relação - Unidade de Medida">
+                        <p:dataTable id="tabCadUnMedida" emptyMessage="Nenhum registro encontrado!" paginator="true" 
+                                     reflow="true" paginatorPosition="bottom" var="unmedida"
+                                     value="#{unidademedidaController.objetoDao.all}" rows="5">
+                            <p:column headerText="ID" sortBy="#{unmedida.id}" filterBy="#{unmedida.id}" style="width: 80px">
+                                <h:outputText value="#{unmedida.id}"/>
+                            </p:column>
+                            <p:column headerText="Sigla" filterBy="#{unmedida.sigla}">
+                                <h:outputText value="#{unmedida.sigla}"/>
+                            </p:column>
+                            <p:column headerText="Descrição" filterBy="#{unmedida.descricao}">
+                                <h:outputText value="#{unmedida.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Opções">
+                                <p:commandButton value="Editar" icon="fa fa-pencil"/>
+                            </p:column>
+                        </p:dataTable>
+                        <f:facet name="footer">
+                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
+                                             actionListener="#{unidademedidaController.objetoLimpo()}"
+                                             update=":frmDialogCadUnMed:pngCadUnMed"/>
+                        </f:facet>
+                    </p:panel>
+                </p:scrollPanel>
+            </h:form>
+
+            <!--Dialogo de cadastro-->
+            <p:dialog header="Cadastro - Unidade de Medida" widgetVar="dlg" modal="true" appendTo="@(body)"
+                      responsive="true" closeOnEscape="true" closable="true" resizable="false"
+                      draggable="false" showEffect="fold" hideEffect="drop" position="center">
+                <h:form id="frmDialogCadUnMed">
+                    <p:panelGrid id="pngCadUnMed" columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+                                 layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:outputLabel for="slg" value="Sigla"/>
+                        <p:inputText id="slg" maxlength="3" size="10" value="#{unidademedidaController.objeto.sigla}"
+                                     required="true" requiredMessage="Sigla é obrigatória!"/>
+                        <p:outputLabel for="desc" value="Descrição"/>
+                        <p:inputText id="desc" maxlength="255" size="50" value="#{unidademedidaController.objeto.descricao}"
+                                     required="true" requiredMessage="Descrição é obrigatória!"/>
+                    </p:panelGrid>
+                    <center>
+                        <p:panelGrid columns="1" columnClasses="ui-grid-col3"
+                                     layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                             actionListener="#{unidademedidaController.salvarRegistro(event)}"
+                                             update=":sms :formCadUnMedida:tabCadUnMedida :frmDialogCadUnMed"/>
+                        </p:panelGrid>
+                    </center>
+                </h:form>
+            </p:dialog>
+        </div>
+    </ui:define>
+
+</ui:composition>

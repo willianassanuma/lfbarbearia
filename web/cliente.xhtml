@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./layout.xhtml">
+
+    <ui:define name="conteudo">
+        <p:growl id="sms" autoUpdate="true"/>
+
+        <div class="ui-fluid">
+            <h:form id="formCadCliente">
+                <p:scrollPanel mode="native" style="height:450px">
+                    <p:panel header="Relação - Clientes">
+                        <p:dataTable id="tabCadCliente" emptyMessage="Nenhum registro encontrado!" paginator="true" 
+                                     reflow="true" paginatorPosition="bottom" var="cliente"
+                                     value="#" rows="5">
+                            <p:column style="width:50px">
+                                <p:rowToggler />
+                            </p:column>
+                            <p:column headerText="ID" sortBy="#" filterBy="#" style="width: 80px">
+                                <h:outputText value="#"/>
+                            </p:column>
+                            <p:column headerText="Nome" filterBy="#" style="width: 600px">
+                                <h:outputText value="#"/>
+                            </p:column>
+
+                            <!--Botão Editar-->
+                            <p:column headerText="Opções">
+                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                                                 update=":sms"
+                                                 actionListener="#">
+                                </p:commandButton>
+                            </p:column>
+
+                            <!--Tabela com expansão de dados-->
+                            <p:rowExpansion id="expDados">
+                                <p:panelGrid  columns="4" columnClasses="ui-grid-col-3,ui-grid-col-6, ui-grid-col-3,ui-grid-col-6"
+                                              layout="grid" styleClass="ui-panelgrid-blank">
+                                    <h:outputText value="Frequencia de comp.:"/>
+                                    <h:outputText value="#"/>
+                                    <h:outputText value="Tratamento:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="CPF" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="Telefone Celular:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="Tefone Comercial:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="Data de Nascimento:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="Sexo:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="Endereço:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="Numero:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="bairro:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="Complemento:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="E-mail:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="Status:" />
+                                    <h:outputText value="#" />
+                                    <h:outputText value="Obs:" />
+                                    <h:outputText value="#" />
+
+                                </p:panelGrid>
+                            </p:rowExpansion>
+                        </p:dataTable>
+                        <f:facet name="footer">
+                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
+                                             actionListener="#{pessoaController.objetoLimpo()}"
+                                             update=":formCadCliente:tabCadCliente"/>
+                        </f:facet>
+                    </p:panel>
+                </p:scrollPanel>
+            </h:form>
+
+            <!--Dialogo de cadastro-->
+            <p:dialog header="Cadastro - Clientes" widgetVar="dlg" modal="true" appendTo="@(body)"
+                      responsive="true" closeOnEscape="true" closable="true" resizable="false"
+                      draggable="false" showEffect="fold" hideEffect="drop" position="center" width="600">
+                <h:form id="frmDialogCadCliente">
+                    <p:scrollPanel mode="native" style="height:450px">
+                        <p:panelGrid id="pngCadCliente" columns="2" columnClasses="ui-grid-col-4,ui-grid-col-12"
+                                     layout="grid" styleClass="ui-panelgrid-blank">
+
+                            <p:outputLabel for="trat" value="Tratamento"/>
+                            <p:selectOneMenu id="trat" autoWidth="true" required="true"
+                                             value="#"
+                                             requiredMessage="Tratamento é obrigatório!" >
+                                <f:selectItem  itemLabel="Selecione" itemValue="" />
+                                <f:selectItem  itemLabel="Cavalheiro" itemValue="davalheiro"/>
+                                <f:selectItem  itemLabel="Dama" itemValue="dama"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel for="nome" value="Nome"/>
+                            <p:inputText id="nome" maxlength="255" size="50" value="#"
+                                         required="true" requiredMessage="Nome é obrigatório!"/>
+                            <p:outputLabel for="cpf" value="CPF"/>
+                            <p:inputMask id="cpf" value="#" mask="999.999.999-99"
+                                         required="true" requiredMessage="CPF é obrigatório"/>
+
+                            <p:outputLabel for="nasc" value="Data de Nascimento"/>
+                            <p:inputMask id="nasc" value="" mask="99/99/9999"
+                                         required="true" requiredMessage="Data de Nascimento é obrigatória"/>
+                            <!---->
+                            <p:outputLabel for="sexo" value="Sexo"/>
+                            <p:selectOneMenu id="sexo" autoWidth="true" required="true"
+                                             value="#"
+                                             requiredMessage="Sexo é obrigatório!" >
+                                <f:selectItem  itemLabel="Selecione" itemValue="" />
+                                <f:selectItem  itemLabel="Masculino" itemValue="masculino"/>
+                                <f:selectItem  itemLabel="Feminino" itemValue="feminino"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel for="est" value="Estado"/>
+                            <p:selectOneMenu id="est" autoWidth="true" required="true"
+                                             value="#"
+                                             requiredMessage="Estado é obrigatório!" >
+                                <f:selectItem  itemLabel="Selecione" itemValue="" />
+                                <f:selectItem  itemLabel="" itemValue=""/>
+                            </p:selectOneMenu>
+                            <p:outputLabel for="cid" value="Cidade"/>
+                            <p:selectOneMenu id="cid" autoWidth="true" required="true"
+                                             value="#"
+                                             requiredMessage="Cidade é obrigatório!" >
+                                <f:selectItem  itemLabel="Selecione" itemValue="" />
+                                <f:selectItem  itemLabel="" itemValue=""/>
+                            </p:selectOneMenu>
+                            <p:outputLabel for="foneCel" value="Telefone Celular"/>
+                            <p:inputMask id="foneCel" value="#" mask="(99)99999-9999"/>
+                            <p:outputLabel for="foneCom" value="Telefone Comercial"/>
+                            <p:inputMask id="foneCom" value="#" mask="(99)99999-9999"/>
+                            <p:outputLabel for="end" value="Endereço"/>
+                            <p:inputText id="end" size="50" maxlength="255" value="#"
+                                         required="true" requiredMessage="Endereço é Obrigatório!"/>
+                            <p:outputLabel for="numero" value="Numero"/>
+                            <p:inputText id="numero" size="10" value="#"
+                                         required="true" requiredMessage="Numero é Obrigatório!"/>
+                            <p:outputLabel for="bairro" value="Bairro"/>
+                            <p:inputText id="bairro" size="50" value="#"
+                                         required="true" requiredMessage="Bairro é Obrigatório!"/>
+                            <p:outputLabel for="comp" value="Complemento"/>
+                            <p:inputText id="comp" size="50" maxlength="50" value="#"/>
+                            <p:outputLabel for="email" value="E-mail"/>
+                            <p:inputText id="email" size="50" maxlength="255" value="#"
+                                         required="true" requiredMessage="E-Mail é Obrigatório!"/>
+                            <p:outputLabel for="status" value="Status"/>
+                            <p:selectOneMenu id="status" autoWidth="true" required="true"
+                                             value="#"
+                                             requiredMessage="Status é obrigatório!" >
+                                <f:selectItem  itemLabel="Selecione" itemValue="" />
+                                <f:selectItem  itemLabel="Ativo" itemValue="true"/>
+                                <f:selectItem  itemLabel="Inativo" itemValue="false"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel for="obs" value="Observação"/>
+                            <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
+                                             counterTemplate="{0} Caracteres Restante."
+                                             autoResize="true"
+                                             addLine="true"/>
+                            <h:outputText/>
+                            <h:outputText id="obs"/>
+                        </p:panelGrid>
+                    </p:scrollPanel>
+
+                    <center>
+                        <p:panelGrid columns="1" columnClasses="ui-grid-col3"
+                                     layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                             actionListener="#{profissionalController.salvarRegistro(event)}"
+                                             update=":sms :formCadCliente:tabCadCliente :frmDialogCadCliente"/>
+                        </p:panelGrid>
+                    </center>
+                </h:form>
+            </p:dialog>
+        </div>
+    </ui:define>
+
+</ui:composition>

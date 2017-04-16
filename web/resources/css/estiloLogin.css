@@ -1,0 +1,13 @@
+body {
+    margin: 0px;
+    background-image: url('../img/fundo.jpg')
+}
+
+#containerLogin  {
+    margin: 1em auto;  	
+    width: 30%;  	
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    
+} 

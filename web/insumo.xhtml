@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./layout.xhtml">
+
+    <ui:define name="conteudo">
+        <p:growl id="sms" autoUpdate="true"/>
+
+        <div class="ui-fluid">
+            <h:form id="formCadInsumo">
+                <p:scrollPanel mode="native" style="height:450px">
+                    <p:panel header="Relação - Insumo">
+                        <p:dataTable id="tabCadInsumo" emptyMessage="Nenhum registro encontrado!" paginator="true" 
+                                     reflow="true" paginatorPosition="bottom" var="insumo" 
+                                     value="#{insumoController.objetoDao.all}" rows="5">
+                            <p:column headerText="ID" sortBy="#{insumo.id}" filterBy="#{insumo.id}" style="width: 80px">
+                                <h:outputText value="#{insumo.id}"/>
+                            </p:column>
+                            <p:column headerText="Nome" filterBy="#{insumo.nome}">
+                                <h:outputText value="#{insumo.nome}"/>
+                            </p:column>
+                            <p:column headerText="Estoque Min" filterBy="#{insumo.estoqueminimo}">
+                                <h:outputText value="#{insumo.estoqueminimo}"/>
+                            </p:column>
+                            <p:column headerText="Status" filterBy="#{insumo.status}">
+                                <h:outputText value="#{insumo.status}"/>
+                            </p:column>
+                            <p:column headerText="Un Medida" filterBy="">
+                                <h:outputText value="#"/>
+                            </p:column>
+                            <p:column headerText="Obs" filterBy="#{insumo.observacao}">
+                                <h:outputText value="#"/>
+                            </p:column>
+
+                            <!--Botão Editar-->
+                            <p:column headerText="Opções">
+                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                                                 update=":sms">
+                                    <f:attribute name="selInsumo" value="#{insumo}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        <f:facet name="footer">
+                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
+                                             actionListener="#{insumoController.objetoLimpo()}"
+                                             update=":formCadInsumo:tabCadInsumo"/>
+                        </f:facet>
+                    </p:panel>
+                </p:scrollPanel>
+            </h:form>
+
+            <!--Dialogo de cadastro-->
+            <p:dialog header="Cadastro - Insumo" widgetVar="dlg" modal="true" appendTo="@(body)"
+                      responsive="true" closeOnEscape="true" closable="true" resizable="false"
+                      draggable="false" showEffect="fold" hideEffect="drop" position="center">
+                <h:form id="frmDialogCadInsumo">
+
+                    <p:panelGrid id="pngCadInsumo" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-4"
+                                 layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:outputLabel for="nome" value="Nome"/>
+                        <p:inputText id="nome" maxlength="255" size="50" value="#{insumoController.objeto.nome}"
+                                     required="true" requiredMessage="Nome é obrigatório!"/>
+                        <p:outputLabel for="estMin" value="Estoque Minimo"/>
+                        <p:inputText id="estMin" size="50" value="#{insumoController.objeto.estoqueMinimo}"
+                                     required="true" requiredMessage="Estoque minimo é obritatório!"/>
+                        <p:outputLabel for="unMed" value="Unidade de Medida"/>
+                        <p:selectOneMenu id="unMed" autoWidth="false" required="true"
+                                         value="#"
+                                         requiredMessage="Selecione Unidade de Medida!">
+                            <f:selectItem  itemLabel="Selecione" itemValue=""/>
+                        </p:selectOneMenu>
+                        <p:outputLabel for="status" value="Status"/>
+                        <p:selectOneMenu id="status" autoWidth="false" required="true"
+                                         value="#{insumoController.objeto.status}"
+                                         requiredMessage="Status é obrigatório!">
+                            <f:selectItem  itemLabel="Selecione" itemValue=""/>
+                            <f:selectItem  itemLabel="Ativo" itemValue="true"/>
+                            <f:selectItem  itemLabel="Inativo" itemValue="false"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel for="obs" value="Observação"/>
+                        <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
+                                         counterTemplate="{0} Caracteres Restante."
+                                         autoResize="true"
+                                         addLine="true"/>
+                        <h:outputText/>
+                        <h:outputText id="obs" />
+
+                    </p:panelGrid>
+
+                    <center>
+                        <p:panelGrid columns="1" columnClasses="ui-grid-col3"
+                                     layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                             actionListener="#{usuarioController.salvarRegistro(event)}"
+                                             update=":sms :formCadInsumo:tabCadInsumo :frmDialogCadInsumo"/>
+                        </p:panelGrid>
+                    </center>
+                </h:form>
+            </p:dialog>
+        </div>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./layout.xhtml">
+    <ui:define name="conteudo">
+        <p:growl id="sms" autoUpdate="true"/>
+        <div class="ui-fluid">
+            <h:form id="formCadTipoServ">
+                <p:scrollPanel mode="native" style="height:450px">
+                    <p:panel header="Relação - Serviços">
+                        <p:dataTable id="tabCadServico" emptyMessage="Nenhum registro encontrado!" paginator="true" 
+                                     reflow="true" paginatorPosition="bottom" var="servico" 
+                                     value="#{servicoController.objetoDao.all}" rows="5">
+                            <p:column headerText="ID" sortBy="#{servico.id}" filterBy="#{servico.id}" style="width: 80px">
+                                <h:outputText value="#{servico.id}"/>
+                            </p:column>
+                            <p:column headerText="Descrição" filterBy="#{servico.descricao}">
+                                <h:outputText value="#{servico.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Comissão" filterBy="#{servico.comissao}">
+                                <h:outputText value="#{servico.comissao}"/>
+                            </p:column>
+                            <p:column headerText="Tempo Gasto" filterBy="#{servico.tempogasto}">
+                                <h:outputText value="#{servico.tempogasto}"/>
+                            </p:column>
+                            <p:column headerText="T. de Espera" filterBy="#{servico.tempoespera}">
+                                <h:outputText value="#{servico.tempoespera}"/>
+                            </p:column>
+                            <p:column headerText="Opções">
+                                <p:commandButton value="Editar" icon="fa fa-pencil"/>
+                            </p:column>
+
+                        </p:dataTable>
+                        <f:facet name="footer">
+                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
+                                             actionListener="#{servicoController.objetoLimpo()}"
+                                             update=":formCadTipoServ:tabCadServico"/>
+                        </f:facet>
+                    </p:panel>
+                </p:scrollPanel>
+            </h:form>
+
+            <!--Dialogo de cadastro-->
+            <p:dialog header="Cadastro - Serviço" widgetVar="dlg" modal="true" appendTo="@(body)"
+                      responsive="true" closeOnEscape="true" closable="true" resizable="false"
+                      draggable="false" showEffect="fold" hideEffect="drop" position="center" width="auto">
+                <h:form id="frmDialogCadServico">
+
+                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2 ,ui-grid-col-10"
+                                 layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:outputLabel for="desc" value="Descrição"/>
+                        <p:inputText id="desc" size="60" value="#{servicoController.objeto.descricaoServico}"
+                                     maxlength="255" required="true" />
+                        <p:outputLabel for="com" value="Comissão"/>
+                        <p:inputMask id="com" size="20" value="#{servicoController.objeto.comissaoServico}"
+                                     mask="999" required="true" />
+                        <p:outputLabel for="timeG" value="Tempo de Execução"/>
+                        <p:inputMask id="timeG" size="20" value="#{servicoController.objeto.tempoGastoReal}"
+                                     mask="99:99:99" required="true" />
+                        <p:outputLabel for="timeE" value="Tempo de Espera"/>
+                        <p:inputMask id="timeE" size="20" value="#{servicoController.objeto.tempoEsperaDurExec}"
+                                     mask="99:99:99" required="true" />
+
+                    </p:panelGrid>
+                    <center>
+                        <p:panelGrid columns="1" columnClasses="ui-grid-col3"
+                                     layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                             actionListener="#{servicoController.salvarRegistro(event)}"
+                                             update=":sms :formCadTipoServ:tabCadServico :frmDialogCadServico"/>
+                        </p:panelGrid>
+                    </center>
+
+                </h:form>
+            </p:dialog>
+        </div>
+    </ui:define>
+
+</ui:composition>

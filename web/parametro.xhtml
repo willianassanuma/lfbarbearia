@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./layout.xhtml">
+
+    <ui:define name="conteudo">
+        <div class="ui-fluid">
+            <h:form id="formParam">
+                <p:panel header="Ajuste/Parâmetros">
+                    <p:panelGrid columns="2" columnClasses="ui-grid-col-12,ui-grid-col-12"
+                                 layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:outputLabel for="id" value="ID"/>
+                        <p:inputText id="id" required="true" size="20" maxlength="2" readonly="true"/>
+                        <p:outputLabel for="timeAg" value="Tempo de Ger. Agenda"/>
+                        <p:inputMask id="timeAg" mask="99:99:99" required="true" requiredMessage="Tempo de Ger. é Obrigatório!"/>
+                        <p:outputLabel for="comPad" value="Comissão Padrão"/>
+                        <p:inputMask id="comPad" mask="999%" required="true" requiredMessage="Comissão é Obrigatório!"/>
+                        <p:outputLabel for="percDecPad" value="Perc. Desc. Pag. Cartão" />
+                        <p:inputMask id="percDecPad" mask="999%" required="true" requiredMessage="Perc. Desc. é Obrigatório!"/>
+                        <p:outputLabel for="fecCaixa" value="Hora Base Fechamento de caixa"/>
+                        <p:inputMask id="fecCaixa" mask="99:99:99" required="true" requiredMessage="Hora Base é Obrigatório!"/>
+                    </p:panelGrid>
+                    <p:separator/>
+                    <p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6"
+                                 layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:commandButton value="Salvar" icon="fa fa-floppy-o"/>
+                        <p:commandButton value="Editar" icon="fa fa-pencil"/>
+                    </p:panelGrid>
+
+                </p:panel>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

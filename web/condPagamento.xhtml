@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./layout.xhtml">
+
+    <ui:define name="conteudo">
+        <p:growl id="sms" autoUpdate="true"/>
+        <div class="ui-fluid">
+            <h:form id="formCondFormPag">
+                <p:scrollPanel mode="native" style="height:450px">
+                    <p:panel  header="Relação - Condições de Pagamento">
+                        <p:dataTable id="painelCondPag" emptyMessage="Nenhum registro encontrado!" paginator="true" 
+                                     reflow="true" paginatorPosition="bottom" var="condPag"
+                                     value="#{condpagamentoController.objetoDao.all}" rows="5">
+                            <p:column headerText="ID" filterBy="#{condPag.id}" sortBy="#{condPag.id}" style="width: 80px">
+                                <h:outputText value="#{condPag.id}"/>
+                            </p:column>
+                            <p:column headerText="Qtde Vezes" filterBy="#{condPag.qtdeVezes}">
+                                <h:outputText value="#{condPag.qtdeVezes}"/>
+                            </p:column>
+                            <p:column headerText="Descrição" filterBy="#{condPag.descricao}">
+                                <h:outputText value="#{condPag.descricao}"/>
+                            </p:column>
+
+
+                            <p:column headerText="Opções">
+                                <p:commandButton value="Editar" icon="fa fa-pencil"/>
+                            </p:column>
+                        </p:dataTable>
+                        <f:facet name="footer">
+                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
+                                             actionListener="#{condpagamentoController.objetoLimpo()}"
+                                             update=":frmDialogCondPag:pngCadPag"/>
+                        </f:facet>
+                    </p:panel>
+                </p:scrollPanel>
+            </h:form>
+
+            <!--Dialogo de cadastro-->
+            <p:dialog header="Cadastro - Condições de Pagamento" widgetVar="dlg" modal="true" appendTo="@(body)"
+                      responsive="true" closeOnEscape="true" closable="true" resizable="false"
+                      draggable="false" showEffect="fold" hideEffect="drop" position="center">
+                <h:form id="frmDialogCondPag">
+                    <p:panelGrid id="pngCadPag" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-4"
+                                 layout="grid" styleClass="ui-panelgrid-blank">
+
+                        <p:outputLabel for="nParc" value="Qtde de Vezes"/>                           
+                        <p:inputText id="nParc" size="42" value="#{condpagamentoController.objeto.qtdeVezes}"
+                                     required="true" requiredMessage="Quantidade de vezes é obrigatória!"/>
+                        <p:outputLabel for="desc" value="Descrição"/>
+                        <p:inputText id="desc" maxlength="30" size="42" value="#{condpagamentoController.objeto.descricao}"
+                                     required="true" requiredMessage="Descrição é obrigatória!"/>
+                    </p:panelGrid>
+                    <center>
+                        <p:panelGrid columns="1" columnClasses="ui-grid-col3"
+                                     layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                             actionListener="#{condpagamentoController.salvarRegistro(event)}"
+                                             update=":sms :formCondFormPag:painelCondPag :frmDialogCondPag"/>
+                        </p:panelGrid>
+                    </center>
+
+                </h:form>
+            </p:dialog>
+
+        </div>
+    </ui:define>
+
+</ui:composition>
