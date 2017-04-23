@@ -7,7 +7,7 @@ package br.edu.tcc.lfbarbearia.entidades;
 
 /**
  *
- * @author Edmilson
+ * @author Marcos
  */
 public interface InterfaceEntidades  {
 

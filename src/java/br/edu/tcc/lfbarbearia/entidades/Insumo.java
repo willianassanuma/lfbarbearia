@@ -42,6 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Insumo.findByEstoqueMinimo", query = "SELECT i FROM Insumo i WHERE i.estoqueMinimo = :estoqueMinimo")})
 public class Insumo implements Serializable, InterfaceEntidades {
 
+    @Lob
+    @Column(name = "observacao")
+    private byte[] observacao;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,9 +65,6 @@ public class Insumo implements Serializable, InterfaceEntidades {
     @NotNull
     @Column(name = "estoqueMinimo")
     private float estoqueMinimo;
-    @Lob
-    @Column(name = "observacao")
-    private byte[] observacao;
     @ManyToMany(mappedBy = "insumoCollection")
     private Collection<Fornecedor> fornecedorCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
@@ -120,13 +121,6 @@ public class Insumo implements Serializable, InterfaceEntidades {
         this.estoqueMinimo = estoqueMinimo;
     }
 
-    public byte[] getObservacao() {
-        return observacao;
-    }
-
-    public void setObservacao(byte[] observacao) {
-        this.observacao = observacao;
-    }
 
     @XmlTransient
     public Collection<Fornecedor> getFornecedorCollection() {
@@ -186,6 +180,14 @@ public class Insumo implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Insumo[ id=" + id + " ]";
+    }
+
+    public byte[] getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(byte[] observacao) {
+        this.observacao = observacao;
     }
     
 }

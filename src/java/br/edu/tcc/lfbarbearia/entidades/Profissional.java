@@ -40,8 +40,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Profissional.findByComplemento", query = "SELECT p FROM Profissional p WHERE p.complemento = :complemento")
     , @NamedQuery(name = "Profissional.findByEmail", query = "SELECT p FROM Profissional p WHERE p.email = :email")
     , @NamedQuery(name = "Profissional.findByStatus", query = "SELECT p FROM Profissional p WHERE p.status = :status")
-    , @NamedQuery(name = "Profissional.findByTelefone", query = "SELECT p FROM Profissional p WHERE p.telefone = :telefone")})
-public class Profissional implements Serializable, InterfaceEntidades{
+    , @NamedQuery(name = "Profissional.findByTelefoneCelular", query = "SELECT p FROM Profissional p WHERE p.telefoneCelular = :telefoneCelular")
+    , @NamedQuery(name = "Profissional.findByTelefoneComercial", query = "SELECT p FROM Profissional p WHERE p.telefoneComercial = :telefoneComercial")})
+public class Profissional implements Serializable, InterfaceEntidades {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -88,8 +89,11 @@ public class Profissional implements Serializable, InterfaceEntidades{
     @Column(name = "observacao")
     private byte[] observacao;
     @Size(max = 30)
-    @Column(name = "telefone")
-    private String telefone;
+    @Column(name = "telefoneCelular")
+    private String telefoneCelular;
+    @Size(max = 45)
+    @Column(name = "telefoneComercial")
+    private String telefoneComercial;
     @JoinColumn(name = "idCidade", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idCidade;
@@ -191,12 +195,20 @@ public class Profissional implements Serializable, InterfaceEntidades{
         this.observacao = observacao;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefoneCelular() {
+        return telefoneCelular;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefoneCelular(String telefoneCelular) {
+        this.telefoneCelular = telefoneCelular;
+    }
+
+    public String getTelefoneComercial() {
+        return telefoneComercial;
+    }
+
+    public void setTelefoneComercial(String telefoneComercial) {
+        this.telefoneComercial = telefoneComercial;
     }
 
     public Cidade getIdCidade() {

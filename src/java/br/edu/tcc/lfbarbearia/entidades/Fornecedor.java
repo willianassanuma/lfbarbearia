@@ -46,8 +46,23 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Fornecedor.findByComplemento", query = "SELECT f FROM Fornecedor f WHERE f.complemento = :complemento")
     , @NamedQuery(name = "Fornecedor.findByEmail", query = "SELECT f FROM Fornecedor f WHERE f.email = :email")
     , @NamedQuery(name = "Fornecedor.findByStatus", query = "SELECT f FROM Fornecedor f WHERE f.status = :status")
-    , @NamedQuery(name = "Fornecedor.findByTelefone", query = "SELECT f FROM Fornecedor f WHERE f.telefone = :telefone")})
+    , @NamedQuery(name = "Fornecedor.findByTelefoneComercial", query = "SELECT f FROM Fornecedor f WHERE f.telefoneComercial = :telefoneComercial")
+    , @NamedQuery(name = "Fornecedor.findByTelefoneCelular", query = "SELECT f FROM Fornecedor f WHERE f.telefoneCelular = :telefoneCelular")})
 public class Fornecedor implements Serializable, InterfaceEntidades {
+
+    @Lob
+    @Column(name = "observacao")
+    private byte[] observacao;
+    @JoinTable(name = "fornecedor_insumo", joinColumns = {
+        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idInsumo", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Insumo> insumoCollection;
+    @JoinTable(name = "fornecedor_contaspagar", joinColumns = {
+        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idContasAPagar", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Contaspagar> contaspagarCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -102,22 +117,12 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
     @NotNull
     @Column(name = "status")
     private boolean status;
-    @Lob
-    @Column(name = "observacao")
-    private byte[] observacao;
     @Size(max = 30)
-    @Column(name = "telefone")
-    private String telefone;
-    @JoinTable(name = "fornecedor_insumo", joinColumns = {
-        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "idInsumo", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Insumo> insumoCollection;
-    @JoinTable(name = "fornecedor_contaspagar", joinColumns = {
-        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "idContasAPagar", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Contaspagar> contaspagarCollection;
+    @Column(name = "telefoneComercial")
+    private String telefoneComercial;
+    @Size(max = 30)
+    @Column(name = "telefoneCelular")
+    private String telefoneCelular;
     @JoinColumn(name = "idCidade", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idCidade;
@@ -230,38 +235,21 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
         this.status = status;
     }
 
-    public byte[] getObservacao() {
-        return observacao;
+
+    public String getTelefoneComercial() {
+        return telefoneComercial;
     }
 
-    public void setObservacao(byte[] observacao) {
-        this.observacao = observacao;
+    public void setTelefoneComercial(String telefoneComercial) {
+        this.telefoneComercial = telefoneComercial;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getTelefoneCelular() {
+        return telefoneCelular;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    @XmlTransient
-    public Collection<Insumo> getInsumoCollection() {
-        return insumoCollection;
-    }
-
-    public void setInsumoCollection(Collection<Insumo> insumoCollection) {
-        this.insumoCollection = insumoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Contaspagar> getContaspagarCollection() {
-        return contaspagarCollection;
-    }
-
-    public void setContaspagarCollection(Collection<Contaspagar> contaspagarCollection) {
-        this.contaspagarCollection = contaspagarCollection;
+    public void setTelefoneCelular(String telefoneCelular) {
+        this.telefoneCelular = telefoneCelular;
     }
 
     public Cidade getIdCidade() {
@@ -295,6 +283,32 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Fornecedor[ id=" + id + " ]";
+    }
+
+    public byte[] getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(byte[] observacao) {
+        this.observacao = observacao;
+    }
+
+    @XmlTransient
+    public Collection<Insumo> getInsumoCollection() {
+        return insumoCollection;
+    }
+
+    public void setInsumoCollection(Collection<Insumo> insumoCollection) {
+        this.insumoCollection = insumoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Contaspagar> getContaspagarCollection() {
+        return contaspagarCollection;
+    }
+
+    public void setContaspagarCollection(Collection<Contaspagar> contaspagarCollection) {
+        this.contaspagarCollection = contaspagarCollection;
     }
     
 }

@@ -47,14 +47,18 @@
                                     <h:outputText value="#{profissional.numero}"/>
                                     <h:outputText value="Bairro:" />
                                     <h:outputText value="#{profissional.bairro}"/>
+                                    <h:outputText value="Cidade:" />
+                                    <h:outputText value="#{profissional.idCidade}"/>
                                     <h:outputText value="Complemento:"/>
                                     <h:outputText value="#{profissional.complemento}"/>
                                     <h:outputText value="E-mail:" />
                                     <h:outputText value="#{profissional.email}"/>
                                     <h:outputText value="Status:" />
                                     <h:outputText value="#{profissional.status}" />
-                                    <h:outputText value="Telefone:" />
-                                    <h:outputText value="#{profissional.telefone}" />
+                                    <h:outputText value="Telefone Comercial:" />
+                                    <h:outputText value="#{profissional.telefoneComercial}" />
+                                    <h:outputText value="Telefone Celular:" />
+                                    <h:outputText value="#{profissional.telefoneCelular}" />
                                     <h:outputText value="Obs:" />
                                     <h:outputText value="#{profissional.observacao}" />
                                 </p:panelGrid>
@@ -72,17 +76,16 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Profissionais" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false" 
-                      draggable="false" showEffect="fold" hideEffect="drop" width="600">
+                      draggable="false" showEffect="fold" hideEffect="drop" width="550">
                 <h:form id="frmDialogCadProf">
                     <p:scrollPanel mode="native" style="max-height: 450px">
-                        <p:panelGrid id="pngCadProf" columns="2" columnClasses="ui-grid-col-4,ui-grid-col-12"
+                        <p:panelGrid id="pngCadProf" columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
                                      layout="grid" styleClass="ui-panelgrid-blank">
                             <p:outputLabel for="nome" value="Nome"/>
                             <p:inputText id="nome" maxlength="255" size="50" value="#{profissionalController.objeto.nomeProf}"
                                          required="true" requiredMessage="Nome é obrigatório!"/>
                             <p:outputLabel for="com" value="Comissão"/>
-                            <p:inputText id="com" size="10" value="#{profissionalController.objeto.comissao}"
-                                         maxlength="3" />
+                            <p:inputText id="com" size="10" value="#{profissionalController.objeto.comissao}" maxlength="3"/>
                             <p:outputLabel for="end" value="Endereço"/>
                             <p:inputText id="end" size="50" maxlength="255" value="#{profissionalController.objeto.endereco}"
                                          required="true" requiredMessage="Endereço é Obrigatório!"/>
@@ -97,25 +100,27 @@
                             <p:outputLabel for="email" value="E-mail"/>
                             <p:inputText id="email" size="50" maxlength="255" value="#{profissionalController.objeto.email}"
                                          required="true" requiredMessage="E-Mail é Obrigatório!"/>
-                            <p:outputLabel for="foneCom" value="Telefone"/>
-                            <p:inputMask id="foneCom" value="#{profissionalController.objeto.telefone}" mask="(99)99999-9999"/>
+                            <p:outputLabel for="foneCom" value="Telefone Comercial"/>
+                            <p:inputMask id="foneCom" value="#{profissionalController.objeto.telefoneComercial}" mask="(99)99999-9999"/>
+                            <p:outputLabel for="foneCel" value="Telefone Celular"/>
+                            <p:inputMask id="foneCel" value="#{profissionalController.objeto.telefoneCelular}" mask="(99)99999-9999"/>
                             <p:outputLabel for="status" value="Status"/>
-                            <p:selectOneMenu id="status" autoWidth="true" required="true"
+                            <p:selectOneMenu id="status" required="true"
                                              value="#{profissionalController.objeto.status}"
-                                             requiredMessage="Status é obrigatório!" >
+                                             requiredMessage="Status é obrigatório!" filter="true">
                                 <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
-                                <f:selectItem  itemLabel="Ativo" itemValue="true"/>
-                                <f:selectItem  itemLabel="Inativo" itemValue="false"/>
+                                <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
+                                <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
                             </p:selectOneMenu>
                             
                       
                             <p:outputLabel for="cid" value="Cidade"/>
-                            <p:selectOneMenu id="cid" autoWidth="true" required="true"
-                                             value="#{cidadeController.objetoDao.all}"
+                            <p:selectOneMenu id="cid" required="true"
+                                             value="#"
                                              filter="true"
                                              requiredMessage="Cidade é obrigatória!">
-                                <f:selectItem  itemLabel="Selecione ..." itemValue="" />
-                                <f:selectItems value="#{cidadeController.objetoDao.all}"/>
+                                <f:selectItem  itemLabel="Selecione ..." noSelectionOption="true"/>
+                                <f:selectItems value="#"/>
                             </p:selectOneMenu>
                             
                             <p:outputLabel for="obs" value="Observação"/>

@@ -73,18 +73,18 @@
                         <p:password id="Vpass" maxlength="255" size="50" value="#{usuarioController.objeto.senha}"
                                     rendered="true" requiredMessage="Senha de confirmação é obrigatória"/>
                         <p:outputLabel for="status" value="Status"/>
-                        <p:selectOneMenu id="status" autoWidth="false" required="true"
+                        <p:selectOneMenu id="status" required="true"
                                          value="#{usuarioController.objeto.status}"
-                                         requiredMessage="Status é obrigatório!">
-                            <f:selectItem  itemLabel="Selecione" itemValue=""/>
-                            <f:selectItem  itemLabel="Ativo" itemValue="true"/>
-                            <f:selectItem  itemLabel="Inativo" itemValue="false"/>
+                                         requiredMessage="Status é obrigatório!" filter="true">
+                            <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                            <f:selectItem  itemLabel="ATVIO" itemValue="true"/>
+                            <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="perfAcesso" value="Perfil de Acesso"/>
-                        <p:selectOneMenu id="perfAcesso" autoWidth="false" required="true"
-                                         value="#"
+                        <p:selectOneMenu id="perfAcesso" required="true"
+                                         value="#" filter="true"
                                          requiredMessage="Selecione Perfil de acesso!">
-                            <f:selectItem  itemLabel="Selecione" itemValue="ADM"/>
+                            <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <center>

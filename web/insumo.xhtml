@@ -68,18 +68,18 @@
                         <p:inputText id="estMin" size="50" value="#{insumoController.objeto.estoqueMinimo}"
                                      required="true" requiredMessage="Estoque minimo é obritatório!"/>
                         <p:outputLabel for="unMed" value="Unidade de Medida"/>
-                        <p:selectOneMenu id="unMed" autoWidth="false" required="true"
-                                         value="#"
+                        <p:selectOneMenu id="unMed" required="true"
+                                         value="#" filter="true"
                                          requiredMessage="Selecione Unidade de Medida!">
-                            <f:selectItem  itemLabel="Selecione" itemValue=""/>
+                            <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="status" value="Status"/>
-                        <p:selectOneMenu id="status" autoWidth="false" required="true"
-                                         value="#{insumoController.objeto.status}"
+                        <p:selectOneMenu id="status" required="true"
+                                         value="#{insumoController.objeto.status}" filter="true"
                                          requiredMessage="Status é obrigatório!">
-                            <f:selectItem  itemLabel="Selecione" itemValue=""/>
-                            <f:selectItem  itemLabel="Ativo" itemValue="true"/>
-                            <f:selectItem  itemLabel="Inativo" itemValue="false"/>
+                            <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                            <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
+                            <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="obs" value="Observação"/>
                         <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
