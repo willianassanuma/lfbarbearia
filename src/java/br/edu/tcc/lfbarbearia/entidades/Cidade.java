@@ -146,5 +146,5 @@ public class Cidade implements Serializable, InterfaceEntidades {
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Cidade[ id=" + id + " ]";
     }
-    
+   
 }

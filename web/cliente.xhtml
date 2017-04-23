@@ -121,10 +121,11 @@
                            
                             <p:outputLabel for="cid" value="Cidade"/>
                             <p:selectOneMenu id="cid" required="true"
-                                             value="#" filter="true"
-                                             requiredMessage="Cidade é obrigatório!" >
+                                             value="#{clienteController.objeto.idCidade}" filter="true"
+                                             requiredMessage="Cidade é obrigatório!">
                                 <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true" />
-                                <f:selectItem  itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
+                                               itemLabel="#{cidade}" itemValue="#{cidade.cidade}"/>
                             </p:selectOneMenu>
                             
                             <p:outputLabel for="foneCel" value="Telefone Celular"/>

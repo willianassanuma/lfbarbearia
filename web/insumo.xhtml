@@ -69,9 +69,11 @@
                                      required="true" requiredMessage="Estoque minimo é obritatório!"/>
                         <p:outputLabel for="unMed" value="Unidade de Medida"/>
                         <p:selectOneMenu id="unMed" required="true"
-                                         value="#" filter="true"
+                                         value="#{insumoController.objeto.idUnidadeMedida}" filter="true"
                                          requiredMessage="Selecione Unidade de Medida!">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                            <f:selectItems value="#{unidademedidaController.objetoDao.all}" var="unMedida"
+                                           itemValue="#{unMedida}" itemLabel="#{unMedida.sigla} - #{unMedida.descricao}"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="status" value="Status"/>
                         <p:selectOneMenu id="status" required="true"

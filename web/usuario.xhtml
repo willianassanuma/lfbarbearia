@@ -77,15 +77,17 @@
                                          value="#{usuarioController.objeto.status}"
                                          requiredMessage="Status é obrigatório!" filter="true">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
-                            <f:selectItem  itemLabel="ATVIO" itemValue="true"/>
+                            <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
                             <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="perfAcesso" value="Perfil de Acesso"/>
                         <p:selectOneMenu id="perfAcesso" required="true"
-                                         value="#" filter="true"
+                                         value="#{usuarioController.objeto.idPerfilAcesso}" filter="true"
                                          requiredMessage="Selecione Perfil de acesso!">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
-                        </p:selectOneMenu>
+                            <f:selectItems value="#{perfilAcessoController.objetoDao.all}" var="perfAcesso"
+                                           itemValue="#{perfAcesso}" itemLabel="#{perfAcesso.descricao}"/>
+                        </p:selectOneMenu>                        
                     </p:panelGrid>
                     <center>
                         <p:panelGrid columns="1" columnClasses="ui-grid-col3"
