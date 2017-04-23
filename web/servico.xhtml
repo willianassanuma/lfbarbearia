@@ -54,16 +54,16 @@
                                  layout="grid" styleClass="ui-panelgrid-blank">
                         <p:outputLabel for="desc" value="Descrição"/>
                         <p:inputText id="desc" size="60" value="#{servicoController.objeto.descricaoServico}"
-                                     maxlength="255" required="true" />
+                                     maxlength="255" required="true" requiredMessage="Descrição é obrigatória!"/>
                         <p:outputLabel for="com" value="Comissão"/>
                         <p:inputMask id="com" size="20" value="#{servicoController.objeto.comissaoServico}"
-                                     mask="999" required="true" />
+                                     mask="999" required="true" requiredMessage="Comissão é obrigatória!" />
                         <p:outputLabel for="timeG" value="Tempo de Execução"/>
                         <p:inputMask id="timeG" size="20" value="#{servicoController.objeto.tempoGastoReal}"
-                                     mask="99:99:99" required="true" />
+                                     mask="99:99:99" required="true" requiredMessage="Tempo de execução é obrigatório!"/>
                         <p:outputLabel for="timeE" value="Tempo de Espera"/>
                         <p:inputMask id="timeE" size="20" value="#{servicoController.objeto.tempoEsperaDurExec}"
-                                     mask="99:99:99" required="true" />
+                                     mask="99:99:99" required="true" requiredMessage="Tempo de espera é obrigatório!" />
 
                     </p:panelGrid>
                     <center>
