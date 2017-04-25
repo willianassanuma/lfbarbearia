@@ -17,13 +17,13 @@
                                      reflow="true" paginatorPosition="bottom" var="cidade"
                                      value="#{cidadeController.objetoDao.all}" rows="5">
                             <p:column headerText="ID" sortBy="#{cidade.id}" filterBy="#{cidade.id}" style="width: 80px">
-                                <h:outputText value="#"/>
+                                <h:outputText value="#{cidade.id}"/>
                             </p:column>
                             <p:column headerText="Cidade" filterBy="#{cidade.cidade}">
-                                <h:outputText value="#"/>
+                                <h:outputText value="#{cidade.cidade}"/>
                             </p:column>
-                            <p:column headerText="Sigla/Desc. Estado" filterBy="#{cidade.id}">
-                                <h:outputText value="#"/>
+                            <p:column headerText="Sigla/Desc. Estado" filterBy="#{cidade.idEstado.descricao}">
+                                <h:outputText value="#{cidade.idEstado.sigla} - #{cidade.idEstado.descricao}"/>
                             </p:column>
                             <p:column headerText="Opções">
                                 <p:commandButton value="Editar" icon="fa fa-pencil"/>
@@ -56,8 +56,8 @@
                         <p:outputLabel for="estado" value="Estado"/>
                         <p:selectOneMenu id="estado" required="true"
                                          requiredMessage="Estado é necessario!"
-                                         filter="true"
-                                         value="#{cidadeController.objeto.cidade}" >
+                                         filter="true" converter="classeConverter"
+                                         value="#{cidadeController.objeto.idEstado}">
                             <f:selectItem itemLabel="Selecione..." noSelectionOption="true"/>
                             <f:selectItems value="#{estadoController.objetoDao.all}" var="estado"
                                            itemValue="#{estado}" itemLabel="#{estado.sigla} - #{estado.descricao}"/>

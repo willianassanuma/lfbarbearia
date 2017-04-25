@@ -23,14 +23,14 @@
                             <p:column headerText="Nome" filterBy="#{usuario.nome}">
                                 <h:outputText value="#{usuario.nome}"/>
                             </p:column>
-                            <p:column headerText="Nome de Usuário" filterBy="#{usuario.nomeusuario}">
-                                <h:outputText value="#{usuario.nomeusuario}"/>
+                            <p:column headerText="Nome de Usuário" filterBy="#{usuario.nomeUsuario}">
+                                <h:outputText value="#{usuario.nomeUsuario}"/>
                             </p:column>
                             <p:column headerText="Senha" filterBy="#{usuario.senha}">
                                 <h:outputText value="#{usuario.senha}"/>
                             </p:column>
-                            <p:column headerText="Perfil de Acesso" filterBy="#{usuario.perfilacesso}">
-                                <h:outputText value="#{usuario.perfilacesso}"/>
+                            <p:column headerText="Perfil de Acesso" filterBy="#{usuario.idPerfilAcesso.descricao}">
+                                <h:outputText value="#{usuario.idPerfilAcesso.descricao}"/>
                             </p:column>
 
 
@@ -55,22 +55,22 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Usuário" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="fold" hideEffect="drop" position="center">
+                      draggable="false" showEffect="fold" hideEffect="drop">
                 <h:form id="frmDialogCadUsuario">
 
-                    <p:panelGrid id="pngCadUsuário" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-4"
+                    <p:panelGrid id="pngCadUsuário" columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
                                  layout="grid" styleClass="ui-panelgrid-blank">
                         <p:outputLabel for="nome" value="Nome"/>
-                        <p:inputText id="nome" maxlength="255" size="50" value="#{usuarioController.objeto.nome}"
+                        <p:inputText id="nome" maxlength="255" value="#{usuarioController.objeto.nome}"
                                      required="true" requiredMessage="Nome é obrigatório!"/>
                         <p:outputLabel for="nomeUsuario" value="Nome de usuário"/>
-                        <p:inputText id="nomeUsuario" maxlength="255" size="50" value="#{usuarioController.objeto.nomeUsuario}"
+                        <p:inputText id="nomeUsuario" maxlength="255" value="#{usuarioController.objeto.nomeUsuario}"
                                      required="true" requiredMessage="Nome de Usuário é obrigatório!"/>
                         <p:outputLabel for="pass" value="Senha"/>
-                        <p:password id="pass" maxlength="255" size="50" required="true"
+                        <p:password id="pass" maxlength="255" required="true"
                                     requiredMessage="Insira uma senha!"/>
                         <p:outputLabel for="Vpass" value="Confirmação de Senha"/>
-                        <p:password id="Vpass" maxlength="255" size="50" value="#{usuarioController.objeto.senha}"
+                        <p:password id="Vpass" maxlength="255" value="#{usuarioController.objeto.senha}"
                                     rendered="true" requiredMessage="Senha de confirmação é obrigatória"/>
                         <p:outputLabel for="status" value="Status"/>
                         <p:selectOneMenu id="status" required="true"
@@ -83,7 +83,7 @@
                         <p:outputLabel for="perfAcesso" value="Perfil de Acesso"/>
                         <p:selectOneMenu id="perfAcesso" required="true"
                                          value="#{usuarioController.objeto.idPerfilAcesso}" filter="true"
-                                         requiredMessage="Selecione Perfil de acesso!">
+                                         requiredMessage="Selecione Perfil de acesso!" converter="classeConverter">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
                             <f:selectItems value="#{perfilAcessoController.objetoDao.all}" var="perfAcesso"
                                            itemValue="#{perfAcesso}" itemLabel="#{perfAcesso.descricao}"/>

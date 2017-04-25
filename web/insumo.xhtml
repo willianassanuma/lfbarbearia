@@ -56,10 +56,11 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Insumo" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="fold" hideEffect="drop" position="center">
+                      draggable="false" showEffect="fold" hideEffect="drop" position="center"
+                      style="max-width: 700px">
                 <h:form id="frmDialogCadInsumo">
 
-                    <p:panelGrid id="pngCadInsumo" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-4"
+                    <p:panelGrid id="pngCadInsumo" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9"
                                  layout="grid" styleClass="ui-panelgrid-blank">
                         <p:outputLabel for="nome" value="Nome"/>
                         <p:inputText id="nome" maxlength="255" size="50" value="#{insumoController.objeto.nome}"
