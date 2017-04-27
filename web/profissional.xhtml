@@ -16,14 +16,14 @@
                     <p:panel header="Relação - Profissionais">
                         <p:dataTable id="tabCadProfissional" emptyMessage="Nenhum registro encontrado!" paginator="true" 
                                      reflow="true" paginatorPosition="bottom" var="profissional"
-                                     value="#{profissionalController.objetoDao.all}" rows="5">
+                                     value="#{profissionalController.objetoDao.all}" rows="5" rowHover="true">
                             <p:column style="width:50px">
                                 <p:rowToggler />
                             </p:column>
-                            <p:column headerText="ID" sortBy="#{profissional.id}" filterBy="#{profissional.id}">
+                            <p:column headerText="ID" sortBy="#{profissional.id}" filterBy="#{profissional.id}" style="width: 80px">
                                 <h:outputText value="#{profissional.id}"/>
                             </p:column>
-                            <p:column headerText="Nome" filterBy="#{profissional.nomeProf}" style="min-width: 600px">
+                            <p:column headerText="Nome" filterBy="#{profissional.nomeProf}" style="width: 600px">
                                 <h:outputText value="#{profissional.nomeProf}"/>
                             </p:column>
 
@@ -48,7 +48,7 @@
                                     <h:outputText value="Bairro:" />
                                     <h:outputText value="#{profissional.bairro}"/>
                                     <h:outputText value="Cidade:" />
-                                    <h:outputText value="#{profissional.idCidade}"/>
+                                    <h:outputText value="#{profissional.idCidade.cidade}"/>
                                     <h:outputText value="Complemento:"/>
                                     <h:outputText value="#{profissional.complemento}"/>
                                     <h:outputText value="E-mail:" />
@@ -79,7 +79,7 @@
                       draggable="false" showEffect="fold" hideEffect="drop" width="550">
                 <h:form id="frmDialogCadProf">
                     <p:scrollPanel mode="native" style="max-height: 450px">
-                        <p:panelGrid id="pngCadProf" columns="2" columnClasses="ui-grid-col-4,ui-grid-col-8"
+                        <p:panelGrid id="pngCadProf" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9"
                                      layout="grid" styleClass="ui-panelgrid-blank">
                             <p:outputLabel for="nome" value="Nome"/>
                             <p:inputText id="nome" maxlength="255" size="50" value="#{profissionalController.objeto.nomeProf}"
@@ -115,12 +115,12 @@
                             
                       
                             <p:outputLabel for="cid" value="Cidade"/>
-                            <p:selectOneMenu id="cid" required="true"
+                            <p:selectOneMenu id="cid" required="true" converter="classeConverter"
                                              value="#{profissionalController.objeto.idCidade}" filter="true"
                                              requiredMessage="Cidade é obrigatório!">
-                                <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true" />
+                                <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true" />
                                 <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
-                                               itemLabel="#{cidade}" itemValue="#{cidade.cidade}"/>
+                                               itemLabel="#{cidade.cidade}"  itemValue="#{cidade}"/>
                             </p:selectOneMenu>
                             
                             <p:outputLabel for="obs" value="Observação"/>

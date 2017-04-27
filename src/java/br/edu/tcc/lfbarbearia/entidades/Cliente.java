@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -47,9 +46,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Cliente.findByComplemento", query = "SELECT c FROM Cliente c WHERE c.complemento = :complemento")
     , @NamedQuery(name = "Cliente.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email")
     , @NamedQuery(name = "Cliente.findByStatus", query = "SELECT c FROM Cliente c WHERE c.status = :status")
+    , @NamedQuery(name = "Cliente.findByObservacao", query = "SELECT c FROM Cliente c WHERE c.observacao = :observacao")
     , @NamedQuery(name = "Cliente.findByTelefoneComercial", query = "SELECT c FROM Cliente c WHERE c.telefoneComercial = :telefoneComercial")
     , @NamedQuery(name = "Cliente.findByTelefoneCelular", query = "SELECT c FROM Cliente c WHERE c.telefoneCelular = :telefoneCelular")})
-public class Cliente implements Serializable {
+public class Cliente implements Serializable, InterfaceEntidades {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -64,7 +64,7 @@ public class Cliente implements Serializable {
     private String nomeCLiente;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 4)
+    @Size(min = 1, max = 15)
     @Column(name = "tratamento")
     private String tratamento;
     @Basic(optional = false)
@@ -112,9 +112,9 @@ public class Cliente implements Serializable {
     @NotNull
     @Column(name = "status")
     private boolean status;
-    @Lob
+    @Size(max = 300)
     @Column(name = "observacao")
-    private byte[] observacao;
+    private String observacao;
     @Size(max = 30)
     @Column(name = "telefoneComercial")
     private String telefoneComercial;
@@ -251,11 +251,11 @@ public class Cliente implements Serializable {
         this.status = status;
     }
 
-    public byte[] getObservacao() {
+    public String getObservacao() {
         return observacao;
     }
 
-    public void setObservacao(byte[] observacao) {
+    public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
 

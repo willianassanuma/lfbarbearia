@@ -6,7 +6,6 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,7 +23,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -67,8 +64,6 @@ public class Contaspagar implements Serializable, InterfaceEntidades {
     @Size(min = 1, max = 50)
     @Column(name = "status")
     private String status;
-    @ManyToMany(mappedBy = "contaspagarCollection")
-    private Collection<Fornecedor> fornecedorCollection;
     @JoinColumn(name = "idCompra", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Compra idCompra;
@@ -126,15 +121,6 @@ public class Contaspagar implements Serializable, InterfaceEntidades {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    @XmlTransient
-    public Collection<Fornecedor> getFornecedorCollection() {
-        return fornecedorCollection;
-    }
-
-    public void setFornecedorCollection(Collection<Fornecedor> fornecedorCollection) {
-        this.fornecedorCollection = fornecedorCollection;
     }
 
     public Compra getIdCompra() {

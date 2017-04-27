@@ -12,19 +12,19 @@
 
         <div class="ui-fluid">
             <h:form id="formCadCliente">
-                <p:scrollPanel mode="native" style="height:450px">
+                <p:scrollPanel mode="native" style="height:550px">
                     <p:panel header="Relação - Clientes">
                         <p:dataTable id="tabCadCliente" emptyMessage="Nenhum registro encontrado!" paginator="true" 
                                      reflow="true" paginatorPosition="bottom" var="cliente"
-                                     value="#{clienteController.objetoDao.all}" rows="5">
+                                     value="#{clienteController.objetoDao.all}" rows="5" rowHover="true">
                             <p:column style="width:50px">
                                 <p:rowToggler />
                             </p:column>
-                            <p:column headerText="ID" sortBy="#" filterBy="#" style="width: 80px">
+                            <p:column headerText="ID" sortBy="#{cliente.id}" filterBy="#{cliente.id}" style="width: 80px">
                                 <h:outputText value="#{cliente.id}"/>
                             </p:column>
-                            <p:column headerText="Nome" filterBy="#" style="width: 600px">
-                                <h:outputText value="#{cliente.nomeCliente}"/>
+                            <p:column headerText="Nome" filterBy="#{cliente.nomeCLiente}" style="width: 600px">
+                                <h:outputText value="#{cliente.nomeCLiente}"/>
                             </p:column>
 
                             <!--Botão Editar-->
@@ -50,7 +50,9 @@
                                     <h:outputText value="Tefone Comercial:" />
                                     <h:outputText value="#{cliente.telefoneComercial}" />
                                     <h:outputText value="Data de Nascimento:" />
-                                    <h:outputText value="#{cliente.dataNascimento}" />
+                                    <h:outputText value="#{cliente.dataNascimento}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" locale="pr"/>
+                                    </h:outputText>
                                     <h:outputText value="Sexo:" />
                                     <h:outputText value="#{cliente.sexo}" />
                                     <h:outputText value="Endereço:" />
@@ -60,9 +62,9 @@
                                     <h:outputText value="bairro:" />
                                     <h:outputText value="#{cliente.bairro}" />
                                     <h:outputText value="Cidade:" />
-                                    <h:outputText value="#{cliente.idCidade}" />
+                                    <h:outputText value="#{cliente.idCidade.idEstado.sigla} - #{cliente.idCidade.cidade}" />
                                     <h:outputText value="Complemento:" />
-                                    <h:outputText value="#{cliente.complemento}" />
+                                    <h:outputText value="#{cliente.complemento}"/>
                                     <h:outputText value="E-mail:" />
                                     <h:outputText value="#{cliente.email}" />
                                     <h:outputText value="Status:" />
@@ -96,8 +98,8 @@
                                              value="#{clienteController.objeto.tratamento}" filter="true"
                                              requiredMessage="Tratamento é obrigatório!" >
                                 <f:selectItem  itemLabel="Selecione" noSelectionOption="true"/>
-                                <f:selectItem  itemLabel="CAVALHEIRO" itemValue="C"/>
-                                <f:selectItem  itemLabel="DAMA" itemValue="D"/>
+                                <f:selectItem  itemLabel="CAVALHEIRO" itemValue="CAVALHEIRO"/>
+                                <f:selectItem  itemLabel="DAMA" itemValue="DAMA"/>
                             </p:selectOneMenu>
                             <p:outputLabel for="nome" value="Nome"/>
                             <p:inputText id="nome" maxlength="255" size="50" value="#{clienteController.objeto.nomeCLiente}"
@@ -107,8 +109,8 @@
                                          required="true" requiredMessage="CPF é obrigatório"/>
 
                             <p:outputLabel for="nasc" value="Data de Nascimento"/>
-                            <p:inputMask id="nasc" value="#{clienteController.objeto.dataNascimento}" mask="99/99/9999"
-                                         required="true" requiredMessage="Data de Nascimento é obrigatória"/>
+                            <p:calendar id="nasc" value="#{clienteController.objeto.dataNascimento}"
+                                        locale="pt"  pattern="dd/MM/yy" mask="99/99/99" placeholder="__/__/__" />
                             
                             <p:outputLabel for="sexo" value="Sexo"/>
                             <p:selectOneMenu id="sexo" required="true"

@@ -23,24 +23,23 @@
                             <p:column headerText="Nome" filterBy="#{insumo.nome}">
                                 <h:outputText value="#{insumo.nome}"/>
                             </p:column>
-                            <p:column headerText="Estoque Min" filterBy="#{insumo.estoqueminimo}">
-                                <h:outputText value="#{insumo.estoqueminimo}"/>
+                            <p:column headerText="Estoque Min" filterBy="#{insumo.estoqueMinimo}">
+                                <h:outputText value="#{insumo.estoqueMinimo}"/>
                             </p:column>
                             <p:column headerText="Status" filterBy="#{insumo.status}">
                                 <h:outputText value="#{insumo.status}"/>
                             </p:column>
-                            <p:column headerText="Un Medida" filterBy="">
-                                <h:outputText value="#"/>
+                            <p:column headerText="Un Medida" filterBy="#{insumo.idUnidadeMedida.descricao}">
+                                <h:outputText value="#{insumo.idUnidadeMedida.sigla} -  #{insumo.idUnidadeMedida.descricao}"/>
                             </p:column>
                             <p:column headerText="Obs" filterBy="#{insumo.observacao}">
-                                <h:outputText value="#"/>
+                                <h:outputText value="#{insumo.observacao}"/>
                             </p:column>
 
                             <!--Botão Editar-->
                             <p:column headerText="Opções">
                                 <p:commandButton value="Editar" icon="fa fa-pencil"
-                                                 update=":sms">
-                                    <f:attribute name="selInsumo" value="#{insumo}"/>
+                                                 update=":sms">    
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
@@ -67,9 +66,12 @@
                                      required="true" requiredMessage="Nome é obrigatório!"/>
                         <p:outputLabel for="estMin" value="Estoque Minimo"/>
                         <p:inputText id="estMin" size="50" value="#{insumoController.objeto.estoqueMinimo}"
-                                     required="true" requiredMessage="Estoque minimo é obritatório!"/>
+                                     required="true" requiredMessage="Estoque minimo é obritatório!">
+                            <f:convertNumber pattern="99"/>
+                        </p:inputText>    
                         <p:outputLabel for="unMed" value="Unidade de Medida"/>
-                        <p:selectOneMenu id="unMed" required="true"
+                        
+                        <p:selectOneMenu id="unMed" required="true" converter="classeConverter"
                                          value="#{insumoController.objeto.idUnidadeMedida}" filter="true"
                                          requiredMessage="Selecione Unidade de Medida!">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
@@ -88,6 +90,7 @@
                         <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
                                          counterTemplate="{0} Caracteres Restante."
                                          autoResize="true"
+                                         value="#{insumoController.objeto.observacao}"
                                          addLine="true"/>
                         <h:outputText/>
                         <h:outputText id="obs" />

@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -40,6 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Profissional.findByComplemento", query = "SELECT p FROM Profissional p WHERE p.complemento = :complemento")
     , @NamedQuery(name = "Profissional.findByEmail", query = "SELECT p FROM Profissional p WHERE p.email = :email")
     , @NamedQuery(name = "Profissional.findByStatus", query = "SELECT p FROM Profissional p WHERE p.status = :status")
+    , @NamedQuery(name = "Profissional.findByObservacao", query = "SELECT p FROM Profissional p WHERE p.observacao = :observacao")
     , @NamedQuery(name = "Profissional.findByTelefoneCelular", query = "SELECT p FROM Profissional p WHERE p.telefoneCelular = :telefoneCelular")
     , @NamedQuery(name = "Profissional.findByTelefoneComercial", query = "SELECT p FROM Profissional p WHERE p.telefoneComercial = :telefoneComercial")})
 public class Profissional implements Serializable, InterfaceEntidades {
@@ -85,9 +85,9 @@ public class Profissional implements Serializable, InterfaceEntidades {
     @NotNull
     @Column(name = "status")
     private boolean status;
-    @Lob
+    @Size(max = 300)
     @Column(name = "observacao")
-    private byte[] observacao;
+    private String observacao;
     @Size(max = 30)
     @Column(name = "telefoneCelular")
     private String telefoneCelular;
@@ -187,11 +187,11 @@ public class Profissional implements Serializable, InterfaceEntidades {
         this.status = status;
     }
 
-    public byte[] getObservacao() {
+    public String getObservacao() {
         return observacao;
     }
 
-    public void setObservacao(byte[] observacao) {
+    public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
 

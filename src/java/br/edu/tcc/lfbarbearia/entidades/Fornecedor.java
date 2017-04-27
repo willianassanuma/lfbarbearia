@@ -6,7 +6,6 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,7 +20,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,23 +41,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Fornecedor.findByComplemento", query = "SELECT f FROM Fornecedor f WHERE f.complemento = :complemento")
     , @NamedQuery(name = "Fornecedor.findByEmail", query = "SELECT f FROM Fornecedor f WHERE f.email = :email")
     , @NamedQuery(name = "Fornecedor.findByStatus", query = "SELECT f FROM Fornecedor f WHERE f.status = :status")
+    , @NamedQuery(name = "Fornecedor.findByObservacao", query = "SELECT f FROM Fornecedor f WHERE f.observacao = :observacao")
     , @NamedQuery(name = "Fornecedor.findByTelefoneComercial", query = "SELECT f FROM Fornecedor f WHERE f.telefoneComercial = :telefoneComercial")
     , @NamedQuery(name = "Fornecedor.findByTelefoneCelular", query = "SELECT f FROM Fornecedor f WHERE f.telefoneCelular = :telefoneCelular")})
 public class Fornecedor implements Serializable, InterfaceEntidades {
-
-    @Lob
-    @Column(name = "observacao")
-    private byte[] observacao;
-    @JoinTable(name = "fornecedor_insumo", joinColumns = {
-        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "idInsumo", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Insumo> insumoCollection;
-    @JoinTable(name = "fornecedor_contaspagar", joinColumns = {
-        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "idContasAPagar", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Contaspagar> contaspagarCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -82,7 +64,7 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
     private String razaoSocial;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 25)
+    @Size(min = 1, max = 50)
     @Column(name = "cnpj")
     private String cnpj;
     @Basic(optional = false)
@@ -117,6 +99,9 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
     @NotNull
     @Column(name = "status")
     private boolean status;
+    @Size(max = 300)
+    @Column(name = "observacao")
+    private String observacao;
     @Size(max = 30)
     @Column(name = "telefoneComercial")
     private String telefoneComercial;
@@ -235,6 +220,13 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
         this.status = status;
     }
 
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
 
     public String getTelefoneComercial() {
         return telefoneComercial;
@@ -283,32 +275,6 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Fornecedor[ id=" + id + " ]";
-    }
-
-    public byte[] getObservacao() {
-        return observacao;
-    }
-
-    public void setObservacao(byte[] observacao) {
-        this.observacao = observacao;
-    }
-
-    @XmlTransient
-    public Collection<Insumo> getInsumoCollection() {
-        return insumoCollection;
-    }
-
-    public void setInsumoCollection(Collection<Insumo> insumoCollection) {
-        this.insumoCollection = insumoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Contaspagar> getContaspagarCollection() {
-        return contaspagarCollection;
-    }
-
-    public void setContaspagarCollection(Collection<Contaspagar> contaspagarCollection) {
-        this.contaspagarCollection = contaspagarCollection;
     }
     
 }

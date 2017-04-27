@@ -6,9 +6,7 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,16 +14,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -41,10 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Insumo.findByStatus", query = "SELECT i FROM Insumo i WHERE i.status = :status")
     , @NamedQuery(name = "Insumo.findByEstoqueMinimo", query = "SELECT i FROM Insumo i WHERE i.estoqueMinimo = :estoqueMinimo")})
 public class Insumo implements Serializable, InterfaceEntidades {
-
-    @Lob
-    @Column(name = "observacao")
-    private byte[] observacao;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,12 +56,9 @@ public class Insumo implements Serializable, InterfaceEntidades {
     @NotNull
     @Column(name = "estoqueMinimo")
     private float estoqueMinimo;
-    @ManyToMany(mappedBy = "insumoCollection")
-    private Collection<Fornecedor> fornecedorCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<Movestoque> movestoqueCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<Item> itemCollection;
+    @Lob
+    @Column(name = "observacao")
+    private byte[] observacao;
     @JoinColumn(name = "idUnidadeMedida", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Unidademedida idUnidadeMedida;
@@ -121,32 +109,12 @@ public class Insumo implements Serializable, InterfaceEntidades {
         this.estoqueMinimo = estoqueMinimo;
     }
 
-
-    @XmlTransient
-    public Collection<Fornecedor> getFornecedorCollection() {
-        return fornecedorCollection;
+    public byte[] getObservacao() {
+        return observacao;
     }
 
-    public void setFornecedorCollection(Collection<Fornecedor> fornecedorCollection) {
-        this.fornecedorCollection = fornecedorCollection;
-    }
-
-    @XmlTransient
-    public Collection<Movestoque> getMovestoqueCollection() {
-        return movestoqueCollection;
-    }
-
-    public void setMovestoqueCollection(Collection<Movestoque> movestoqueCollection) {
-        this.movestoqueCollection = movestoqueCollection;
-    }
-
-    @XmlTransient
-    public Collection<Item> getItemCollection() {
-        return itemCollection;
-    }
-
-    public void setItemCollection(Collection<Item> itemCollection) {
-        this.itemCollection = itemCollection;
+    public void setObservacao(byte[] observacao) {
+        this.observacao = observacao;
     }
 
     public Unidademedida getIdUnidadeMedida() {
@@ -180,14 +148,6 @@ public class Insumo implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Insumo[ id=" + id + " ]";
-    }
-
-    public byte[] getObservacao() {
-        return observacao;
-    }
-
-    public void setObservacao(byte[] observacao) {
-        this.observacao = observacao;
     }
     
 }
