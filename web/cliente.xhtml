@@ -30,8 +30,10 @@
                             <!--Botão Editar-->
                             <p:column headerText="Opções">
                                 <p:commandButton value="Editar" icon="fa fa-pencil"
-                                                 update=":sms"
-                                                 actionListener="#">
+                                                 actionListener="#"
+                                                 update=":formCadCliente:tabCadCliente"
+                                                 oncomplete="PF('dlg').show();">
+                                    <f:attribute name="editarCel" value="#{cliente}"/>
                                 </p:commandButton>
                             </p:column>
 
@@ -54,7 +56,7 @@
                                         <f:convertDateTime pattern="dd/MM/yyyy" locale="pr"/>
                                     </h:outputText>
                                     <h:outputText value="Sexo:" />
-                                    <h:outputText value="#{cliente.sexo}" />
+                                    <h:outputText value="#{cliente.sexo}"/>
                                     <h:outputText value="Endereço:" />
                                     <h:outputText value="#{cliente.endereco}" />
                                     <h:outputText value="Numero:" />
@@ -111,7 +113,7 @@
                             <p:outputLabel for="nasc" value="Data de Nascimento"/>
                             <p:calendar id="nasc" value="#{clienteController.objeto.dataNascimento}"
                                         locale="pt"  pattern="dd/MM/yy" mask="99/99/99" placeholder="__/__/__" />
-                            
+
                             <p:outputLabel for="sexo" value="Sexo"/>
                             <p:selectOneMenu id="sexo" required="true"
                                              value="#{clienteController.objeto.sexo}" filter="true"
@@ -120,7 +122,7 @@
                                 <f:selectItem  itemLabel="MASCULINO" itemValue="M"/>
                                 <f:selectItem  itemLabel="FEMININO" itemValue="F"/>
                             </p:selectOneMenu>
-                           
+
                             <p:outputLabel for="cid" value="Cidade"/>
                             <p:selectOneMenu id="cid" required="true" converter="classeConverter"
                                              value="#{clienteController.objeto.idCidade}" filter="true"
@@ -129,7 +131,7 @@
                                 <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
                                                itemLabel="#{cidade.cidade}"  itemValue="#{cidade}"/>
                             </p:selectOneMenu>
-                            
+
                             <p:outputLabel for="foneCel" value="Telefone Celular"/>
                             <p:inputMask id="foneCel" value="#{clienteController.objeto.telefoneCelular}" mask="(99)99999-9999"/>
                             <p:outputLabel for="foneCom" value="Telefone Comercial"/>

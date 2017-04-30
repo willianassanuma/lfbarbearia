@@ -26,7 +26,11 @@
                                 <h:outputText value="#{cidade.idEstado.sigla} - #{cidade.idEstado.descricao}"/>
                             </p:column>
                             <p:column headerText="Opções">
-                                <p:commandButton value="Editar" icon="fa fa-pencil"/>
+                                <p:commandButton value="Editar" icon="fa fa-pencil" update=":formCadCidade:tabCadCidade"
+                                                 actionListener="#"
+                                                 oncomplete="PF('dlg').show();" >
+                                    <f:attribute name="editSelection" value="#{cidade}"/>
+                                </p:commandButton>
                             </p:column>
 
                         </p:dataTable>
@@ -46,10 +50,10 @@
                 <h:form id="frmDialogCadCid">
                     
                     <!--Grid de formulario-->
-                    <p:panelGrid id="pngCadCid" columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
+                    <p:panelGrid id="pngCadCid" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9"
                                  layout="grid" styleClass="ui-panelgrid-blank">
                         <p:outputLabel for="cid" value="Cidade"/>
-                        <p:inputText id="cid" maxlength="50" size="50" value="#{cidadeController.objeto.cidade}"
+                        <p:inputText id="cid" maxlength="50" value="#{cidadeController.objeto.cidade}"
                                      required="true" requiredMessage="Cidade é obrigatória!"/>
 
                        

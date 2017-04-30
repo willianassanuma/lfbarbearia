@@ -35,6 +35,6 @@ public class ClienteController extends BaseController<Cliente, Integer> implemen
     @Override
     public void setObjeto(Cliente objeto) {
         super.setObjeto(objeto);
-    } 
-    
+    }
+       
 }

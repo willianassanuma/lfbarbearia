@@ -49,10 +49,10 @@
                       draggable="false" showEffect="fold" hideEffect="drop" position="center">
                 <h:form id="frmDialogCadPerfAcesso">
 
-                    <p:panelGrid id="pngCadPerfAcesso" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9"
+                    <p:panelGrid id="pngCadPerfAcesso" columns="2" columnClasses="ui-grid-col-3, ui-grid-col-9"
                                  layout="grid" styleClass="ui-panelgrid-blank">
                         <p:outputLabel for="desc" value="Descrição"/>
-                        <p:inputText id="desc" maxlength="255" size="30" value="#{perfilAcessoController.objeto.descricao}"
+                        <p:inputText id="desc" maxlength="255" value="#{perfilAcessoController.objeto.descricao}"
                                      required="true" requiredMessage="Descrição é obrigatória!"/>
                         <p:outputLabel for="status" value="Status"/>
                         <p:selectOneMenu id="status" required="true"

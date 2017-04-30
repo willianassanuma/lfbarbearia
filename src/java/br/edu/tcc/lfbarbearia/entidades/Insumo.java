@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Insumo.findById", query = "SELECT i FROM Insumo i WHERE i.id = :id")
     , @NamedQuery(name = "Insumo.findByNome", query = "SELECT i FROM Insumo i WHERE i.nome = :nome")
     , @NamedQuery(name = "Insumo.findByStatus", query = "SELECT i FROM Insumo i WHERE i.status = :status")
-    , @NamedQuery(name = "Insumo.findByEstoqueMinimo", query = "SELECT i FROM Insumo i WHERE i.estoqueMinimo = :estoqueMinimo")})
+    , @NamedQuery(name = "Insumo.findByEstoqueMinimo", query = "SELECT i FROM Insumo i WHERE i.estoqueMinimo = :estoqueMinimo")
+    , @NamedQuery(name = "Insumo.findByObservacao", query = "SELECT i FROM Insumo i WHERE i.observacao = :observacao")})
 public class Insumo implements Serializable, InterfaceEntidades {
 
     private static final long serialVersionUID = 1L;
@@ -56,9 +56,9 @@ public class Insumo implements Serializable, InterfaceEntidades {
     @NotNull
     @Column(name = "estoqueMinimo")
     private float estoqueMinimo;
-    @Lob
+    @Size(max = 300)
     @Column(name = "observacao")
-    private byte[] observacao;
+    private String observacao;
     @JoinColumn(name = "idUnidadeMedida", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Unidademedida idUnidadeMedida;
@@ -109,11 +109,11 @@ public class Insumo implements Serializable, InterfaceEntidades {
         this.estoqueMinimo = estoqueMinimo;
     }
 
-    public byte[] getObservacao() {
+    public String getObservacao() {
         return observacao;
     }
 
-    public void setObservacao(byte[] observacao) {
+    public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
 
