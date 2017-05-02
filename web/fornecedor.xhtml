@@ -15,7 +15,7 @@
                 <p:scrollPanel mode="native" style="height:450px">
                     <p:panel header="Relação - Fornecedores">
                         <p:dataTable id="tabCadFornecedor" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="fornecedor"
+                                     reflow="true" paginatorPosition="bottom" var="fornecedor" rowHover="true"
                                      value="#{fornecedorController.objetoDao.all}" rows="5">
                             <p:column style="width:50px">
                                 <p:rowToggler />
@@ -56,7 +56,7 @@
                                     <h:outputText value="bairro:" />
                                     <h:outputText value="#{fornecedor.bairro}" />
                                     <h:outputText value="Cidade:" />
-                                    <h:outputText value="#{fornecedor.idCidade}" />
+                                    <h:outputText value="#{fornecedor.idCidade.cidade}" />
                                     <h:outputText value="Complemento:" />
                                     <h:outputText value="#{fornecedor.complemento}" />
                                     <h:outputText value="E-mail:" />
@@ -71,7 +71,7 @@
                         </p:dataTable>
                         <f:facet name="footer">
                             <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
-                                             actionListener="#{clienteController.objetoLimpo()}"
+                                             actionListener="#{fornecedorController.objetoLimpo()}"
                                              update=":formCadForn:tabCadFornecedor"/>
                         </f:facet>
                     </p:panel>
@@ -123,10 +123,10 @@
                                                itemLabel="#{cidade.cidade}" itemValue="#{cidade}"/>
                             </p:selectOneMenu>
                             <p:outputLabel for="email" value="E-mail"/>
-                            <p:inputText id="email" size="50" maxlength="255" value="#{clienteController.objeto.email}"
+                            <p:inputText id="email" size="50" maxlength="255" value="#{fornecedorController.objeto.email}"
                                          required="true" requiredMessage="E-Mail é Obrigatório!"/>
-                            <p:outputLabel for="status" value="Status"/>
-                            <p:selectOneMenu id="status" autoWidth="true" required="true"
+                             <p:outputLabel for="status" value="Status"/>
+                            <p:selectOneMenu id="status" required="true"
                                              value="#{fornecedorController.objeto.status}"
                                              requiredMessage="Status é obrigatório!" filter="true">
                                 <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>

@@ -15,7 +15,7 @@
                 <p:scrollPanel mode="native" style="height:450px">
                     <p:panel header="Relação - Usuário">
                         <p:dataTable id="tabCadUsuario" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="usuario" 
+                                     reflow="true" paginatorPosition="bottom" var="usuario" rowHover="true"
                                      value="#{usuarioController.objetoDao.all}" rows="5">
                             <p:column headerText="ID" sortBy="#{usuario.id}" filterBy="#{usuario.id}" style="width: 80px">
                                 <h:outputText value="#{usuario.id}"/>

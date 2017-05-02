@@ -143,4 +143,9 @@ public class BaseController<T, ID> implements Serializable {
         }
     }
     
+//    public void editarLinha (ActionEvent event){
+//       objetoDao = (BaseDao<T, ID>) event.getComponent().getAttributes().get("editSelection");
+//        
+//        //event.getComponent().getAttributes().get("editSelection");
+//    } 
 }

@@ -13,22 +13,28 @@
                 <p:scrollPanel mode="native" style="height:450px">
                     <p:panel header="Relação - Serviços">
                         <p:dataTable id="tabCadServico" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="servico" 
+                                     reflow="true" paginatorPosition="bottom" var="servico" rowHover="true"
                                      value="#{servicoController.objetoDao.all}" rows="5">
                             <p:column headerText="ID" sortBy="#{servico.id}" filterBy="#{servico.id}" style="width: 80px">
                                 <h:outputText value="#{servico.id}"/>
                             </p:column>
-                            <p:column headerText="Descrição" filterBy="#{servico.descricao}">
-                                <h:outputText value="#{servico.descricao}"/>
+                            <p:column headerText="Descrição" filterBy="#{servico.descricaoServico}">
+                                <h:outputText value="#{servico.descricaoServico}"/>
                             </p:column>
-                            <p:column headerText="Comissão" filterBy="#{servico.comissao}">
-                                <h:outputText value="#{servico.comissao}"/>
+                            <p:column headerText="Comissão" filterBy="#{servico.comissaoServico}">
+                                <h:outputText value="#{servico.comissaoServico}">
+                                    <f:convertNumber pattern="000"/>
+                                </h:outputText>
                             </p:column>
-                            <p:column headerText="Tempo Gasto" filterBy="#{servico.tempogasto}">
-                                <h:outputText value="#{servico.tempogasto}"/>
+                            <p:column headerText="Tempo Gasto" filterBy="#{servico.tempoGastoReal}">
+                                <h:outputText value="#{servico.tempoGastoReal}">
+                                    <f:convertDateTime pattern="HH:mm:ss"/>
+                                </h:outputText>
                             </p:column>
-                            <p:column headerText="T. de Espera" filterBy="#{servico.tempoespera}">
-                                <h:outputText value="#{servico.tempoespera}"/>
+                            <p:column headerText="T. de Espera" filterBy="#{servico.tempoEsperaDurExec}">
+                                <h:outputText value="#{servico.tempoEsperaDurExec}">
+                                    <f:convertDateTime pattern="HH:mm:ss"/>
+                                </h:outputText>
                             </p:column>
                             <p:column headerText="Opções">
                                 <p:commandButton value="Editar" icon="fa fa-pencil"/>
@@ -60,10 +66,14 @@
                                      mask="999" required="true" requiredMessage="Comissão é obrigatória!" />
                         <p:outputLabel for="timeG" value="Tempo de Execução"/>
                         <p:inputMask id="timeG" size="20" value="#{servicoController.objeto.tempoGastoReal}"
-                                     mask="99:99:99" required="true" requiredMessage="Tempo de execução é obrigatório!"/>
+                                     mask="99:99:99" required="true" requiredMessage="Tempo de execução é obrigatório!">
+                            <f:convertDateTime pattern="HH:mm:ss"/>
+                        </p:inputMask>
                         <p:outputLabel for="timeE" value="Tempo de Espera"/>
                         <p:inputMask id="timeE" size="20" value="#{servicoController.objeto.tempoEsperaDurExec}"
-                                     mask="99:99:99" required="true" requiredMessage="Tempo de espera é obrigatório!" />
+                                     mask="99:99:99" required="true" requiredMessage="Tempo de espera é obrigatório!" >
+                            <f:convertDateTime pattern="HH:mm:ss"/>
+                        </p:inputMask>
 
                     </p:panelGrid>
                     <center>

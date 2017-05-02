@@ -14,7 +14,7 @@
                 <p:scrollPanel mode="native" style="height:450px">
                     <p:panel header="Relação - Unidade de Medida">
                         <p:dataTable id="tabCadUnMedida" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="unmedida"
+                                     reflow="true" paginatorPosition="bottom" var="unmedida" rowHover="true"
                                      value="#{unidademedidaController.objetoDao.all}" rows="5">
                             <p:column headerText="ID" sortBy="#{unmedida.id}" filterBy="#{unmedida.id}" style="width: 80px">
                                 <h:outputText value="#{unmedida.id}"/>

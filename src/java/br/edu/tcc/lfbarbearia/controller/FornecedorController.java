@@ -2,13 +2,13 @@ package br.edu.tcc.lfbarbearia.controller;
 
 
 import br.edu.tcc.lfbarbearia.dao.FornecedorDao;
-import br.edu.tcc.lfbarbearia.entidades.Fornecedor;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
+import br.edu.tcc.lfbarbearia.entidades.Fornecedor;
 
 @ViewScoped
 @Named(value="fornecedorController")
@@ -37,4 +37,5 @@ public class FornecedorController extends BaseController<Fornecedor, Integer> im
         super.setObjeto(objeto);
     } 
   
+    
 }

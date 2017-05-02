@@ -15,7 +15,7 @@
                 <p:scrollPanel mode="native" style="height:450px">
                     <p:panel header="Relação - Estados">
                         <p:dataTable id="tabCadEstado" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="estado" 
+                                     reflow="true" paginatorPosition="bottom" var="estado" rowHover="true"
                                      value="#{estadoController.objetoDao.all}" rows="5">
                             <p:column headerText="ID" sortBy="#{estado.id}" filterBy="#{estado.id}" style="width: 80px">
                                 <h:outputText value="#{estado.id}"/>

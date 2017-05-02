@@ -14,7 +14,7 @@
                 <p:scrollPanel mode="native" style="height:450px">
                     <p:panel  header="Relação - Condições de Pagamento">
                         <p:dataTable id="painelCondPag" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="condPag"
+                                     reflow="true" paginatorPosition="bottom" var="condPag" rowHover="true"
                                      value="#{condpagamentoController.objetoDao.all}" rows="5">
                             <p:column headerText="ID" filterBy="#{condPag.id}" sortBy="#{condPag.id}" style="width: 80px">
                                 <h:outputText value="#{condPag.id}"/>

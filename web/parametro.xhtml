@@ -8,26 +8,38 @@
                 template="./layout.xhtml">
 
     <ui:define name="conteudo">
+        
+        <p:growl id="sms" autoUpdate="true"/>
         <div class="ui-fluid">
             <h:form id="formParam">
                 <p:panel header="Ajuste/Parâmetros">
-                    <p:panelGrid columns="2" columnClasses="ui-grid-col-12,ui-grid-col-12"
+                    <p:panelGrid columns="2" columnClasses="ui-grid-col-7,ui-grid-col-5"
                                  layout="grid" styleClass="ui-panelgrid-blank">
-                        <p:outputLabel for="id" value="ID"/>
-                        <p:inputText id="id" required="true" size="20" maxlength="2" readonly="true"/>
+                        
                         <p:outputLabel for="timeAg" value="Tempo de Ger. Agenda"/>
-                        <p:inputMask id="timeAg" mask="99:99:99" required="true" requiredMessage="Tempo de Ger. é Obrigatório!"/>
+                        <p:inputMask id="timeAg" mask="99:99:99" required="true"
+                                     requiredMessage="Tempo de Ger. é Obrigatório!"
+                                     value="#{parametroController.objeto.tempoGerAgeda}">
+                            <f:convertDateTime pattern="HH:mm:ss"/>
+                        </p:inputMask>
                         <p:outputLabel for="comPad" value="Comissão Padrão"/>
-                        <p:inputMask id="comPad" mask="999%" required="true" requiredMessage="Comissão é Obrigatório!"/>
-                        <p:outputLabel for="percDecPad" value="Perc. Desc. Pag. Cartão" />
-                        <p:inputMask id="percDecPad" mask="999%" required="true" requiredMessage="Perc. Desc. é Obrigatório!"/>
+                        <p:inputText id="comPad" maxlength="3" required="true"
+                                     requiredMessage="Comissão é Obrigatório!"
+                                     value="#{parametroController.objeto.comissaoPadrao}"/>
                         <p:outputLabel for="fecCaixa" value="Hora Base Fechamento de caixa"/>
-                        <p:inputMask id="fecCaixa" mask="99:99:99" required="true" requiredMessage="Hora Base é Obrigatório!"/>
+                        <p:inputMask id="fecCaixa" mask="99:99:99" required="true"
+                                     requiredMessage="Hora Base é Obrigatório!"
+                                     value="#{parametroController.objeto.harioFechamentoCaixa}">
+                            <f:convertDateTime pattern="HH:mm:ss"/>
+                        </p:inputMask>
                     </p:panelGrid>
                     <p:separator/>
                     <p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6"
                                  layout="grid" styleClass="ui-panelgrid-blank">
-                        <p:commandButton value="Salvar" icon="fa fa-floppy-o"/>
+                        
+                        <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                         actionListener="#{parametroController.salvarRegistro(event)}"
+                                         update=":sms"/>
                         <p:commandButton value="Editar" icon="fa fa-pencil"/>
                     </p:panelGrid>
 

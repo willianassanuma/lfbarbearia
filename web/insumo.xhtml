@@ -15,7 +15,7 @@
                 <p:scrollPanel mode="native" style="height:450px">
                     <p:panel header="Relação - Insumo">
                         <p:dataTable id="tabCadInsumo" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="insumo" 
+                                     reflow="true" paginatorPosition="bottom" var="insumo" rowHover="true"
                                      value="#{insumoController.objetoDao.all}" rows="5">
                             <p:column headerText="ID" sortBy="#{insumo.id}" filterBy="#{insumo.id}" style="width: 80px">
                                 <h:outputText value="#{insumo.id}"/>
@@ -24,7 +24,9 @@
                                 <h:outputText value="#{insumo.nome}"/>
                             </p:column>
                             <p:column headerText="Estoque Min" filterBy="#{insumo.estoqueMinimo}">
-                                <h:outputText value="#{insumo.estoqueMinimo}"/>
+                                <h:outputText value="#{insumo.estoqueMinimo}">
+                                    <f:convertNumber pattern="00.00"/>
+                                </h:outputText>
                             </p:column>
                             <p:column headerText="Status" filterBy="#{insumo.status}">
                                 <h:outputText value="#{insumo.status}"/>
@@ -68,7 +70,6 @@
                         <p:inputNumber id="estMin" size="50" value="#{insumoController.objeto.estoqueMinimo}"
                                         required="true" requiredMessage="Estoque minimo é obritatório!"/>
                         <p:outputLabel for="unMed" value="Unidade de Medida"/>
-                        
                         <p:selectOneMenu id="unMed" required="true" converter="classeConverter"
                                          value="#{insumoController.objeto.idUnidadeMedida}" filter="true"
                                          requiredMessage="Selecione Unidade de Medida!">
@@ -99,7 +100,7 @@
                         <p:panelGrid columns="1" columnClasses="ui-grid-col3"
                                      layout="grid" styleClass="ui-panelgrid-blank">
                             <p:commandButton value="Salvar" icon="fa fa-floppy-o"
-                                             actionListener="#{usuarioController.salvarRegistro(event)}"
+                                             actionListener="#{insumoController.salvarRegistro(event)}"
                                              update=":sms :formCadInsumo:tabCadInsumo :frmDialogCadInsumo"/>
                         </p:panelGrid>
                     </center>

@@ -15,7 +15,7 @@
                     <p:panel header="Relação - Cidades">
                         <p:dataTable id="tabCadCidade" emptyMessage="Nenhum registro encontrado!" paginator="true" 
                                      reflow="true" paginatorPosition="bottom" var="cidade"
-                                     value="#{cidadeController.objetoDao.all}" rows="5">
+                                     value="#{cidadeController.objetoDao.all}" rows="5" rowHover="true">
                             <p:column headerText="ID" sortBy="#{cidade.id}" filterBy="#{cidade.id}" style="width: 80px">
                                 <h:outputText value="#{cidade.id}"/>
                             </p:column>
@@ -27,8 +27,8 @@
                             </p:column>
                             <p:column headerText="Opções">
                                 <p:commandButton value="Editar" icon="fa fa-pencil" update=":formCadCidade:tabCadCidade"
-                                                 actionListener="#"
-                                                 oncomplete="PF('dlg').show();" >
+                                                 actionListener="#{cidadeController.editarLinha(event)}"
+                                                 onclick="PF('dlg').show();">
                                     <f:attribute name="editSelection" value="#{cidade}"/>
                                 </p:commandButton>
                             </p:column>
@@ -41,8 +41,8 @@
                         </f:facet>
                     </p:panel>
                 </p:scrollPanel>
+            
             </h:form>
-
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Cidades" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"

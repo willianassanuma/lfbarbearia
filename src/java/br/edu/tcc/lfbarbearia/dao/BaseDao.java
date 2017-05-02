@@ -23,6 +23,6 @@ public interface BaseDao<T,  ID> {
     
     public abstract List pesq(String query, String ordenacao);
    
-    public abstract List<T> getByField(String campo, String texto);
+    public abstract List<T> getByField(String campo, String texto);    
 
 }

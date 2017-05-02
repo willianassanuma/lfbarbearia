@@ -15,7 +15,7 @@
                 <p:scrollPanel mode="native" style="height:450px">
                     <p:panel header="Relação - Perfil de Acesso">
                         <p:dataTable id="tabCadPerfAcesso" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="perfAcesso" 
+                                     reflow="true" paginatorPosition="bottom" var="perfAcesso" rowHover="true"
                                      value="#{perfilAcessoController.objetoDao.all}" rows="5">
                             <p:column headerText="ID" sortBy="#{perfAcesso.id}" filterBy="#{perfAcesso.id}" style="width: 80px">
                                 <h:outputText value="#{perfAcesso.id}"/>

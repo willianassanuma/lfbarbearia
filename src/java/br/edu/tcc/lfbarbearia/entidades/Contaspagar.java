@@ -6,6 +6,7 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,6 +25,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Contaspagar.findByDataVencimento", query = "SELECT c FROM Contaspagar c WHERE c.dataVencimento = :dataVencimento")
     , @NamedQuery(name = "Contaspagar.findByStatus", query = "SELECT c FROM Contaspagar c WHERE c.status = :status")})
 public class Contaspagar implements Serializable, InterfaceEntidades {
+
+    @ManyToMany(mappedBy = "contaspagarCollection")
+    private Collection<Fornecedor> fornecedorCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -154,6 +160,15 @@ public class Contaspagar implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Contaspagar[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Fornecedor> getFornecedorCollection() {
+        return fornecedorCollection;
+    }
+
+    public void setFornecedorCollection(Collection<Fornecedor> fornecedorCollection) {
+        this.fornecedorCollection = fornecedorCollection;
     }
     
 }

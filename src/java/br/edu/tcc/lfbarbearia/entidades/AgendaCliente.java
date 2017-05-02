@@ -6,10 +6,8 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -17,13 +15,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -59,8 +55,6 @@ public class AgendaCliente implements Serializable {
     @JoinColumn(name = "idAgenda", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Agenda agenda;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agendaCliente")
-    private Collection<Servico> servicoCollection;
 
     public AgendaCliente() {
     }
@@ -117,15 +111,6 @@ public class AgendaCliente implements Serializable {
 
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
-    }
-
-    @XmlTransient
-    public Collection<Servico> getServicoCollection() {
-        return servicoCollection;
-    }
-
-    public void setServicoCollection(Collection<Servico> servicoCollection) {
-        this.servicoCollection = servicoCollection;
     }
 
     @Override

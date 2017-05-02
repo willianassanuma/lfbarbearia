@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Parametro.findById", query = "SELECT p FROM Parametro p WHERE p.id = :id")
     , @NamedQuery(name = "Parametro.findByTempoGerAgeda", query = "SELECT p FROM Parametro p WHERE p.tempoGerAgeda = :tempoGerAgeda")
     , @NamedQuery(name = "Parametro.findByComissaoPadrao", query = "SELECT p FROM Parametro p WHERE p.comissaoPadrao = :comissaoPadrao")
-    , @NamedQuery(name = "Parametro.findByPercDescPagCart", query = "SELECT p FROM Parametro p WHERE p.percDescPagCart = :percDescPagCart")
     , @NamedQuery(name = "Parametro.findByHarioFechamentoCaixa", query = "SELECT p FROM Parametro p WHERE p.harioFechamentoCaixa = :harioFechamentoCaixa")})
 public class Parametro implements Serializable, InterfaceEntidades {
 
@@ -54,10 +53,6 @@ public class Parametro implements Serializable, InterfaceEntidades {
     private float comissaoPadrao;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "percDescPagCart")
-    private float percDescPagCart;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "harioFechamentoCaixa")
     @Temporal(TemporalType.DATE)
     private Date harioFechamentoCaixa;
@@ -69,11 +64,10 @@ public class Parametro implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Parametro(Integer id, Date tempoGerAgeda, float comissaoPadrao, float percDescPagCart, Date harioFechamentoCaixa) {
+    public Parametro(Integer id, Date tempoGerAgeda, float comissaoPadrao, Date harioFechamentoCaixa) {
         this.id = id;
         this.tempoGerAgeda = tempoGerAgeda;
         this.comissaoPadrao = comissaoPadrao;
-        this.percDescPagCart = percDescPagCart;
         this.harioFechamentoCaixa = harioFechamentoCaixa;
     }
 
@@ -99,14 +93,6 @@ public class Parametro implements Serializable, InterfaceEntidades {
 
     public void setComissaoPadrao(float comissaoPadrao) {
         this.comissaoPadrao = comissaoPadrao;
-    }
-
-    public float getPercDescPagCart() {
-        return percDescPagCart;
-    }
-
-    public void setPercDescPagCart(float percDescPagCart) {
-        this.percDescPagCart = percDescPagCart;
     }
 
     public Date getHarioFechamentoCaixa() {

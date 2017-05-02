@@ -6,6 +6,7 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,6 +23,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -45,6 +49,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Fornecedor.findByTelefoneComercial", query = "SELECT f FROM Fornecedor f WHERE f.telefoneComercial = :telefoneComercial")
     , @NamedQuery(name = "Fornecedor.findByTelefoneCelular", query = "SELECT f FROM Fornecedor f WHERE f.telefoneCelular = :telefoneCelular")})
 public class Fornecedor implements Serializable, InterfaceEntidades {
+
+    @JoinTable(name = "fornecedor_insumo", joinColumns = {
+        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idInsumo", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Insumo> insumoCollection;
+    @JoinTable(name = "fornecedor_contaspagar", joinColumns = {
+        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idContasAPagar", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Contaspagar> contaspagarCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -275,6 +290,24 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Fornecedor[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Insumo> getInsumoCollection() {
+        return insumoCollection;
+    }
+
+    public void setInsumoCollection(Collection<Insumo> insumoCollection) {
+        this.insumoCollection = insumoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Contaspagar> getContaspagarCollection() {
+        return contaspagarCollection;
+    }
+
+    public void setContaspagarCollection(Collection<Contaspagar> contaspagarCollection) {
+        this.contaspagarCollection = contaspagarCollection;
     }
     
 }

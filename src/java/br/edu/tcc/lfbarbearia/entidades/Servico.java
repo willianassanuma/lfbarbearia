@@ -15,12 +15,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,6 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Servico.findByTempoGastoReal", query = "SELECT s FROM Servico s WHERE s.tempoGastoReal = :tempoGastoReal")
     , @NamedQuery(name = "Servico.findByTempoEsperaDurExec", query = "SELECT s FROM Servico s WHERE s.tempoEsperaDurExec = :tempoEsperaDurExec")})
 public class Servico implements Serializable, InterfaceEntidades {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idServico")
+    private Collection<Contasreceber> contasreceberCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -70,13 +71,8 @@ public class Servico implements Serializable, InterfaceEntidades {
     @Column(name = "tempoEsperaDurExec")
     @Temporal(TemporalType.TIME)
     private Date tempoEsperaDurExec;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idServico")
-    private Collection<Contasreceber> contasreceberCollection;
-    @JoinColumns({
-        @JoinColumn(name = "idCliente", referencedColumnName = "idCliente")
-        , @JoinColumn(name = "idAgenda", referencedColumnName = "idAgenda")})
-    @ManyToOne(optional = false)
-    private AgendaCliente agendaCliente;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "servico")
+    private Agenda agenda;
 
     public Servico() {
     }
@@ -133,21 +129,12 @@ public class Servico implements Serializable, InterfaceEntidades {
         this.tempoEsperaDurExec = tempoEsperaDurExec;
     }
 
-    @XmlTransient
-    public Collection<Contasreceber> getContasreceberCollection() {
-        return contasreceberCollection;
+    public Agenda getAgenda() {
+        return agenda;
     }
 
-    public void setContasreceberCollection(Collection<Contasreceber> contasreceberCollection) {
-        this.contasreceberCollection = contasreceberCollection;
-    }
-
-    public AgendaCliente getAgendaCliente() {
-        return agendaCliente;
-    }
-
-    public void setAgendaCliente(AgendaCliente agendaCliente) {
-        this.agendaCliente = agendaCliente;
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
     }
 
     @Override
@@ -173,6 +160,15 @@ public class Servico implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Servico[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Contasreceber> getContasreceberCollection() {
+        return contasreceberCollection;
+    }
+
+    public void setContasreceberCollection(Collection<Contasreceber> contasreceberCollection) {
+        this.contasreceberCollection = contasreceberCollection;
     }
     
 }
