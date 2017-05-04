@@ -28,7 +28,11 @@
 
 
                             <p:column headerText="Opções">
-                                <p:commandButton value="Editar" icon="fa fa-pencil"/>
+                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                                                 update=":formCondFormPag:painelCondPag :frmDialogCondPag"
+                                                 oncomplete="PF('dlg').show();">
+                                    <f:setPropertyActionListener value="#{condPag}" target="#{condpagamentoController.objeto}"/>
+                                </p:commandButton>
                             </p:column>
                         </p:dataTable>
                         <f:facet name="footer">

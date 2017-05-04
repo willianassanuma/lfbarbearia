@@ -30,10 +30,9 @@
                             <!--Botão Editar-->
                             <p:column headerText="Opções">
                                 <p:commandButton value="Editar" icon="fa fa-pencil"
-                                                 actionListener="#"
-                                                 update=":formCadCliente:tabCadCliente"
+                                                 update=":formCadCliente:tabCadCliente :frmDialogCadCliente"
                                                  oncomplete="PF('dlg').show();">
-                                    <f:attribute name="editarCel" value="#{cliente}"/>
+                                    <f:setPropertyActionListener value="#{cliente}" target="#{clienteController.objeto}"/>
                                 </p:commandButton>
                             </p:column>
 

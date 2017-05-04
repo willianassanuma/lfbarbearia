@@ -12,11 +12,11 @@
 
         <div class="ui-fluid">
             <h:form id="formCadUsuario">
-                <p:scrollPanel mode="native" style="height:450px">
+                <p:scrollPanel mode="native" style="height:500px">
                     <p:panel header="Relação - Usuário">
                         <p:dataTable id="tabCadUsuario" emptyMessage="Nenhum registro encontrado!" paginator="true" 
                                      reflow="true" paginatorPosition="bottom" var="usuario" rowHover="true"
-                                     value="#{usuarioController.objetoDao.all}" rows="5">
+                                     value="#{usuarioController.objetoDao.all}" rows="10">
                             <p:column headerText="ID" sortBy="#{usuario.id}" filterBy="#{usuario.id}" style="width: 80px">
                                 <h:outputText value="#{usuario.id}"/>
                             </p:column>
@@ -32,20 +32,25 @@
                             <p:column headerText="Perfil de Acesso" filterBy="#{usuario.idPerfilAcesso.descricao}">
                                 <h:outputText value="#{usuario.idPerfilAcesso.descricao}"/>
                             </p:column>
+                            <p:column headerText="Status" filterBy="#{usuario.status}">
+                                <h:outputText value="#{usuario.status}"/>
+                            </p:column>
 
 
 
                             <!--Botão Editar-->
-                            <p:column headerText="Opções">
-                                <p:commandButton value="Editar" icon="fa fa-pencil"
-                                                 update=":sms">
-                                    <f:attribute name="selusuario" value="#{usuario}"/>
+                            <p:column style="width: 45px">
+                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
+                                                 update=":formCadUsuario:tabCadUsuario :frmDialogCadUsuario"
+                                                 oncomplete="PF('dlg').show();" >
+                                    <f:setPropertyActionListener value="#{usuario}" target="#{usuarioController.objeto}" />
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
-                        <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
-                                             actionListener="#{usuarioController.objetoLimpo()}"
+                        <f:facet name="header">
+                            <!--Botão Novo-->
+                            <p:commandButton icon="fa fa-plus" value="Novo" onclick="PF('dlg').show();"
+                                             actionListener="#{usuarioController.objetoLimpo()}" style="width: 180px"
                                              update=":formCadUsuario:tabCadUsuario"/>
                         </f:facet>
                     </p:panel>

@@ -29,8 +29,9 @@
                             <!--Botão Editar-->
                             <p:column headerText="Opções">
                                 <p:commandButton value="Editar" icon="fa fa-pencil"
-                                                 update=":sms">
-                                    <f:attribute name="selPerfAcesso" value="#{perfAcesso}"/>
+                                                 update=":formCadPerfAcesso:tabCadPerfAcesso :frmDialogCadPerfAcesso"
+                                                 oncomplete="PF('dlg').show();" >
+                                    <f:setPropertyActionListener value="#{perfAcesso}" target="#{perfilAcessoController.objeto}" />
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>

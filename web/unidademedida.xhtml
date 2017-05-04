@@ -26,7 +26,11 @@
                                 <h:outputText value="#{unmedida.descricao}"/>
                             </p:column>
                             <p:column headerText="Opções">
-                                <p:commandButton value="Editar" icon="fa fa-pencil"/>
+                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                                                 update=":formCadUnMedida:tabCadUnMedida :frmDialogCadUnMed"
+                                                 oncomplete="PF('dlg').show();">
+                                    <f:setPropertyActionListener value="#{unmedida}" target="#{unidademedidaController.objeto}"/>
+                                </p:commandButton>
                             </p:column>
                         </p:dataTable>
                         <f:facet name="footer">

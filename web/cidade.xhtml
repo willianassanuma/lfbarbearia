@@ -26,10 +26,11 @@
                                 <h:outputText value="#{cidade.idEstado.sigla} - #{cidade.idEstado.descricao}"/>
                             </p:column>
                             <p:column headerText="Opções">
-                                <p:commandButton value="Editar" icon="fa fa-pencil" update=":formCadCidade:tabCadCidade"
-                                                 actionListener="#{cidadeController.editarLinha(event)}"
-                                                 onclick="PF('dlg').show();">
-                                    <f:attribute name="editSelection" value="#{cidade}"/>
+                                <!--Botão Editar-->
+                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                                                 update=":formCadCidade:tabCadCidade :frmDialogCadCid"
+                                                 oncomplete="PF('dlg').show();">
+                                    <f:setPropertyActionListener value="#{cidade}" target="#{cidadeController.objeto}"/>
                                 </p:commandButton>
                             </p:column>
 

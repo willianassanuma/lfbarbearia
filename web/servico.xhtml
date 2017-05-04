@@ -37,7 +37,11 @@
                                 </h:outputText>
                             </p:column>
                             <p:column headerText="Opções">
-                                <p:commandButton value="Editar" icon="fa fa-pencil"/>
+                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                                                 update=":formCadTipoServ:tabCadServico :frmDialogCadServico"
+                                                 oncomplete="PF('dlg').show();">
+                                    <f:setPropertyActionListener value="#{servico}" target="#{servicoController.objeto}"/>
+                                </p:commandButton>
                             </p:column>
 
                         </p:dataTable>

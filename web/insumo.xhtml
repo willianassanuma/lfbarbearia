@@ -41,7 +41,9 @@
                             <!--Botão Editar-->
                             <p:column headerText="Opções">
                                 <p:commandButton value="Editar" icon="fa fa-pencil"
-                                                 update=":sms">    
+                                                 update=":formCadInsumo:tabCadInsumo :frmDialogCadInsumo"
+                                                 oncomplete="PF('dlg').show();">
+                                    <f:setPropertyActionListener value="#{insumo}" target="#{insumoController.objeto}"/>
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>

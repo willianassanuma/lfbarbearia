@@ -30,7 +30,9 @@
                             <!--Botão Editar-->
                             <p:column headerText="Opções">
                                 <p:commandButton value="Editar" icon="fa fa-pencil"
-                                                 update=":sms">
+                                                 update=":formCadProfissional:tabCadProfissional :frmDialogCadProf"
+                                                 oncomplete="PF('dlg').show();">
+                                    <f:setPropertyActionListener value="#{profissional}" target="#{profissionalController.objeto}"  />
                                 </p:commandButton>
                             </p:column>
 
