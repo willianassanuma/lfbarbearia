@@ -36,8 +36,8 @@
                                     <f:convertDateTime pattern="HH:mm:ss"/>
                                 </h:outputText>
                             </p:column>
-                            <p:column headerText="Opções">
-                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                            <p:column style="width: 45px">
+                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
                                                  update=":formCadTipoServ:tabCadServico :frmDialogCadServico"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{servico}" target="#{servicoController.objeto}"/>
@@ -46,9 +46,9 @@
 
                         </p:dataTable>
                         <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
-                                             actionListener="#{servicoController.objetoLimpo()}"
-                                             update=":formCadTipoServ:tabCadServico"/>
+                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
+                                             actionListener="#{servicoController.objetoLimpo()}" style="max-width: 180px"
+                                             update=":formCadTipoServ:tabCadServico :frmDialogCadServico:pngCadServico"/>
                         </f:facet>
                     </p:panel>
                 </p:scrollPanel>
@@ -57,10 +57,10 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Serviço" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="fold" hideEffect="drop" position="center" width="auto">
+                      draggable="false" showEffect="clip" hideEffect="clip" position="center" width="auto">
                 <h:form id="frmDialogCadServico">
 
-                    <p:panelGrid columns="2" columnClasses="ui-grid-col-2 ,ui-grid-col-10"
+                    <p:panelGrid id="pngCadServico" columns="2" columnClasses="ui-grid-col-2 ,ui-grid-col-10"
                                  layout="grid" styleClass="ui-panelgrid-blank">
                         <p:outputLabel for="desc" value="Descrição"/>
                         <p:inputText id="desc" size="60" value="#{servicoController.objeto.descricaoServico}"

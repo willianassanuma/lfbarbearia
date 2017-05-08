@@ -27,8 +27,8 @@
                                 <h:outputText value="#{estado.descricao}"/>
                             </p:column>
                             <!--Botão Editar-->
-                            <p:column headerText="Opções">
-                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                            <p:column style="width: 45px">
+                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
                                                  update=":formCadEstado:tabCadEstado :frmDialogCadEst"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{estado}" target="#{estadoController.objeto}"/>
@@ -36,9 +36,9 @@
                             </p:column>
                         </p:dataTable>
                         <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
-                                             actionListener="#{estadoController.objetoLimpo()}"
-                                             update=":frmDialogCadEst:pngCadEst"/>
+                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
+                                             actionListener="#{estadoController.objetoLimpo()}" style="max-width: 180px"
+                                             update=":frmDialogCadEst:pngCadEst :frmDialogCadEst:pngCadEst"/>
                         </f:facet>
                     </p:panel>
                 </p:scrollPanel>
@@ -47,7 +47,7 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Estados" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="fold" hideEffect="drop" position="center">
+                      draggable="false" showEffect="clip" hideEffect="clip" position="center">
                 <h:form id="frmDialogCadEst">
 
                     <p:panelGrid id="pngCadEst" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-12"

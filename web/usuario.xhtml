@@ -12,11 +12,11 @@
 
         <div class="ui-fluid">
             <h:form id="formCadUsuario">
-                <p:scrollPanel mode="native" style="height:500px">
+                <p:scrollPanel mode="native" style="height:450px">
                     <p:panel header="Relação - Usuário">
                         <p:dataTable id="tabCadUsuario" emptyMessage="Nenhum registro encontrado!" paginator="true" 
                                      reflow="true" paginatorPosition="bottom" var="usuario" rowHover="true"
-                                     value="#{usuarioController.objetoDao.all}" rows="10">
+                                     value="#{usuarioController.objetoDao.all}" rows="5">
                             <p:column headerText="ID" sortBy="#{usuario.id}" filterBy="#{usuario.id}" style="width: 80px">
                                 <h:outputText value="#{usuario.id}"/>
                             </p:column>
@@ -47,11 +47,11 @@
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
-                        <f:facet name="header">
+                        <f:facet name="footer">
                             <!--Botão Novo-->
-                            <p:commandButton icon="fa fa-plus" value="Novo" onclick="PF('dlg').show();"
-                                             actionListener="#{usuarioController.objetoLimpo()}" style="width: 180px"
-                                             update=":formCadUsuario:tabCadUsuario"/>
+                            <p:commandButton icon="fa fa-plus" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
+                                             actionListener="#{usuarioController.objetoLimpo()}" style="max-width: 180px"
+                                             update=":formCadUsuario:tabCadUsuario :frmDialogCadUsuario:pngCadUsuário"/>
                         </f:facet>
                     </p:panel>
                 </p:scrollPanel>
@@ -60,7 +60,8 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Usuário" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="fold" hideEffect="drop">
+                      draggable="false" showEffect="clip" hideEffect="clip">
+
                 <h:form id="frmDialogCadUsuario">
 
                     <p:panelGrid id="pngCadUsuário" columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"

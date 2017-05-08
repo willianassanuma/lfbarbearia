@@ -6,11 +6,8 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,14 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -53,11 +48,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Cliente.findByStatus", query = "SELECT c FROM Cliente c WHERE c.status = :status")
     , @NamedQuery(name = "Cliente.findByObservacao", query = "SELECT c FROM Cliente c WHERE c.observacao = :observacao")
     , @NamedQuery(name = "Cliente.findByTelefoneComercial", query = "SELECT c FROM Cliente c WHERE c.telefoneComercial = :telefoneComercial")
-    , @NamedQuery(name = "Cliente.findByTelefoneCelular", query = "SELECT c FROM Cliente c WHERE c.telefoneCelular = :telefoneCelular")})
+    , @NamedQuery(name = "Cliente.findByTelefoneCelular", query = "SELECT c FROM Cliente c WHERE c.telefoneCelular = :telefoneCelular")
+    , @NamedQuery(name = "Cliente.findByApelido", query = "SELECT c FROM Cliente c WHERE c.apelido = :apelido")})
 public class Cliente implements Serializable, InterfaceEntidades {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
-    private Collection<AgendaCliente> agendaClienteCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -129,6 +122,9 @@ public class Cliente implements Serializable, InterfaceEntidades {
     @Size(max = 30)
     @Column(name = "telefoneCelular")
     private String telefoneCelular;
+    @Size(max = 2555)
+    @Column(name = "apelido")
+    private String apelido;
     @JoinColumn(name = "idCidade", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idCidade;
@@ -283,6 +279,14 @@ public class Cliente implements Serializable, InterfaceEntidades {
         this.telefoneCelular = telefoneCelular;
     }
 
+    public String getApelido() {
+        return apelido;
+    }
+
+    public void setApelido(String apelido) {
+        this.apelido = apelido;
+    }
+
     public Cidade getIdCidade() {
         return idCidade;
     }
@@ -314,15 +318,6 @@ public class Cliente implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Cliente[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<AgendaCliente> getAgendaClienteCollection() {
-        return agendaClienteCollection;
-    }
-
-    public void setAgendaClienteCollection(Collection<AgendaCliente> agendaClienteCollection) {
-        this.agendaClienteCollection = agendaClienteCollection;
     }
     
 }

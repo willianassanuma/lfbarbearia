@@ -25,9 +25,9 @@
                             <p:column headerText="Sigla/Desc. Estado" filterBy="#{cidade.idEstado.descricao}">
                                 <h:outputText value="#{cidade.idEstado.sigla} - #{cidade.idEstado.descricao}"/>
                             </p:column>
-                            <p:column headerText="Opções">
-                                <!--Botão Editar-->
-                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                            <!--Botão de edição-->
+                            <p:column style="width: 45px">
+                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
                                                  update=":formCadCidade:tabCadCidade :frmDialogCadCid"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{cidade}" target="#{cidadeController.objeto}"/>
@@ -36,9 +36,9 @@
 
                         </p:dataTable>
                         <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
-                                             actionListener="#{cidadeController.objetoLimpo()}"
-                                             update=":frmDialogCadCid:pngCadCid"/>
+                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
+                                             actionListener="#{cidadeController.objetoLimpo()}" style="max-width: 180px"
+                                             update=":frmDialogCadCid:pngCadCid :frmDialogCadCid:pngCadCid" />
                         </f:facet>
                     </p:panel>
                 </p:scrollPanel>
@@ -47,7 +47,7 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Cidades" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="fold" hideEffect="drop" position="center">
+                      draggable="false" showEffect="clip" hideEffect="clip" position="center">
                 <h:form id="frmDialogCadCid">
                     
                     <!--Grid de formulario-->

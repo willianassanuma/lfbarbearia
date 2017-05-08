@@ -33,9 +33,8 @@
                                     <f:convertDateTime pattern="HH:mm:ss"/>
                                 </h:outputText>
                             </p:column>
-                            <p:column headerText="Editar/Ajustar">
-                                <!--Botão Editar-->
-                                <p:commandButton icon="fa fa-pencil"
+                           <p:column style="width: 45px">
+                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
                                                  update=":formCadParam:tabCadParam :frmDialogParam"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{parametro}" target="#{parametroController.objeto}"/>
@@ -49,7 +48,7 @@
 
             <p:dialog header="Ajuste de parâmetros" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="fold" hideEffect="drop" position="center">
+                      draggable="false" showEffect="clip" hideEffect="clip" position="center">
                 <h:form id="frmDialogParam">
                     <!--Grid de formulario-->
                     <p:panelGrid id="pngCadParam" columns="2" columnClasses="ui-grid-col-7,ui-grid-col-5"

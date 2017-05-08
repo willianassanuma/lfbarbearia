@@ -28,8 +28,8 @@
                             </p:column>
 
                             <!--Botão Editar-->
-                            <p:column headerText="Opções">
-                                <p:commandButton value="Editar" icon="fa fa-pencil"
+                            <p:column style="width: 45px">
+                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
                                                  update=":formCadProfissional:tabCadProfissional :frmDialogCadProf"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{profissional}" target="#{profissionalController.objeto}"  />
@@ -67,9 +67,9 @@
                             </p:rowExpansion>
                         </p:dataTable>
                         <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" onclick="PF('dlg').show();"
-                                             actionListener="#{profissionalController.objetoLimpo()}"
-                                             update=":formCadProfissional:tabCadProfissional"/>
+                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
+                                             actionListener="#{profissionalController.objetoLimpo()}" style="max-width: 180px"
+                                             update=":formCadProfissional:tabCadProfissional :frmDialogCadProf:pngCadProf"/>
                         </f:facet>
                     </p:panel>
                 </p:scrollPanel>
@@ -78,7 +78,7 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Profissionais" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false" 
-                      draggable="false" showEffect="fold" hideEffect="drop" width="550">
+                      draggable="false" showEffect="clip" hideEffect="clip" width="550">
                 <h:form id="frmDialogCadProf">
                     <p:scrollPanel mode="native" style="max-height: 450px">
                         <p:panelGrid id="pngCadProf" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9"
