@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c")
     , @NamedQuery(name = "Cliente.findById", query = "SELECT c FROM Cliente c WHERE c.id = :id")
     , @NamedQuery(name = "Cliente.findByNomeCLiente", query = "SELECT c FROM Cliente c WHERE c.nomeCLiente = :nomeCLiente")
-    , @NamedQuery(name = "Cliente.findByTratamento", query = "SELECT c FROM Cliente c WHERE c.tratamento = :tratamento")
     , @NamedQuery(name = "Cliente.findByCpf", query = "SELECT c FROM Cliente c WHERE c.cpf = :cpf")
     , @NamedQuery(name = "Cliente.findByDataNascimento", query = "SELECT c FROM Cliente c WHERE c.dataNascimento = :dataNascimento")
     , @NamedQuery(name = "Cliente.findBySexo", query = "SELECT c FROM Cliente c WHERE c.sexo = :sexo")
@@ -63,11 +62,6 @@ public class Cliente implements Serializable, InterfaceEntidades {
     @Size(min = 1, max = 255)
     @Column(name = "nomeCLiente")
     private String nomeCLiente;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "tratamento")
-    private String tratamento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -136,10 +130,9 @@ public class Cliente implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Cliente(Integer id, String nomeCLiente, String tratamento, String cpf, Date dataNascimento, Character sexo, int frequencia, String endereco, int numero, String bairro, String email, boolean status) {
+    public Cliente(Integer id, String nomeCLiente, String cpf, Date dataNascimento, Character sexo, int frequencia, String endereco, int numero, String bairro, String email, boolean status) {
         this.id = id;
         this.nomeCLiente = nomeCLiente;
-        this.tratamento = tratamento;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
@@ -165,14 +158,6 @@ public class Cliente implements Serializable, InterfaceEntidades {
 
     public void setNomeCLiente(String nomeCLiente) {
         this.nomeCLiente = nomeCLiente;
-    }
-
-    public String getTratamento() {
-        return tratamento;
-    }
-
-    public void setTratamento(String tratamento) {
-        this.tratamento = tratamento;
     }
 
     public String getCpf() {

@@ -33,7 +33,7 @@
                                 <h:outputText value="#{usuario.idPerfilAcesso.descricao}"/>
                             </p:column>
                             <p:column headerText="Status" filterBy="#{usuario.status}">
-                                <h:outputText value="#{usuario.status}"/>
+                                <h:outputText value="#{usuario.status == true ? 'ATIVO' : 'INATIVO'}"/>
                             </p:column>
 
 

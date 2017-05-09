@@ -56,7 +56,7 @@
                                     <h:outputText value="E-mail:" />
                                     <h:outputText value="#{profissional.email}"/>
                                     <h:outputText value="Status:" />
-                                    <h:outputText value="#{profissional.status}" />
+                                    <h:outputText value="#{profissional.status == true ? 'ATIVO':'INATIVO'}" />
                                     <h:outputText value="Telefone Comercial:" />
                                     <h:outputText value="#{profissional.telefoneComercial}" />
                                     <h:outputText value="Telefone Celular:" />

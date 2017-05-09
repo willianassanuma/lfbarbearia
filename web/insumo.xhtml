@@ -29,7 +29,7 @@
                                 </h:outputText>
                             </p:column>
                             <p:column headerText="Status" filterBy="#{insumo.status}">
-                                <h:outputText value="#{insumo.status}"/>
+                                <h:outputText value="#{insumo.status == true ? 'ATIVO':'INATIVO'}"/>
                             </p:column>
                             <p:column headerText="Un Medida" filterBy="#{insumo.idUnidadeMedida.descricao}">
                                 <h:outputText value="#{insumo.idUnidadeMedida.sigla} -  #{insumo.idUnidadeMedida.descricao}"/>

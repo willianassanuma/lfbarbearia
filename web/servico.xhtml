@@ -6,6 +6,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="./layout.xhtml">
+    
     <ui:define name="conteudo">
         <p:growl id="sms" autoUpdate="true"/>
         <div class="ui-fluid">
@@ -35,6 +36,9 @@
                                 <h:outputText value="#{servico.tempoEsperaDurExec}">
                                     <f:convertDateTime pattern="HH:mm:ss"/>
                                 </h:outputText>
+                            </p:column>
+                            <p:column headerText="Status" filterBy="#{servico.status}">
+                                <h:outputText value="#{servico.status == true ? 'ATIVO' : 'INATIVO'}"/>
                             </p:column>
                             <p:column style="width: 45px">
                                 <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
@@ -78,6 +82,14 @@
                                      mask="99:99:99" required="true" requiredMessage="Tempo de espera é obrigatório!" >
                             <f:convertDateTime pattern="HH:mm:ss"/>
                         </p:inputMask>
+                        <p:outputLabel for="status" value="Status"/>
+                        <p:selectOneMenu id="status" required="true"
+                                         value="#{servicoController.objeto.status}"
+                                         requiredMessage="Status é obrigatório!" filter="true">
+                            <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                            <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
+                            <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
+                        </p:selectOneMenu>
 
                     </p:panelGrid>
                     <center>

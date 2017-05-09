@@ -12,7 +12,7 @@
 
         <div class="ui-fluid">
             <h:form id="formCadCliente">
-                <p:scrollPanel mode="native" style="height:550px">
+                <p:scrollPanel mode="native" style="height:600px">
                     <p:panel header="Relação - Clientes">
                         <p:dataTable id="tabCadCliente" emptyMessage="Nenhum registro encontrado!" paginator="true" 
                                      reflow="true" paginatorPosition="bottom" var="cliente"
@@ -42,8 +42,6 @@
                                               layout="grid" styleClass="ui-panelgrid-blank">
                                     <h:outputText value="Frequencia de comp.:"/>
                                     <h:outputText value="#{cliente.frequencia}"/>
-                                    <h:outputText value="Tratamento:" />
-                                    <h:outputText value="#{cliente.tratamento}" />
                                     <h:outputText value="Apelido:" />
                                     <h:outputText value="#{cliente.apelido}" />
                                     <h:outputText value="CPF" />
@@ -57,7 +55,7 @@
                                         <f:convertDateTime pattern="dd/MM/yyyy" locale="br"/>
                                     </h:outputText>
                                     <h:outputText value="Sexo:" />
-                                    <h:outputText value="#{cliente.sexo}"/>
+                                    <h:outputText value="#{cliente.sexo == 'M' ? 'MASCULINO' : 'FEMININO'}"/>
                                     <h:outputText value="Endereço:" />
                                     <h:outputText value="#{cliente.endereco}" />
                                     <h:outputText value="Numero:" />
@@ -71,7 +69,7 @@
                                     <h:outputText value="E-mail:" />
                                     <h:outputText value="#{cliente.email}" />
                                     <h:outputText value="Status:" />
-                                    <h:outputText value="#{cliente.status}" />
+                                    <h:outputText value="#{cliente.status == true ? 'ATIVO' : 'INATIVO'}"/>
                                     <h:outputText value="Obs:" />
                                     <h:outputText value="#{cliente.observacao}" />
 
@@ -95,15 +93,6 @@
                     <p:scrollPanel mode="native" style="height:450px">
                         <p:panelGrid id="pngCadCliente" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9"
                                      layout="grid" styleClass="ui-panelgrid-blank">
-
-                            <p:outputLabel for="trat" value="Tratamento"/>
-                            <p:selectOneMenu id="trat" required="true"
-                                             value="#{clienteController.objeto.tratamento}" filter="true"
-                                             requiredMessage="Tratamento é obrigatório!" >
-                                <f:selectItem  itemLabel="Selecione" noSelectionOption="true"/>
-                                <f:selectItem  itemLabel="CAVALHEIRO" itemValue="CAVALHEIRO"/>
-                                <f:selectItem  itemLabel="DAMA" itemValue="DAMA"/>
-                            </p:selectOneMenu>
                             
                             <p:outputLabel for="ape" value="Apelido: "/>
                             <p:inputText id="ape" maxlength="255" value="#{clienteController.objeto.apelido}" />

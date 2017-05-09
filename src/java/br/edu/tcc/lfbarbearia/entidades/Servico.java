@@ -6,10 +6,8 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,15 +15,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,11 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Servico.findByDescricaoServico", query = "SELECT s FROM Servico s WHERE s.descricaoServico = :descricaoServico")
     , @NamedQuery(name = "Servico.findByComissaoServico", query = "SELECT s FROM Servico s WHERE s.comissaoServico = :comissaoServico")
     , @NamedQuery(name = "Servico.findByTempoGastoReal", query = "SELECT s FROM Servico s WHERE s.tempoGastoReal = :tempoGastoReal")
-    , @NamedQuery(name = "Servico.findByTempoEsperaDurExec", query = "SELECT s FROM Servico s WHERE s.tempoEsperaDurExec = :tempoEsperaDurExec")})
+    , @NamedQuery(name = "Servico.findByTempoEsperaDurExec", query = "SELECT s FROM Servico s WHERE s.tempoEsperaDurExec = :tempoEsperaDurExec")
+    , @NamedQuery(name = "Servico.findByStatus", query = "SELECT s FROM Servico s WHERE s.status = :status")})
 public class Servico implements Serializable, InterfaceEntidades {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idServico")
-    private Collection<Contasreceber> contasreceberCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,8 +64,10 @@ public class Servico implements Serializable, InterfaceEntidades {
     @Column(name = "tempoEsperaDurExec")
     @Temporal(TemporalType.TIME)
     private Date tempoEsperaDurExec;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "servico")
-    private Agenda agenda;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "status")
+    private boolean status;
 
     public Servico() {
     }
@@ -81,12 +76,13 @@ public class Servico implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Servico(Integer id, String descricaoServico, float comissaoServico, Date tempoGastoReal, Date tempoEsperaDurExec) {
+    public Servico(Integer id, String descricaoServico, float comissaoServico, Date tempoGastoReal, Date tempoEsperaDurExec, boolean status) {
         this.id = id;
         this.descricaoServico = descricaoServico;
         this.comissaoServico = comissaoServico;
         this.tempoGastoReal = tempoGastoReal;
         this.tempoEsperaDurExec = tempoEsperaDurExec;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -129,12 +125,12 @@ public class Servico implements Serializable, InterfaceEntidades {
         this.tempoEsperaDurExec = tempoEsperaDurExec;
     }
 
-    public Agenda getAgenda() {
-        return agenda;
+    public boolean getStatus() {
+        return status;
     }
 
-    public void setAgenda(Agenda agenda) {
-        this.agenda = agenda;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     @Override
@@ -160,15 +156,6 @@ public class Servico implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Servico[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Contasreceber> getContasreceberCollection() {
-        return contasreceberCollection;
-    }
-
-    public void setContasreceberCollection(Collection<Contasreceber> contasreceberCollection) {
-        this.contasreceberCollection = contasreceberCollection;
     }
     
 }

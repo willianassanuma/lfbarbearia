@@ -24,7 +24,7 @@
                                 <h:outputText value="#{perfAcesso.descricao}"/>
                             </p:column>
                             <p:column headerText="Status" filterBy="#{perfAcesso.status}">
-                                <h:outputText value="#{perfAcesso.status}"/>
+                                <h:outputText value="#{perfAcesso.status == true ? 'ATIVO':'INATIVO'}"/>
                             </p:column>
                             <!--Botão Editar-->
                             <p:column style="width: 45px">
