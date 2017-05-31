@@ -6,6 +6,7 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -21,6 +23,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -68,6 +71,8 @@ public class Servico implements Serializable, InterfaceEntidades {
     @NotNull
     @Column(name = "status")
     private boolean status;
+    @ManyToMany(mappedBy = "servicoCollection")
+    private Collection<Profissional> profissionalCollection;
 
     public Servico() {
     }
@@ -131,6 +136,15 @@ public class Servico implements Serializable, InterfaceEntidades {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    @XmlTransient
+    public Collection<Profissional> getProfissionalCollection() {
+        return profissionalCollection;
+    }
+
+    public void setProfissionalCollection(Collection<Profissional> profissionalCollection) {
+        this.profissionalCollection = profissionalCollection;
     }
 
     @Override

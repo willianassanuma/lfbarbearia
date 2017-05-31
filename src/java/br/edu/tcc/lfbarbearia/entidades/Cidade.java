@@ -49,15 +49,15 @@ public class Cidade implements Serializable, InterfaceEntidades {
     @Size(min = 1, max = 50)
     @Column(name = "cidade")
     private String cidade;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCidade")
-    private Collection<Cliente> clienteCollection;
     @JoinColumn(name = "idEstado", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Estado idEstado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCidade")
-    private Collection<Fornecedor> fornecedorCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCidade")
     private Collection<Profissional> profissionalCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCidade")
+    private Collection<Cliente> clienteCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCidade")
+    private Collection<Fornecedor> fornecedorCollection;
 
     public Cidade() {
     }
@@ -87,15 +87,6 @@ public class Cidade implements Serializable, InterfaceEntidades {
         this.cidade = cidade;
     }
 
-    @XmlTransient
-    public Collection<Cliente> getClienteCollection() {
-        return clienteCollection;
-    }
-
-    public void setClienteCollection(Collection<Cliente> clienteCollection) {
-        this.clienteCollection = clienteCollection;
-    }
-
     public Estado getIdEstado() {
         return idEstado;
     }
@@ -105,21 +96,30 @@ public class Cidade implements Serializable, InterfaceEntidades {
     }
 
     @XmlTransient
-    public Collection<Fornecedor> getFornecedorCollection() {
-        return fornecedorCollection;
-    }
-
-    public void setFornecedorCollection(Collection<Fornecedor> fornecedorCollection) {
-        this.fornecedorCollection = fornecedorCollection;
-    }
-
-    @XmlTransient
     public Collection<Profissional> getProfissionalCollection() {
         return profissionalCollection;
     }
 
     public void setProfissionalCollection(Collection<Profissional> profissionalCollection) {
         this.profissionalCollection = profissionalCollection;
+    }
+
+    @XmlTransient
+    public Collection<Cliente> getClienteCollection() {
+        return clienteCollection;
+    }
+
+    public void setClienteCollection(Collection<Cliente> clienteCollection) {
+        this.clienteCollection = clienteCollection;
+    }
+
+    @XmlTransient
+    public Collection<Fornecedor> getFornecedorCollection() {
+        return fornecedorCollection;
+    }
+
+    public void setFornecedorCollection(Collection<Fornecedor> fornecedorCollection) {
+        this.fornecedorCollection = fornecedorCollection;
     }
 
     @Override
@@ -146,5 +146,5 @@ public class Cidade implements Serializable, InterfaceEntidades {
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Cidade[ id=" + id + " ]";
     }
-   
+    
 }

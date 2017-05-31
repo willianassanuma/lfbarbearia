@@ -9,10 +9,10 @@
 
     <ui:define name="conteudo">
         <p:growl id="sms" autoUpdate="true"/>
-
+        
         <div class="ui-fluid">
             <h:form id="formCadForn">
-                <p:scrollPanel mode="native" style="height:450px">
+                <p:scrollPanel mode="native" style="height:500px">
                     <p:panel header="Relação - Fornecedores">
                         <p:dataTable id="tabCadFornecedor" emptyMessage="Nenhum registro encontrado!" paginator="true" 
                                      reflow="true" paginatorPosition="bottom" var="fornecedor" rowHover="true"
@@ -29,7 +29,7 @@
 
                             <!--Botão Editar-->
                             <p:column style="width: 45px">
-                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
+                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o" resetValues="true"
                                                  update=":formCadForn:tabCadFornecedor :frmDialogCadForn"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{fornecedor}" target="#{fornecedorController.objeto}"/>
@@ -73,7 +73,7 @@
                         <f:facet name="footer">
                             <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
                                              actionListener="#{fornecedorController.objetoLimpo()}" style="max-width: 180px"
-                                             update=":formCadForn:tabCadFornecedor :frmDialogCadForn:pngCadForn"/>
+                                             update=":formCadForn:tabCadFornecedor :frmDialogCadForn"/>
                         </f:facet>
                     </p:panel>
                 </p:scrollPanel>
@@ -82,77 +82,100 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Fornecedor" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="clip" hideEffect="clip" position="center" width="550">
+                      draggable="false" showEffect="clip" hideEffect="clip" position="center" style="max-width: 650px">
                 <h:form id="frmDialogCadForn">
-                    <p:scrollPanel mode="native" style="height:450px">
-                        <p:panelGrid id="pngCadForn" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9"
-                                     layout="grid" styleClass="ui-panelgrid-blank">
-
-                            <p:outputLabel for="nomeFant" value="Nome Fantasia"/>
-                            <p:inputText id="nomeFant" maxlength="255" size="50" value="#{fornecedorController.objeto.nomeFantasia}"
-                                         required="true" requiredMessage="Nome fantasia é obrigatório!"/>
-                            <p:outputLabel for="raSocial" value="Razão social"/>
-                            <p:inputText id="raSocial" maxlength="255" size="50" value="#{fornecedorController.objeto.razaoSocial}"
-                                         required="true" requiredMessage="Razão social é obrigatória!"/>
-                            <p:outputLabel for="cnpj" value="CNPJ"/>
-                            <p:inputMask id="cnpj" value="#{fornecedorController.objeto.cnpj}" mask="99.999.999/9999-99"
-                                         required="true" requiredMessage="CNPJ é obrigatório"/>
-                            <p:outputLabel for="inscEst" value="Inscrição estadual"/>
-                            <p:inputText id="inscEst" value="#{fornecedorController.objeto.inscricaoEstadual}"
-                                         required="true" requiredMessage="Inscrição Estadual é obrigatória"/>
-                            <p:outputLabel for="foneCel" value="Telefone Celular"/>
-                            <p:inputMask id="foneCel" value="#{fornecedorController.objeto.telefoneCelular}" mask="(99)99999-9999"/>
-                            <p:outputLabel for="foneCom" value="Telefone Comercial"/>
-                            <p:inputMask id="foneCom" value="#{fornecedorController.objeto.telefoneComercial}" mask="(99)99999-9999"/>
-                            <p:outputLabel for="end" value="Endereço"/>
-                            <p:inputText id="end" size="50" maxlength="255" value="#{fornecedorController.objeto.endereco}"
-                                         required="true" requiredMessage="Endereço é Obrigatório!"/>
-                            <p:outputLabel for="numero" value="Numero"/>
-                            <p:inputText id="numero" size="10" value="#{fornecedorController.objeto.numero}"
-                                         required="true" requiredMessage="Numero é Obrigatório!"/>
-                            <p:outputLabel for="bairro" value="Bairro"/>
-                            <p:inputText id="bairro" size="50" value="#{fornecedorController.objeto.bairro}"
-                                         required="true" requiredMessage="Bairro é Obrigatório!"/>
-                            <p:outputLabel for="comp" value="Complemento"/>
-                            <p:inputText id="comp" size="50" maxlength="50" value="#{fornecedorController.objeto.complemento}"/>
-                            <p:outputLabel for="cid" value="Cidade"/>
-                            <p:selectOneMenu id="cid" required="true"
-                                             value="#{fornecedorController.objeto.idCidade}" filter="true"
-                                             requiredMessage="Cidade é obrigatório!" converter="classeConverter">
-                                <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true" />
-                                <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
-                                               itemLabel="#{cidade.cidade}" itemValue="#{cidade}"/>
-                            </p:selectOneMenu>
-                            <p:outputLabel for="email" value="E-mail"/>
-                            <p:inputText id="email" size="50" maxlength="255" value="#{fornecedorController.objeto.email}"
-                                         required="true" requiredMessage="E-Mail é Obrigatório!"/>
-                             <p:outputLabel for="status" value="Status"/>
-                            <p:selectOneMenu id="status" required="true"
-                                             value="#{fornecedorController.objeto.status}"
-                                             requiredMessage="Status é obrigatório!" filter="true">
-                                <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
-                                <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
-                                <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
-                            </p:selectOneMenu>
-                            <p:outputLabel for="obs" value="Observação"/>
-                            <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
-                                             counterTemplate="{0} Caracteres Restante."
-                                             autoResize="true"
-                                             addLine="true"
-                                             value="#{fornecedorController.objeto.observacao}"/>
-                            <h:outputText/>
-                            <h:outputText id="obs"/>
-                        </p:panelGrid>
-                    </p:scrollPanel>
-
-                    <center>
-                        <p:panelGrid columns="1" columnClasses="ui-grid-col3"
-                                     layout="grid" styleClass="ui-panelgrid-blank">
-                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
-                                             actionListener="#{fornecedorController.salvarRegistro(event)}"
-                                             update=":sms :formCadForn:tabCadFornecedor :frmDialogCadForn"/>
-                        </p:panelGrid>
-                    </center>
+                    <p:wizard backLabel="Voltar" nextLabel="Próximo" widgetVar="wiz">
+                        <!--Dados de Identificação-->
+                        <p:tab id="identificacao" title="Identificação">
+                            <p:panel header="Dados de Identificação">
+                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
+                                             layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:outputLabel for="nomeFant" value="Nome Fantasia"/>
+                                    <p:inputText id="nomeFant" maxlength="255" value="#{fornecedorController.objeto.nomeFantasia}"
+                                                 required="true" requiredMessage="Nome fantasia é obrigatório!"/>
+                                    <p:outputLabel for="raSocial" value="Razão social"/>
+                                    <p:inputText id="raSocial" maxlength="255" value="#{fornecedorController.objeto.razaoSocial}"
+                                                 required="true" requiredMessage="Razão social é obrigatória!"/>
+                                    <p:outputLabel for="cnpj" value="CNPJ"/>
+                                    <p:inputMask id="cnpj" value="#{fornecedorController.objeto.cnpj}" mask="99.999.999/9999-99"
+                                                 required="true" requiredMessage="CNPJ é obrigatório"/>
+                                    <p:outputLabel for="inscEst" value="Inscrição estadual"/>
+                                    <p:inputText id="inscEst" value="#{fornecedorController.objeto.inscricaoEstadual}"
+                                                 required="true" requiredMessage="Inscrição Estadual é obrigatória"/>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+                        <!--Dados de Contato-->
+                        <p:tab id="contato" title="Contato">
+                            <p:panel header="Dados para contato">
+                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
+                                             layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:outputLabel for="foneCel" value="Telefone Celular"/>
+                                    <p:inputMask id="foneCel" value="#{fornecedorController.objeto.telefoneCelular}" mask="(99)99999-9999"
+                                                 required="true" requiredMessage="Telefone celular é obrigatório!"/>
+                                    <p:outputLabel for="foneCom" value="Telefone Comercial"/>
+                                    <p:inputMask id="foneCom" value="#{fornecedorController.objeto.telefoneComercial}" mask="(99)99999-9999"/>
+                                    <p:outputLabel for="email" value="E-mail"/>
+                                    <p:inputText id="email" maxlength="255" value="#{fornecedorController.objeto.email}"
+                                                 required="true" requiredMessage="E-Mail é Obrigatório!"/>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+                        <!--Dados de Localização-->
+                        <p:tab id="localizacao" title="Localização">
+                            <p:panel header="Dados de localizaçao">
+                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
+                                             layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:outputLabel for="end" value="Endereço"/>
+                                    <p:inputText id="end" maxlength="255" value="#{fornecedorController.objeto.endereco}"
+                                                 required="true" requiredMessage="Endereço é Obrigatório!"/>
+                                    <p:outputLabel for="numero" value="Numero"/>
+                                    <p:inputText id="numero" value="#{fornecedorController.objeto.numero}"
+                                                 required="true" requiredMessage="Numero é Obrigatório!"/>
+                                    <p:outputLabel for="bairro" value="Bairro"/>
+                                    <p:inputText id="bairro" value="#{fornecedorController.objeto.bairro}"
+                                                 required="true" requiredMessage="Bairro é Obrigatório!"/>   
+                                    <p:outputLabel for="cid" value="Cidade"/>
+                                    <p:selectOneMenu id="cid" required="true"
+                                                     value="#{fornecedorController.objeto.idCidade}" filter="true"
+                                                     requiredMessage="Cidade é obrigatório!" converter="classeConverter">
+                                        <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true" />
+                                        <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
+                                                       itemLabel="#{cidade.cidade}" itemValue="#{cidade}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="comp" value="Complemento"/>
+                                    <p:inputText id="comp" maxlength="50" value="#{fornecedorController.objeto.complemento}"/>
+                                    <p:outputLabel for="status" value="Status"/>
+                                    <p:selectOneMenu id="status" required="true"
+                                                     value="#{fornecedorController.objeto.status}"
+                                                     requiredMessage="Status é obrigatório!" filter="true">
+                                        <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                                        <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
+                                        <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+                        <!--Observação-->
+                        <p:tab id="observacao" title="Observação">
+                            <p:panel header="Observação">
+                                <p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+                                             layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:outputLabel for="obs" value="Observação"/>
+                                    <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
+                                                     counterTemplate="{0} Caracteres Restante."
+                                                     autoResize="true"
+                                                     addLine="true"
+                                                     value="#{fornecedorController.objeto.observacao}"/>
+                                    <h:outputText/>
+                                    <h:outputText id="obs"/>
+                                </p:panelGrid>
+                                <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                                 actionListener="#{fornecedorController.salvarRegistro(event)}"
+                                                 update=":sms :formCadForn:tabCadFornecedor :frmDialogCadForn"/>
+                            </p:panel>
+                        </p:tab>
+                    </p:wizard>
                 </h:form>
             </p:dialog>
         </div>

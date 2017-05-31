@@ -12,7 +12,7 @@
 
         <div class="ui-fluid">
             <h:form id="formCadProfissional">
-                <p:scrollPanel mode="native" style="height:450px">
+                <p:scrollPanel mode="native" style="height:500px">
                     <p:panel header="Relação - Profissionais">
                         <p:dataTable id="tabCadProfissional" emptyMessage="Nenhum registro encontrado!" paginator="true" 
                                      reflow="true" paginatorPosition="bottom" var="profissional"
@@ -29,7 +29,7 @@
 
                             <!--Botão Editar-->
                             <p:column style="width: 45px">
-                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
+                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o" resetValues="true"
                                                  update=":formCadProfissional:tabCadProfissional :frmDialogCadProf"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{profissional}" target="#{profissionalController.objeto}"  />
@@ -69,7 +69,7 @@
                         <f:facet name="footer">
                             <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
                                              actionListener="#{profissionalController.objetoLimpo()}" style="max-width: 180px"
-                                             update=":formCadProfissional:tabCadProfissional :frmDialogCadProf:pngCadProf"/>
+                                             update=":formCadProfissional:tabCadProfissional :frmDialogCadProf"/>
                         </f:facet>
                     </p:panel>
                 </p:scrollPanel>
@@ -78,71 +78,110 @@
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Profissionais" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false" 
-                      draggable="false" showEffect="clip" hideEffect="clip" width="550">
+                      draggable="false" showEffect="clip" hideEffect="clip" style="max-width: 650px">
                 <h:form id="frmDialogCadProf">
-                    <p:scrollPanel mode="native" style="max-height: 450px">
-                        <p:panelGrid id="pngCadProf" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9"
-                                     layout="grid" styleClass="ui-panelgrid-blank">
-                            <p:outputLabel for="nome" value="Nome"/>
-                            <p:inputText id="nome" maxlength="255" size="50" value="#{profissionalController.objeto.nomeProf}"
-                                         required="true" requiredMessage="Nome é obrigatório!"/>
-                            <p:outputLabel for="com" value="Comissão"/>
-                            <p:inputText id="com" size="10" value="#{profissionalController.objeto.comissao}" maxlength="3"/>
-                            <p:outputLabel for="end" value="Endereço"/>
-                            <p:inputText id="end" size="50" maxlength="255" value="#{profissionalController.objeto.endereco}"
-                                         required="true" requiredMessage="Endereço é Obrigatório!"/>
-                            <p:outputLabel for="numero" value="Numero"/>
-                            <p:inputText id="numero" size="10" value="#{profissionalController.objeto.numero}"
-                                         required="true" requiredMessage="Numero é Obrigatório!"/>
-                            <p:outputLabel for="bairro" value="Bairro"/>
-                            <p:inputText id="bairro" size="50" value="#{profissionalController.objeto.bairro}"
-                                         required="true" requiredMessage="Bairro é Obrigatório!"/>
-                            <p:outputLabel for="comp" value="Complemento"/>
-                            <p:inputText id="comp" size="50" maxlength="50" value="#{profissionalController.objeto.complemento}"/>
-                            <p:outputLabel for="email" value="E-mail"/>
-                            <p:inputText id="email" size="50" maxlength="255" value="#{profissionalController.objeto.email}"
-                                         required="true" requiredMessage="E-Mail é Obrigatório!"/>
-                            <p:outputLabel for="foneCom" value="Telefone Comercial"/>
-                            <p:inputMask id="foneCom" value="#{profissionalController.objeto.telefoneComercial}" mask="(99)99999-9999"/>
-                            <p:outputLabel for="foneCel" value="Telefone Celular"/>
-                            <p:inputMask id="foneCel" value="#{profissionalController.objeto.telefoneCelular}" mask="(99)99999-9999"/>
-                            <p:outputLabel for="status" value="Status"/>
-                            <p:selectOneMenu id="status" required="true"
-                                             value="#{profissionalController.objeto.status}"
-                                             requiredMessage="Status é obrigatório!" filter="true">
-                                <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
-                                <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
-                                <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
-                            </p:selectOneMenu>
-                            
-                      
-                            <p:outputLabel for="cid" value="Cidade"/>
-                            <p:selectOneMenu id="cid" required="true" converter="classeConverter"
-                                             value="#{profissionalController.objeto.idCidade}" filter="true"
-                                             requiredMessage="Cidade é obrigatório!">
-                                <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true" />
-                                <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
-                                               itemLabel="#{cidade.cidade}"  itemValue="#{cidade}"/>
-                            </p:selectOneMenu>
-                            
-                            <p:outputLabel for="obs" value="Observação"/>
-                            <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
-                                             counterTemplate="{0} Caracteres Restante."
-                                             autoResize="true"
-                                             addLine="true"
-                                             value="#{profissionalController.objeto.observacao}"/>
-                            <h:outputText/>
-                            <h:outputText id="obs"/>
-                        </p:panelGrid>
-                    </p:scrollPanel>
-                    <center>
-                        <p:panelGrid columns="1" columnClasses="ui-grid-col3"
-                                     layout="grid" styleClass="ui-panelgrid-blank">
-                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
-                                             actionListener="#{profissionalController.salvarRegistro(event)}"
-                                             update=":sms :formCadProfissional:tabCadProfissional :frmDialogCadProf"/>
-                        </p:panelGrid>
-                    </center>
+                    <p:wizard backLabel="Voltar"  nextLabel="Próximo">
+                        <!--Dados de Identificação-->
+                        <p:tab id="identificacao" title="Identificação">
+                            <p:panel header="Dados de Identificação">
+                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
+                                             layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:outputLabel for="com" value="Comissão"/>
+                                    <p:inputText id="com" value="#{profissionalController.objeto.comissao}" maxlength="3"/>
+                                    <p:outputLabel for="nome" value="Nome"/>
+                                    <p:inputText id="nome" maxlength="255" value="#{profissionalController.objeto.nomeProf}"
+                                                 required="true" requiredMessage="Nome é obrigatório!"/>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+                        <!--Dados de Contato-->
+                        <p:tab id="contato" title="Contato">
+                            <p:panel header="Dados para contato">
+                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
+                                             layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:outputLabel for="foneCel" value="Telefone Celular"/>
+                                    <p:inputMask id="foneCel" value="#{profissionalController.objeto.telefoneCelular}" mask="(99)99999-9999"
+                                                 required="true" requiredMessage="Telefone celular é obrigatório!"/>
+                                    <p:outputLabel for="foneCom" value="Telefone Comercial"/>
+                                    <p:inputMask id="foneCom" value="#{profissionalController.objeto.telefoneComercial}" mask="(99)99999-9999"/>
+                                    <p:outputLabel for="email" value="E-mail"/>
+                                    <p:inputText id="email" maxlength="255" value="#{profissionalController.objeto.email}"
+                                                 required="true" requiredMessage="E-Mail é Obrigatório!"/>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+                        <!--Dados de Localização-->
+                        <p:tab id="localizacao" title="Localização">
+                            <p:panel header="Dados de localizaçao">
+                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
+                                             layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:outputLabel for="end" value="Endereço"/>
+                                    <p:inputText id="end" maxlength="255" value="#{profissionalController.objeto.endereco}"
+                                                 required="true" requiredMessage="Endereço é Obrigatório!"/>
+                                    <p:outputLabel for="numero" value="Numero"/>
+                                    <p:inputText id="numero" value="#{profissionalController.objeto.numero}"
+                                                 required="true" requiredMessage="Numero é Obrigatório!"/>
+                                    <p:outputLabel for="bairro" value="Bairro"/>
+                                    <p:inputText id="bairro" value="#{profissionalController.objeto.bairro}"
+                                                 required="true" requiredMessage="Bairro é Obrigatório!"/>
+                                    <p:outputLabel for="cid" value="Cidade"/>
+                                    <p:selectOneMenu id="cid" required="true" converter="classeConverter"
+                                                     value="#{profissionalController.objeto.idCidade}" filter="true"
+                                                     requiredMessage="Cidade é obrigatório!">
+                                        <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true" />
+                                        <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
+                                                       itemLabel="#{cidade.cidade}"  itemValue="#{cidade}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="comp" value="Complemento"/>
+                                    <p:inputText id="comp" maxlength="50" value="#{profissionalController.objeto.complemento}"/>
+
+                                    <p:outputLabel for="status" value="Status"/>
+                                    <p:selectOneMenu id="status" required="true"
+                                                     value="#{profissionalController.objeto.status}"
+                                                     requiredMessage="Status é obrigatório!" filter="true">
+                                        <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                                        <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
+                                        <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
+                                    </p:selectOneMenu>
+                                </p:panelGrid>
+                            </p:panel>
+                        </p:tab>
+
+                        <!--Serviços prestado pelo profissional-->
+                        <p:tab id="servico" title="Serviços">
+                            <p:panel header="Informações de serviços prestados">
+                                <p:selectManyCheckbox id="serv" value="#{profissionalController.selecionarServico}" layout="responsive" columns="3"
+                                                      converter="classeConverter"
+                                                      required="true" requiredMessage="Serviço é necessário estar preenchido">
+                                    <f:selectItems value="#{servicoController.objetoDao.all}"
+                                                   var="cidade" itemLabel="#{cidade.descricaoServico}" itemValue="#{cidade}" />
+                                </p:selectManyCheckbox>
+                            </p:panel>
+                        </p:tab>
+
+
+
+                        <!--Observação-->
+                        <p:tab id="observacao" title="Observação">
+                            <p:panel header="Observação">
+                                <p:panelGrid columns="1" columnClasses="ui-grid-col-12"
+                                             layout="grid" styleClass="ui-panelgrid-blank">
+                                    <p:outputLabel for="obs" value="Observação"/>
+                                    <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
+                                                     counterTemplate="{0} Caracteres Restante."
+                                                     autoResize="true"
+                                                     addLine="true"
+                                                     value="#{profissionalController.objeto.observacao}"/>
+                                    <h:outputText/>
+                                    <h:outputText id="obs"/>
+
+                                </p:panelGrid>
+                                <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                                 actionListener="#{profissionalController.salvarRegistro(event)}"
+                                                 update=":sms :formCadProfissional:tabCadProfissional :frmDialogCadProf"/>
+                            </p:panel>
+                        </p:tab>
+                    </p:wizard>
                 </h:form>
             </p:dialog>
         </div>

@@ -105,5 +105,10 @@ public class BaseDaoImp<T, ID> implements BaseDao<T, ID> {
                 + " p  WHERE p." + campo + " LIKE '" + texto + "%' ORDER BY p.id DESC").getResultList();
         return lista;
     }
+    
+    public void excluirTodos (String sql){
+        Query q = entityManager.createQuery("delete from" + persistentClass.getSimpleName() + " " + sql);
+        q.executeUpdate();
+    }
 
 }

@@ -35,6 +35,6 @@ public class CidadeController extends BaseController<Cidade, Integer> implements
     @Override
     public void setObjeto(Cidade objeto) {
         super.setObjeto(objeto);
-    } 
+    }    
 
 }

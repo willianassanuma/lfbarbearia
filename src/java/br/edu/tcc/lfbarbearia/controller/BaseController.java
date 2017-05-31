@@ -39,6 +39,7 @@ public class BaseController<T, ID> implements Serializable {
     public void atualizar(ActionEvent event) {
         try {
             if (validacoes(event)) {
+                metodoAntesDoSalvarAtualizar();
                 objetoDao.update((T) objeto);
                 metodoDepoisDoSalvarAtualizar();
                 addInfoMessage("Dados atualizados com sucesso!");
@@ -52,10 +53,14 @@ public class BaseController<T, ID> implements Serializable {
 
     public void metodoDepoisDoSalvarAtualizar() {
     }
+
+    public void metodoAntesDoSalvarAtualizar() {
+    }
     
     public void salvar(ActionEvent event) {
         try {
             if (validacoes(event)) {
+                metodoAntesDoSalvarAtualizar();
                 objetoDao.save((T) objeto);
                 metodoDepoisDoSalvarAtualizar();
                 addInfoMessage("Dados salvo com sucesso!");
@@ -141,7 +146,7 @@ public class BaseController<T, ID> implements Serializable {
         } else {
             salvar(event);
         }
-    }
+    }  
     
 //    public void editarLinha (ActionEvent event){
 //       objetoDao = (BaseDao<T, ID>) event.getComponent().getAttributes().get("editSelection");

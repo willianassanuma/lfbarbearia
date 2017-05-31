@@ -67,9 +67,6 @@ public class Contasreceber implements Serializable, InterfaceEntidades {
     @JoinColumn(name = "idAgenda", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Agenda idAgenda;
-    @JoinColumn(name = "idServico", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Servico idServico;
     @JoinColumn(name = "idCondPagamento", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Condpagamento idCondPagamento;
@@ -135,14 +132,6 @@ public class Contasreceber implements Serializable, InterfaceEntidades {
 
     public void setIdAgenda(Agenda idAgenda) {
         this.idAgenda = idAgenda;
-    }
-
-    public Servico getIdServico() {
-        return idServico;
-    }
-
-    public void setIdServico(Servico idServico) {
-        this.idServico = idServico;
     }
 
     public Condpagamento getIdCondPagamento() {

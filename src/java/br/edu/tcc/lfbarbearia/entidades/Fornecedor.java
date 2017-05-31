@@ -50,17 +50,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Fornecedor.findByTelefoneCelular", query = "SELECT f FROM Fornecedor f WHERE f.telefoneCelular = :telefoneCelular")})
 public class Fornecedor implements Serializable, InterfaceEntidades {
 
-    @JoinTable(name = "fornecedor_insumo", joinColumns = {
-        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "idInsumo", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Insumo> insumoCollection;
-    @JoinTable(name = "fornecedor_contaspagar", joinColumns = {
-        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "idContasAPagar", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Contaspagar> contaspagarCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,7 +68,7 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
     private String razaoSocial;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 25)
     @Column(name = "cnpj")
     private String cnpj;
     @Basic(optional = false)
@@ -120,9 +109,21 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
     @Size(max = 30)
     @Column(name = "telefoneComercial")
     private String telefoneComercial;
-    @Size(max = 30)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "telefoneCelular")
     private String telefoneCelular;
+    @JoinTable(name = "fornecedor_insumo", joinColumns = {
+        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idInsumo", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Insumo> insumoCollection;
+    @JoinTable(name = "fornecedor_contaspagar", joinColumns = {
+        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idContasAPagar", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Contaspagar> contaspagarCollection;
     @JoinColumn(name = "idCidade", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idCidade;
@@ -134,7 +135,7 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Fornecedor(Integer id, String nomeFantasia, String razaoSocial, String cnpj, String inscricaoEstadual, String endereco, int numero, String bairro, String email, boolean status) {
+    public Fornecedor(Integer id, String nomeFantasia, String razaoSocial, String cnpj, String inscricaoEstadual, String endereco, int numero, String bairro, String email, boolean status, String telefoneCelular) {
         this.id = id;
         this.nomeFantasia = nomeFantasia;
         this.razaoSocial = razaoSocial;
@@ -145,6 +146,7 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
         this.bairro = bairro;
         this.email = email;
         this.status = status;
+        this.telefoneCelular = telefoneCelular;
     }
 
     public Integer getId() {
@@ -259,6 +261,24 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
         this.telefoneCelular = telefoneCelular;
     }
 
+    @XmlTransient
+    public Collection<Insumo> getInsumoCollection() {
+        return insumoCollection;
+    }
+
+    public void setInsumoCollection(Collection<Insumo> insumoCollection) {
+        this.insumoCollection = insumoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Contaspagar> getContaspagarCollection() {
+        return contaspagarCollection;
+    }
+
+    public void setContaspagarCollection(Collection<Contaspagar> contaspagarCollection) {
+        this.contaspagarCollection = contaspagarCollection;
+    }
+
     public Cidade getIdCidade() {
         return idCidade;
     }
@@ -290,24 +310,6 @@ public class Fornecedor implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Fornecedor[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Insumo> getInsumoCollection() {
-        return insumoCollection;
-    }
-
-    public void setInsumoCollection(Collection<Insumo> insumoCollection) {
-        this.insumoCollection = insumoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Contaspagar> getContaspagarCollection() {
-        return contaspagarCollection;
-    }
-
-    public void setContaspagarCollection(Collection<Contaspagar> contaspagarCollection) {
-        this.contaspagarCollection = contaspagarCollection;
     }
     
 }

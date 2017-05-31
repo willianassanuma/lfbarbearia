@@ -43,9 +43,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Contaspagar.findByStatus", query = "SELECT c FROM Contaspagar c WHERE c.status = :status")})
 public class Contaspagar implements Serializable, InterfaceEntidades {
 
-    @ManyToMany(mappedBy = "contaspagarCollection")
-    private Collection<Fornecedor> fornecedorCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,6 +67,8 @@ public class Contaspagar implements Serializable, InterfaceEntidades {
     @Size(min = 1, max = 50)
     @Column(name = "status")
     private String status;
+    @ManyToMany(mappedBy = "contaspagarCollection")
+    private Collection<Fornecedor> fornecedorCollection;
     @JoinColumn(name = "idCompra", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Compra idCompra;
@@ -129,6 +128,15 @@ public class Contaspagar implements Serializable, InterfaceEntidades {
         this.status = status;
     }
 
+    @XmlTransient
+    public Collection<Fornecedor> getFornecedorCollection() {
+        return fornecedorCollection;
+    }
+
+    public void setFornecedorCollection(Collection<Fornecedor> fornecedorCollection) {
+        this.fornecedorCollection = fornecedorCollection;
+    }
+
     public Compra getIdCompra() {
         return idCompra;
     }
@@ -160,15 +168,6 @@ public class Contaspagar implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Contaspagar[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Fornecedor> getFornecedorCollection() {
-        return fornecedorCollection;
-    }
-
-    public void setFornecedorCollection(Collection<Fornecedor> fornecedorCollection) {
-        this.fornecedorCollection = fornecedorCollection;
     }
     
 }

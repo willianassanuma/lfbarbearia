@@ -6,8 +6,10 @@
 package br.edu.tcc.lfbarbearia.entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,12 +19,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -113,15 +117,19 @@ public class Cliente implements Serializable, InterfaceEntidades {
     @Size(max = 30)
     @Column(name = "telefoneComercial")
     private String telefoneComercial;
-    @Size(max = 30)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
     @Column(name = "telefoneCelular")
     private String telefoneCelular;
-    @Size(max = 2555)
+    @Size(max = 255)
     @Column(name = "apelido")
     private String apelido;
     @JoinColumn(name = "idCidade", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idCidade;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    private Collection<AgendaCliente> agendaClienteCollection;
 
     public Cliente() {
     }
@@ -130,7 +138,7 @@ public class Cliente implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Cliente(Integer id, String nomeCLiente, String cpf, Date dataNascimento, Character sexo, int frequencia, String endereco, int numero, String bairro, String email, boolean status) {
+    public Cliente(Integer id, String nomeCLiente, String cpf, Date dataNascimento, Character sexo, int frequencia, String endereco, int numero, String bairro, String email, boolean status, String telefoneCelular) {
         this.id = id;
         this.nomeCLiente = nomeCLiente;
         this.cpf = cpf;
@@ -142,6 +150,7 @@ public class Cliente implements Serializable, InterfaceEntidades {
         this.bairro = bairro;
         this.email = email;
         this.status = status;
+        this.telefoneCelular = telefoneCelular;
     }
 
     public Integer getId() {
@@ -278,6 +287,15 @@ public class Cliente implements Serializable, InterfaceEntidades {
 
     public void setIdCidade(Cidade idCidade) {
         this.idCidade = idCidade;
+    }
+
+    @XmlTransient
+    public Collection<AgendaCliente> getAgendaClienteCollection() {
+        return agendaClienteCollection;
+    }
+
+    public void setAgendaClienteCollection(Collection<AgendaCliente> agendaClienteCollection) {
+        this.agendaClienteCollection = agendaClienteCollection;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package br.edu.tcc.lfbarbearia.controller;
 
-
 import br.edu.tcc.lfbarbearia.dao.ServicoDao;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -9,9 +8,10 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import br.edu.tcc.lfbarbearia.entidades.Servico;
+import java.util.List;
 
 @ViewScoped
-@Named(value="servicoController")
+@Named(value = "servicoController")
 @Stateless
 public class ServicoController extends BaseController<Servico, Integer> implements Serializable {
 
@@ -20,9 +20,9 @@ public class ServicoController extends BaseController<Servico, Integer> implemen
     
     public ServicoController() {
     }
-    
+
     @PostConstruct
-    public void inicializar(){
+    public void inicializar() {
         setObjeto(new Servico());
         setObjetoDao(servicoDao);
     }
@@ -35,6 +35,6 @@ public class ServicoController extends BaseController<Servico, Integer> implemen
     @Override
     public void setObjeto(Servico objeto) {
         super.setObjeto(objeto);
-    } 
-    
+    }
+
 }

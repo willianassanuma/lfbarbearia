@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -44,12 +46,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Profissional.findByEmail", query = "SELECT p FROM Profissional p WHERE p.email = :email")
     , @NamedQuery(name = "Profissional.findByStatus", query = "SELECT p FROM Profissional p WHERE p.status = :status")
     , @NamedQuery(name = "Profissional.findByObservacao", query = "SELECT p FROM Profissional p WHERE p.observacao = :observacao")
-    , @NamedQuery(name = "Profissional.findByTelefoneCelular", query = "SELECT p FROM Profissional p WHERE p.telefoneCelular = :telefoneCelular")
-    , @NamedQuery(name = "Profissional.findByTelefoneComercial", query = "SELECT p FROM Profissional p WHERE p.telefoneComercial = :telefoneComercial")})
+    , @NamedQuery(name = "Profissional.findByTelefoneComercial", query = "SELECT p FROM Profissional p WHERE p.telefoneComercial = :telefoneComercial")
+    , @NamedQuery(name = "Profissional.findByTelefoneCelular", query = "SELECT p FROM Profissional p WHERE p.telefoneCelular = :telefoneCelular")})
 public class Profissional implements Serializable, InterfaceEntidades {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfissional")
-    private Collection<Agenda> agendaCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,9 +61,10 @@ public class Profissional implements Serializable, InterfaceEntidades {
     @Size(min = 1, max = 255)
     @Column(name = "nomeProf")
     private String nomeProf;
-    @Size(max = 30)
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "comissao")
-    private String comissao;
+    private float comissao;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -96,11 +96,20 @@ public class Profissional implements Serializable, InterfaceEntidades {
     @Column(name = "observacao")
     private String observacao;
     @Size(max = 30)
-    @Column(name = "telefoneCelular")
-    private String telefoneCelular;
-    @Size(max = 45)
     @Column(name = "telefoneComercial")
     private String telefoneComercial;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "telefoneCelular")
+    private String telefoneCelular;
+    @JoinTable(name = "profissional_servico", joinColumns = {
+        @JoinColumn(name = "idProfissional", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idServico", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Servico> servicoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProfissional")
+    private Collection<Agenda> agendaCollection;
     @JoinColumn(name = "idCidade", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idCidade;
@@ -112,14 +121,16 @@ public class Profissional implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Profissional(Integer id, String nomeProf, String endereco, int numero, String bairro, String email, boolean status) {
+    public Profissional(Integer id, String nomeProf, float comissao, String endereco, int numero, String bairro, String email, boolean status, String telefoneCelular) {
         this.id = id;
         this.nomeProf = nomeProf;
+        this.comissao = comissao;
         this.endereco = endereco;
         this.numero = numero;
         this.bairro = bairro;
         this.email = email;
         this.status = status;
+        this.telefoneCelular = telefoneCelular;
     }
 
     public Integer getId() {
@@ -138,11 +149,11 @@ public class Profissional implements Serializable, InterfaceEntidades {
         this.nomeProf = nomeProf;
     }
 
-    public String getComissao() {
+    public float getComissao() {
         return comissao;
     }
 
-    public void setComissao(String comissao) {
+    public void setComissao(float comissao) {
         this.comissao = comissao;
     }
 
@@ -202,6 +213,14 @@ public class Profissional implements Serializable, InterfaceEntidades {
         this.observacao = observacao;
     }
 
+    public String getTelefoneComercial() {
+        return telefoneComercial;
+    }
+
+    public void setTelefoneComercial(String telefoneComercial) {
+        this.telefoneComercial = telefoneComercial;
+    }
+
     public String getTelefoneCelular() {
         return telefoneCelular;
     }
@@ -210,12 +229,22 @@ public class Profissional implements Serializable, InterfaceEntidades {
         this.telefoneCelular = telefoneCelular;
     }
 
-    public String getTelefoneComercial() {
-        return telefoneComercial;
+    @XmlTransient
+    public Collection<Servico> getServicoCollection() {
+        return servicoCollection;
     }
 
-    public void setTelefoneComercial(String telefoneComercial) {
-        this.telefoneComercial = telefoneComercial;
+    public void setServicoCollection(Collection<Servico> servicoCollection) {
+        this.servicoCollection = servicoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Agenda> getAgendaCollection() {
+        return agendaCollection;
+    }
+
+    public void setAgendaCollection(Collection<Agenda> agendaCollection) {
+        this.agendaCollection = agendaCollection;
     }
 
     public Cidade getIdCidade() {
@@ -249,15 +278,6 @@ public class Profissional implements Serializable, InterfaceEntidades {
     @Override
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Profissional[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Agenda> getAgendaCollection() {
-        return agendaCollection;
-    }
-
-    public void setAgendaCollection(Collection<Agenda> agendaCollection) {
-        this.agendaCollection = agendaCollection;
     }
     
 }
