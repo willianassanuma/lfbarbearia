@@ -58,6 +58,5 @@ public class ProfissionalController extends BaseController<Profissional, Integer
         for (Servico slServ : selecionarServico){
             getObjeto().getServicoCollection().add(slServ);
         }
-
     }
 }

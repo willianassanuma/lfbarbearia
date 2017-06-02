@@ -33,7 +33,7 @@
                                     <f:convertDateTime pattern="HH:mm:ss"/>
                                 </h:outputText>
                             </p:column>
-                           <p:column style="width: 45px">
+                            <p:column style="width: 45px">
                                 <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
                                                  update=":formCadParam:tabCadParam :frmDialogParam"
                                                  oncomplete="PF('dlg').show();">
@@ -42,6 +42,11 @@
                             </p:column>
 
                         </p:dataTable>
+                        <f:facet name="footer">
+                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
+                                             actionListener="#{parametroController.objetoLimpo()}" style="max-width: 180px"
+                                             update=":formCadParam:tabCadParam :frmDialogParam"/>
+                        </f:facet>
                     </p:panel>
                 </p:scrollPanel>
             </h:form>
@@ -76,7 +81,7 @@
                         <p:panelGrid columns="1" columnClasses="ui-grid-col2"
                                      layout="grid" styleClass="ui-panelgrid-blank">
                             <p:commandButton value="Salvar" icon="fa fa-floppy-o"
-                                             actionListener="#{cidadeController.salvarRegistro(event)}"
+                                             actionListener="#{parametroController.salvarRegistro(event)}"
                                              update=":sms :formCadParam:tabCadParam :frmDialogParam"/>
                         </p:panelGrid>
                     </center>

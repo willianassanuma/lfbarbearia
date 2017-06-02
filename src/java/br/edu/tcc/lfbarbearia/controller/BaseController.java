@@ -56,7 +56,7 @@ public class BaseController<T, ID> implements Serializable {
 
     public void metodoAntesDoSalvarAtualizar() {
     }
-    
+       
     public void salvar(ActionEvent event) {
         try {
             if (validacoes(event)) {
