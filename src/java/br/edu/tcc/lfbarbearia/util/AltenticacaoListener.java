@@ -8,7 +8,7 @@ public class AltenticacaoListener implements PhaseListener {
 
     @Override
     public void afterPhase(PhaseEvent pe) {
-        System.out.println("DEPOIS DA FASE" + pe.getPhaseId());
+        System.out.println("DEPOIS DA FASE: " + pe.getPhaseId());
     }
 
     @Override
