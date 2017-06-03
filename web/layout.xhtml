@@ -23,24 +23,25 @@
                 color:  #ffffff;
             }
         </style>
-        
+
         <div id="topo">
             <ui:insert name="topo">
                 <a href="layout.xhtml">L.F. BARBEARIA</a>
-                
+
             </ui:insert>
         </div>
+        <div>
+            <div id="esquerda">
+                <ui:insert name="esquerda">
+                    <ui:include src="menu.xhtml"/>
+                </ui:insert>
+            </div>
 
-        <div id="esquerda">
-            <ui:insert name="esquerda">
-                <ui:include src="menu.xhtml"/>
-            </ui:insert>
-        </div>
+            <div id="conteudo" class="conteudoEsquerda">
+                <ui:insert name="conteudo">
 
-        <div id="conteudo" class="conteudoEsquerda">
-            <ui:insert name="conteudo">
-
-            </ui:insert>
+                </ui:insert>
+            </div>
         </div>
 
     </h:body>

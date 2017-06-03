@@ -9,6 +9,8 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import br.edu.tcc.lfbarbearia.entidades.Agenda;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleModel;
 
 @ViewScoped
 @Named(value="agendaController")
@@ -18,6 +20,18 @@ public class AgendaController extends BaseController<Agenda, Integer> implements
     @EJB
     private AgendaDao agendaDao;
     
+    
+    //Cria no prostConstruct o modelo do Schedule
+    private ScheduleModel modelSchedule;
+
+    public ScheduleModel getModelSchedule() {
+        return modelSchedule;
+    }
+
+    public void setModelSchedule(ScheduleModel modelSchedule) {
+        this.modelSchedule = modelSchedule;
+    }
+    
     public AgendaController() {
     }
     
@@ -25,6 +39,9 @@ public class AgendaController extends BaseController<Agenda, Integer> implements
     public void inicializar(){
         setObjeto(new Agenda());
         setObjetoDao(agendaDao);
+        
+        //Constroe o schedule
+        modelSchedule = new DefaultScheduleModel();
     }
     
     @Override

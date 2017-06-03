@@ -36,7 +36,8 @@ body {
 
 /*Informações do lado esquerdo*/
 .conteudoEsquerda {
-    position: fixed;
+/*    se mudar para fluid sai na pagina do template*/
+/*    position: fixed;*/
     background-color: #ffffff;
     padding: 10px 10px;
     margin-left: 300px;

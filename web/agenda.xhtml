@@ -4,44 +4,22 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://java.sun.com/jsf/core"
                 template="./layout.xhtml">
 
     <ui:define name="conteudo">
-        <p:growl id="sms" autoUpdate="true"/>
-
         <div class="ui-fluid">
-            <h:form>
-                <!--                <p:wizard backLabel="Voltar" nextLabel="Próximo">
-                                    <p:tab id="cliente" title="Cliente">
-                                        <p:panel header="Seleção do cliente">
-                                            <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
-                                                         layout="grid" styleClass="ui-panelgrid-blank">
-                                                <p:outputLabel value="Cliente"/>
-                                                <p:inputText/>
-                
-                
-                                            </p:panelGrid>
-                                        </p:panel>
-                                    </p:tab>
-                                    <p:tab id="profissional" title="Profissional">
-                                        <p:panel header="Seleção do profissional">
-                                            <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
-                                                         layout="grid" styleClass="ui-panelgrid-blank">
-                
-                
-                                            </p:panelGrid>
-                                        </p:panel>
-                                    </p:tab>
-                                </p:wizard>-->
+            <p:dialog header="Agenda" widgetVar="dlg" modal="true" appendTo="@(body)" responsive="true"
+                      closeOnEscape="true" closable="true" resizable="false" visible="true" 
+                      draggable="true" showEffect="clip" hideEffect="clip" position="initial"
+                      style="max-width: 700px; max-height: 650px;">
+                <h:form>
+                    <!--Whidt = 592px / heigth 568px-->
+                    <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
+                                widgetVar="schd" locale="pt">
 
-                <p:schedule id="schedule" value="#{Schedule.event}"/>
-                    
-
-                
-
-
-            </h:form>
+                    </p:schedule>
+                </h:form>
+            </p:dialog>
         </div>
     </ui:define>
 
