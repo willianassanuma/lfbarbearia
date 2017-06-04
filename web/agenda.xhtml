@@ -7,6 +7,7 @@
                 template="./layout.xhtml">
 
     <ui:define name="conteudo">
+        <p:growl id="sms" autoUpdate="true"/>
         <div class="ui-fluid">
             <p:dialog header="Agenda" widgetVar="dlg" modal="true" appendTo="@(body)" responsive="true"
                       closeOnEscape="true" closable="true" resizable="false" visible="true" 
@@ -15,7 +16,7 @@
                 <h:form>
                     <!--Whidt = 592px / heigth 568px-->
                     <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
-                                widgetVar="schd" locale="pt">
+                                widgetVar="schd" locale="pt" >
 
                     </p:schedule>
                 </h:form>
