@@ -4,21 +4,50 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                template="./layout.xhtml">
+                template="./layout.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="conteudo">
         <p:growl id="sms" autoUpdate="true"/>
         <div class="ui-fluid">
-            <p:dialog header="Agenda" widgetVar="dlg" modal="true" appendTo="@(body)" responsive="true"
-                      closeOnEscape="true" closable="true" resizable="false" visible="true" 
+            <!--Dialogo do Schedule-->
+            <p:dialog header="Agenda" widgetVar="dlgSchedule" modal="true" appendTo="@(body)" responsive="true"
+                      closeOnEscape="true" closable="true" resizable="false" visible="true"
                       draggable="true" showEffect="clip" hideEffect="clip" position="initial"
                       style="max-width: 700px; max-height: 650px;">
                 <h:form>
                     <!--Whidt = 592px / heigth 568px-->
                     <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
-                                widgetVar="schd" locale="pt" >
-
+                                widgetVar="schd" locale="pt" view="agendaWeek" >
+                        <p:ajax event="dateSelect" oncomplete="PF('dlg').show();" resetValues="true" />
                     </p:schedule>
+                </h:form>
+            </p:dialog>
+
+            <!--Dialogo do formulário-->
+            <p:dialog header="Incluir Horário" widgetVar="dlg" modal="true" appendTo="@(body)"
+                      responsive="true" closeOnEscape="true" closable="true" resizable="false"
+                      draggable="false" showEffect="clip" hideEffect="clip" position="center"> 
+                <h:form>
+                    <p:panelGrid id="pngCadCid" columns="2" columnClasses="ui-grid-col-3, ui-grid-col-9"
+                                 layout="grid" styleClass="ui-panelgrid-blank">
+                        <p:outputLabel for="prof" value="Funcionario:"/>
+                        <p:selectOneMenu id="prof" required="true" converter="classeConverter"
+                                         value="#{agendaController.objeto.idProfissional}" filter="true" 
+                                         requiredMessage="Profissional é obrigatório!">
+                            <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true" />
+                            <f:selectItems  value="#{profissionalController.objetoDao.all}" var="profissional"
+                                            itemLabel="#{profissional.nomeProf}"  itemValue="#{profissional}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <center>
+                        <p:panelGrid columns="1" columnClasses="ui-grid-col2"
+                                     layout="grid" styleClass="ui-panelgrid-blank">
+                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                                             actionListener="#{agendaController.salvarRegistro(event)}"
+                                             update=":sms @form"/>
+                        </p:panelGrid>
+                    </center>
                 </h:form>
             </p:dialog>
         </div>

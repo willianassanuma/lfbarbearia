@@ -24,7 +24,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,7 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Agenda.findAll", query = "SELECT a FROM Agenda a")
     , @NamedQuery(name = "Agenda.findById", query = "SELECT a FROM Agenda a WHERE a.id = :id")
     , @NamedQuery(name = "Agenda.findByDataAgenda", query = "SELECT a FROM Agenda a WHERE a.dataAgenda = :dataAgenda")
-    , @NamedQuery(name = "Agenda.findByObs", query = "SELECT a FROM Agenda a WHERE a.obs = :obs")
     , @NamedQuery(name = "Agenda.findByHora", query = "SELECT a FROM Agenda a WHERE a.hora = :hora")})
 public class Agenda implements Serializable, InterfaceEntidades {
 
@@ -54,9 +52,6 @@ public class Agenda implements Serializable, InterfaceEntidades {
     @Column(name = "dataAgenda")
     @Temporal(TemporalType.DATE)
     private Date dataAgenda;
-    @Size(max = 60)
-    @Column(name = "obs")
-    private String obs;
     @Basic(optional = false)
     @NotNull
     @Column(name = "hora")
@@ -97,14 +92,6 @@ public class Agenda implements Serializable, InterfaceEntidades {
 
     public void setDataAgenda(Date dataAgenda) {
         this.dataAgenda = dataAgenda;
-    }
-
-    public String getObs() {
-        return obs;
-    }
-
-    public void setObs(String obs) {
-        this.obs = obs;
     }
 
     public Date getHora() {
