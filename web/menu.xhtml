@@ -6,43 +6,59 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <h:form>
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="resources/css/cssMenu.css"/>
 
-        <style>
-            a {
-                text-decoration: none;
-            }
-        </style>
-            <p:panelMenu style="width: auto; height: 520px;" rendered="true">
-                <p:submenu label="Cadastros" icon="fa fa-newspaper-o">
-                <p:menuitem value="Usuario" outcome="usuario.xhtml" icon="fa fa-user-plus"/>
-                <p:menuitem value="Perfil de Acesso" outcome="perfilAcesso.xhtml" icon="fa fa-low-vision "/>
-                <p:menuitem value="Cliente" outcome="cliente.xhtml" icon="fa fa-male" />
-                <p:menuitem value="Fornecedor" outcome="fornecedor.xhtml" icon="fa fa-users" />
-                <p:menuitem value="Profissional" outcome="profissional.xhtml" icon="fa fa-handshake-o" />
-                <p:menuitem value="Estado" outcome="estado.xhtml" icon="fa fa-map" />
-                <p:menuitem value="Cidade" outcome="cidade.xhtml" icon="fa fa-map-signs" />
-                <p:menuitem value="Condições de pagamento" outcome="condPagamento.xhtml" icon="fa fa-credit-card-alt" />
-                <p:menuitem value="Insumos" outcome="insumo.xhtml" icon="fa fa-barcode" />
-                <p:menuitem value="Unidade de Medida" outcome="unidademedida.xhtml" icon="fa fa-flask" />
-                <p:menuitem value="Serviço" outcome="servico.xhtml" icon="fa fa-scissors" />
-            </p:submenu>
-            <p:submenu label="Agenda" icon="fa fa-calendar">
-                <p:menuitem value="Agendar" outcome="agenda.xhtml" icon="fa fa-book" />
-            </p:submenu>
-            <p:submenu label="Finanças" icon="fa fa-archive">
-                <p:menuitem value="Finanaças" icon="fa fa-archive" />
-            </p:submenu>
-            <p:submenu label="Estoque" icon="fa fa-archive">
-                <p:menuitem value="Mov. Estoque" icon="fa fa-archive" />
-            </p:submenu>
-            <p:submenu label="Relatórios" icon="fa fa-wrench">
-                <p:menuitem value="Cliente" icon="fa fa-male" />
-            </p:submenu>
-            <p:submenu label="Configurações" icon="fa fa-wrench">
-                <p:menuitem value="Parâmetro" outcome="parametro.xhtml" icon="fa fa-cog" />
-            </p:submenu>
-
-        </p:panelMenu>
+        <!-- conteudo -->
+        <ul id="accordion" class="accordion">
+            <li>
+                <div class="link"><i class="fa fa-newspaper-o"></i>Cadastros<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu">
+                    <li><a href="usuario.xhtml">Usuário</a></li>
+                    <li><a href="perfilAcesso.xhtml">Perfil de Acesso</a></li>
+                    <li><a href="cliente.xhtml">Cliente</a></li>
+                    <li><a href="fornecedor.xhtml">Fornecedor</a></li>
+                    <li><a href="profissional.xhtml">Profissional</a></li>
+                    <li><a href="estado.xhtml">Estado</a></li>
+                    <li><a href="cidade.xhtml">Cidade</a></li>
+                    <li><a href="condPagamento.xhtml">Condições de pagamento</a></li>
+                    <li><a href="insumo.xhtml">Insumos</a></li>
+                    <li><a href="unidademedida.xhtml">Unidade de Medida</a></li>
+                    <li><a href="servico.xhtml">Serviço</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="link"><i class="fa fa-calendar"></i>Agenda<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu">
+                    <li><a href="agenda.xhtml">Agendar</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="link"><i class="fa fa-archive"></i>Finanças<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu">
+                    <li><a href="#">#</a></li>
+                </ul>
+            </li>
+            <li><div class="link"><i class="fa fa-archive"></i>Estoque<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu">
+                    <li><a href="#">#</a></li>
+                </ul>
+            </li>
+            <li><div class="link"><i class="fa fa-wrench"></i>Relatórios<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu">
+                    <li><a href="#">#</a></li>
+                </ul>
+            </li>
+            <li><div class="link"><i class="fa fa-wrench"></i>Configurações<i class="fa fa-chevron-down"></i></div>
+                <ul class="submenu">
+                    <li><a href="parametro.xhtml">Parâmetros</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Scripts -->
+        <script src="resources/js/jquery-3.2.1.js"></script>
+        <script src="resources/js/scriptMenu.js"></script>
+            
     </h:form>
 
 </ui:composition>

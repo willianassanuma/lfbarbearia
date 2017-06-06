@@ -1,55 +1,48 @@
 body {
-    margin: 0px;
-/*    background-image: url('../img/fundo.jpg')*/
+    margin: 0;
+    /*    background-image: url('../img/fundo.jpg')*/
 }
 
-/*#container  {
-    margin: 1em auto;  	
-    width: 98%;  	
-    background: #ffffff;  
-} */
-
 .ui-widget, .ui-widget .ui-widget {
-    font-size: 95% !important;
+    font-size: 100% !important;
+}
+
+.conteiner{
+    width: 100%;
 }
 
 #topo {
-    position: relative;
+    min-width: max-content;
+    float: top;
     background-color: #222222;
-    color: white;
-    padding: 20px 20px;
-     border: 15px;
-     border-color: black;
+    color: #ffffff;
+    padding: 1.5em;
 }
 
-#esquerda { 
+#esquerda {
     float: left;
-    width: 300px;
+    position: initial;
+    width: 20%;
+    min-height: max-content;
+    min-width: max-content;
 }
 
-.conteudoCentro {
+/*Informações do lado esquerdo
+.conteudoEsquerda {
+        se mudar para fluid sai na pagina do template
+        position: fixed;
+    background-color: #ffffff;
+    width: 100%;
+    min-height: max-content;
+    
+}*/
+
+
+/*.conteudoCentro {
     position: fixed;
     width: 100%;
     background-color: #dddddd;
     padding: 5px;
-}
-
-/*Informações do lado esquerdo*/
-.conteudoEsquerda {
-/*    se mudar para fluid sai na pagina do template*/
-/*    position: fixed;*/
-    background-color: #ffffff;
-    padding: 10px 10px;
-    margin-left: 300px;
-}
-
-/*@media (max-width: 768px){
-    #esquerda {
-        overflow: hidden;
-        
-    }
-    
-    #conteudo {
-        position: relative;
-    }
 }*/
+
+

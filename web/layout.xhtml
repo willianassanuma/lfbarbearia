@@ -17,32 +17,31 @@
     </h:head>
 
     <h:body>
-        <!--Remover-->
-        <style>
-            a {
-                color:  #ffffff;
+<!--        <style>
+            a{
+                color: #ffffff;
             }
-        </style>
-
-        <div id="topo">
-            <ui:insert name="topo">
-                <a href="layout.xhtml">L.F. BARBEARIA</a>
-
-            </ui:insert>
-        </div>
-        <div>
-            <div id="esquerda">
+        </style>-->
+        
+        <div class="conteiner">
+            <!--Conteudo do corpo-->
+            <header id="topo">
+                <ui:insert name="topo">
+                    <a href="layout.xhtml">L.F. BARBEARIA</a>
+                </ui:insert>
+            </header>
+            <!--Conteudo de navegação-->
+            <nav id="esquerda">
                 <ui:insert name="esquerda">
                     <ui:include src="menu.xhtml"/>
                 </ui:insert>
-            </div>
-
-            <div id="conteudo" class="conteudoEsquerda">
+            </nav>
+            <!--Conteudo da esquerda-->
+            <article class="conteudoEsquerda">
                 <ui:insert name="conteudo">
 
                 </ui:insert>
-            </div>
+            </article>
         </div>
-
     </h:body>
 </html>
