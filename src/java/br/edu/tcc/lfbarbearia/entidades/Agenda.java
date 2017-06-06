@@ -37,8 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Agenda.findAll", query = "SELECT a FROM Agenda a")
     , @NamedQuery(name = "Agenda.findById", query = "SELECT a FROM Agenda a WHERE a.id = :id")
-    , @NamedQuery(name = "Agenda.findByDataAgenda", query = "SELECT a FROM Agenda a WHERE a.dataAgenda = :dataAgenda")
-    , @NamedQuery(name = "Agenda.findByHora", query = "SELECT a FROM Agenda a WHERE a.hora = :hora")})
+    , @NamedQuery(name = "Agenda.findByDataHoraDaAgenda", query = "SELECT a FROM Agenda a WHERE a.dataHoraDaAgenda = :dataHoraDaAgenda")})
 public class Agenda implements Serializable, InterfaceEntidades {
 
     private static final long serialVersionUID = 1L;
@@ -49,14 +48,9 @@ public class Agenda implements Serializable, InterfaceEntidades {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "dataAgenda")
+    @Column(name = "dataHoraDaAgenda")
     @Temporal(TemporalType.DATE)
-    private Date dataAgenda;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "hora")
-    @Temporal(TemporalType.TIME)
-    private Date hora;
+    private Date dataHoraDaAgenda;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAgenda")
     private Collection<Contasreceber> contasreceberCollection;
     @JoinColumn(name = "idProfissional", referencedColumnName = "id")
@@ -72,10 +66,9 @@ public class Agenda implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Agenda(Integer id, Date dataAgenda, Date hora) {
+    public Agenda(Integer id, Date dataHoraDaAgenda) {
         this.id = id;
-        this.dataAgenda = dataAgenda;
-        this.hora = hora;
+        this.dataHoraDaAgenda = dataHoraDaAgenda;
     }
 
     public Integer getId() {
@@ -86,20 +79,12 @@ public class Agenda implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Date getDataAgenda() {
-        return dataAgenda;
+    public Date getDataHoraDaAgenda() {
+        return dataHoraDaAgenda;
     }
 
-    public void setDataAgenda(Date dataAgenda) {
-        this.dataAgenda = dataAgenda;
-    }
-
-    public Date getHora() {
-        return hora;
-    }
-
-    public void setHora(Date hora) {
-        this.hora = hora;
+    public void setDataHoraDaAgenda(Date dataHoraDaAgenda) {
+        this.dataHoraDaAgenda = dataHoraDaAgenda;
     }
 
     @XmlTransient
