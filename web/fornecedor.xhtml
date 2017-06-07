@@ -84,7 +84,7 @@
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
                       draggable="false" showEffect="clip" hideEffect="clip" position="center" style="max-width: 650px">
                 <h:form id="frmDialogCadForn">
-                    <p:wizard backLabel="Voltar" nextLabel="Próximo" widgetVar="wiz">
+                    <p:tabView widgetVar="wiz">
                         <!--Dados de Identificação-->
                         <p:tab id="identificacao" title="Identificação">
                             <p:panel header="Dados de Identificação">
@@ -114,7 +114,7 @@
                                     <p:inputMask id="foneCel" value="#{fornecedorController.objeto.telefoneCelular}" mask="(99)99999-9999"
                                                  required="true" requiredMessage="Telefone celular é obrigatório!"/>
                                     <p:outputLabel for="foneCom" value="Telefone Comercial"/>
-                                    <p:inputMask id="foneCom" value="#{fornecedorController.objeto.telefoneComercial}" mask="(99)99999-9999"/>
+                                    <p:inputMask id="foneCom" value="#{fornecedorController.objeto.telefoneComercial}" mask="(99)9999-9999"/>
                                     <p:outputLabel for="email" value="E-mail"/>
                                     <p:inputText id="email" maxlength="255" value="#{fornecedorController.objeto.email}"
                                                  required="true" requiredMessage="E-Mail é Obrigatório!"/>
@@ -162,7 +162,7 @@
                                 <p:panelGrid columns="1" columnClasses="ui-grid-col-12"
                                              layout="grid" styleClass="ui-panelgrid-blank">
                                     <p:outputLabel for="obs" value="Observação"/>
-                                    <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
+                                    <p:inputTextarea rows="7" cols="40" counter="obs" maxlength="300"
                                                      counterTemplate="{0} Caracteres Restante."
                                                      autoResize="true"
                                                      addLine="true"
@@ -175,7 +175,7 @@
                                                  update=":sms :formCadForn:tabCadFornecedor :frmDialogCadForn"/>
                             </p:panel>
                         </p:tab>
-                    </p:wizard>
+                    </p:tabView>
                 </h:form>
             </p:dialog>
         </div>

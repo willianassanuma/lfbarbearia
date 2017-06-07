@@ -88,7 +88,7 @@
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
                       draggable="false" showEffect="clip" hideEffect="clip" position="center" style="max-width: 650px">
                 <h:form id="frmDialogCadCliente">
-                    <p:wizard backLabel="Voltar" nextLabel="Próximo" widgetVar="wiz">
+                    <p:tabView widgetVar="wiz">
                         <!--Dados de Identificação-->
                         <p:tab id="identificacao" title="Identificação">
                             <p:panel header="Dados de Identificação">
@@ -129,7 +129,7 @@
                                     <p:inputMask id="foneCel" value="#{clienteController.objeto.telefoneCelular}" mask="(99)99999-9999"
                                                  required="true" requiredMessage="Telefone celular é obrigatório!"/>
                                     <p:outputLabel for="foneCom" value="Telefone Comercial"/>
-                                    <p:inputMask id="foneCom" value="#{clienteController.objeto.telefoneComercial}" mask="(99)99999-9999"/>
+                                    <p:inputMask id="foneCom" value="#{clienteController.objeto.telefoneComercial}" mask="(99)9999-9999"/>
                                     <p:outputLabel for="email" value="E-mail"/>
                                     <p:inputText id="email" maxlength="255" value="#{clienteController.objeto.email}"
                                                  required="true" requiredMessage="E-Mail é Obrigatório!"/>
@@ -192,7 +192,7 @@
                                                  update=":sms :formCadCliente:tabCadCliente :frmDialogCadCliente"/>
                             </p:panel>
                         </p:tab>
-                    </p:wizard>
+                    </p:tabView>
                 </h:form>
             </p:dialog>
         </div>
