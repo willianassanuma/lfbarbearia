@@ -4,10 +4,10 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                template="./layout.xhtml"
+                template="/WEB-INF/template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="conteudo">
+    <ui:define name="content">
         <p:growl id="sms" autoUpdate="true"/>
         <div class="ui-fluid">
             <!--Dialogo do Schedule-->
@@ -17,7 +17,7 @@
                                   style="max-width: 700px; max-height: 650px;">-->
             <h:form>
                 <p:scrollPanel mode="native" style="height:550px">
-                    <p:panel header="Relação - Cidades">
+                    <p:panel header="Relação - Cidades" style="height: max-content">
                         <!--Whidt = 592px / heigth 568px-->
                         <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
                                     widgetVar="schd" locale="pt" view="agendaWeek" allDaySlot="false"

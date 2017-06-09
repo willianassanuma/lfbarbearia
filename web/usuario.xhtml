@@ -5,9 +5,9 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://java.sun.com/jsf/core"
-                template="./layout.xhtml">
+                template="/WEB-INF/template.xhtml">
 
-    <ui:define name="conteudo">
+    <ui:define name="content">
         <p:growl id="sms" autoUpdate="true"/>
 
         <div class="ui-fluid">
@@ -87,7 +87,7 @@
                             <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="perfAcesso" value="Perfil de Acesso"/>
-                        <p:selectOneMenu id="perfAcesso" required="true"
+                        <p:selectOneMenu id="perfAcesso" required="true" 
                                          value="#{usuarioController.objeto.idPerfilAcesso}" filter="true"
                                          requiredMessage="Selecione Perfil de acesso!" converter="classeConverter">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>

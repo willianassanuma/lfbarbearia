@@ -11,7 +11,6 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
-            <meta name="theme-color" content="#{guestPreferences.themeColors[guestPreferences.theme]}" />
         </f:facet>
         <title>PrimeFaces Ultima</title>
         <h:outputScript name="js/nanoscroller.js" library="ultima-layout" />
@@ -21,13 +20,13 @@
         <ui:insert name="head"/>
     </h:head>
 
-    <h:body styleClass="main-body #{guestPreferences.compact ? 'layout-compact' : null}">
+    <h:body styleClass="main-body layout-compact">
         
-        <div class="layout-wrapper #{guestPreferences.menuLayout}">
+        <div class="layout-wrapper menu-layout-overlay">
             <ui:include src="./topbar.xhtml" />
             <ui:include src="./menu.xhtml" />
             
-            <div class="layout-main">
+            <div class="layout-main ">
                 <ui:insert name="content"/>
                 
                 <ui:include src="./footer.xhtml" />
