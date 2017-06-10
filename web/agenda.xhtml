@@ -8,31 +8,25 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
+        
         <p:growl id="sms" autoUpdate="true"/>
-        <div class="ui-fluid">
-            <!--Dialogo do Schedule-->
-            <!--            <p:dialog header="Agenda" widgetVar="dlgSchedule" modal="true" appendTo="@(body)" responsive="true"
-                                  closeOnEscape="true" closable="true" resizable="false" visible="true"
-                                  draggable="true" showEffect="clip" hideEffect="clip" position="initial"
-                                  style="max-width: 700px; max-height: 650px;">-->
+        <div class="card card-w-title">
+            <h1>Agenda</h1>
             <h:form>
-                <p:scrollPanel mode="native" style="height:550px">
-                    <p:panel header="Relação - Cidades" style="height: max-content">
-                        <!--Whidt = 592px / heigth 568px-->
-                        <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
-                                    widgetVar="schd" locale="pt" view="agendaWeek" allDaySlot="false"
-                                    ignoreTimezone="true">
-                            <p:ajax event="dateSelect" oncomplete="PF('dlg').show();" resetValues="true" />
-                        </p:schedule>
-                    </p:panel>
-                </p:scrollPanel>
-            </h:form>   
-            <!--            </p:dialog>-->
+                <p:panel style="height: max-content">
+                    <!--Whidt = 592px / heigth 568px-->
+                    <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
+                                widgetVar="schd" locale="pt" view="agendaWeek" allDaySlot="false"
+                                ignoreTimezone="true">
+                        <p:ajax event="dateSelect" oncomplete="PF('dlg').show();" resetValues="true" />
+                    </p:schedule>
+                </p:panel>
+            </h:form>
 
             <!--Dialogo do formulário-->
             <p:dialog header="Incluir Horário" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="clip" hideEffect="clip" position="center"> 
+                      draggable="false" showEffect="clip" hideEffect="clip"> 
                 <h:form>
                     <p:panelGrid id="pngCadCid" columns="2" columnClasses="ui-grid-col-4, ui-grid-col-8"
                                  layout="grid" styleClass="ui-panelgrid-blank">
