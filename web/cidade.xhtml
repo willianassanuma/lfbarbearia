@@ -7,15 +7,25 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="/WEB-INF/template.xhtml">
 
+    <ui:define name="title">Cadastro de cidade</ui:define>
+
     <ui:define name="content">
-        <p:growl id="sms" autoUpdate="true"/>
-        <div class="ui-fluid">
+        <p:growl id="sms" autoUpdate="true" life="1000"/>
+        <div class="ui-g ui-fluid">
             <h:form id="formCadCidade">
-                <p:scrollPanel mode="native" style="height:450px">
-                    <p:panel header="Relação - Cidades">
-                        <p:dataTable id="tabCadCidade" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="cidade"
-                                     value="#{cidadeController.objetoDao.all}" rows="5" rowHover="true">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Relação de Cidades</h1>
+                        <p:dataTable id="tabCadCidade"
+                                     emptyMessage="Nenhum registro encontrado!"
+                                     paginator="true" 
+                                     reflow="true"
+                                     paginatorPosition="bottom"
+                                     var="cidade"
+                                     rowHover="true"
+                                     value="#{cidadeController.objetoDao.all}"
+                                     rows="5">
+
                             <p:column headerText="ID" sortBy="#{cidade.id}" filterBy="#{cidade.id}" style="width: 80px">
                                 <h:outputText value="#{cidade.id}"/>
                             </p:column>
@@ -26,38 +36,43 @@
                                 <h:outputText value="#{cidade.idEstado.sigla} - #{cidade.idEstado.descricao}"/>
                             </p:column>
                             <!--Botão de edição-->
-                            <p:column style="width: 45px">
-                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
+                            <p:column style="width: 50px">
+                                <p:commandButton title="Editar"
+                                                 icon="fa fa-edit"
+                                                 resetValues="true"
                                                  update=":formCadCidade:tabCadCidade :frmDialogCadCid"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{cidade}" target="#{cidadeController.objeto}"/>
                                 </p:commandButton>
                             </p:column>
-
+                            <!--Botão Novo-->
+                            <f:facet name="footer">
+                                <p:commandButton value="Novo"
+                                                 icon="fa fa-plus-circle" 
+                                                 oncomplete="PF('dlg').show();"
+                                                 resetValues="true"
+                                                 actionListener="#{cidadeController.objetoLimpo()}"
+                                                 style="max-width: 250px"
+                                                 styleClass="secondary flat"
+                                                 update=":frmDialogCadCid :frmDialogCadCid" />
+                            </f:facet>
                         </p:dataTable>
-                        <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
-                                             actionListener="#{cidadeController.objetoLimpo()}" style="max-width: 180px"
-                                             update=":frmDialogCadCid:pngCadCid :frmDialogCadCid:pngCadCid" />
-                        </f:facet>
-                    </p:panel>
-                </p:scrollPanel>
-            
+                    </div>
+                </div>
             </h:form>
             <!--Dialogo de cadastro-->
-            <p:dialog header="Cadastro - Cidades" widgetVar="dlg" modal="true" appendTo="@(body)"
+            <p:dialog header="Cadastro de Cidades" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="clip" hideEffect="clip" position="center">
+                      draggable="false" showEffect="clip" hideEffect="clip">
                 <h:form id="frmDialogCadCid">
-                    
-                    <!--Grid de formulario-->
-                    <p:panelGrid id="pngCadCid" columns="2" columnClasses="ui-grid-col-3,ui-grid-col-9"
-                                 layout="grid" styleClass="ui-panelgrid-blank">
-                        <p:outputLabel for="cid" value="Cidade"/>
-                        <p:inputText id="cid" maxlength="50" value="#{cidadeController.objeto.cidade}"
-                                     required="true" requiredMessage="Cidade é obrigatória!"/>
-
-                       
+                    <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText id="cid" maxlength="50" value="#{cidadeController.objeto.cidade}"
+                                         required="true" requiredMessage="Cidade é obrigatória!"/>
+                            <p:outputLabel for="cid" value="Cidade"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
                         <p:outputLabel for="estado" value="Estado"/>
                         <p:selectOneMenu id="estado" required="true"
                                          requiredMessage="Estado é necessario!"
@@ -68,15 +83,12 @@
                                            itemValue="#{estado}" itemLabel="#{estado.sigla} - #{estado.descricao}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    
                     <!--Botão de salvar-->
                     <center>
-                        <p:panelGrid columns="1" columnClasses="ui-grid-col2"
-                                     layout="grid" styleClass="ui-panelgrid-blank">
-                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                            <p:commandButton value="Salvar"
+                                             icon="fa fa-save"
                                              actionListener="#{cidadeController.salvarRegistro(event)}"
                                              update=":sms :formCadCidade:tabCadCidade :frmDialogCadCid"/>
-                        </p:panelGrid>
                     </center>
 
                 </h:form>
