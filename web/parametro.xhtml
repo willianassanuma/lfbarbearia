@@ -7,16 +7,25 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="./WEB-INF/template.xhtml">
 
+    <ui:define name="title">Ajuste de parâmetros</ui:define>
+
     <ui:define name="content">
 
-        <p:growl id="sms" autoUpdate="true"/>
-        <div class="ui-fluid">
+        <p:growl id="sms" autoUpdate="true" life="1000"/>
+        <div class="ui-g ui-fluid">
             <h:form id="formCadParam">
-                <p:scrollPanel mode="native" style="height:450px">
-                    <p:panel header="Parâmetros/Ajustes do Sistema">
-                        <p:dataTable id="tabCadParam" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="parametro"
-                                     value="#{parametroController.objetoDao.all}" rows="5" rowHover="true">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Ajuste de Parâmetro</h1>
+                        <p:dataTable id="tabCadParam"
+                                     emptyMessage="Nenhum registro encontrado!"
+                                     paginator="true" 
+                                     reflow="true"
+                                     paginatorPosition="bottom"
+                                     var="parametro"
+                                     rowHover="true"
+                                     value="#{parametroController.objetoDao.all}"
+                                     rows="5">
                             <p:column headerText="ID" style="width: 80px">
                                 <h:outputText value="#{parametro.id}"/>
                             </p:column>
@@ -33,57 +42,63 @@
                                     <f:convertDateTime pattern="HH:mm:ss"/>
                                 </h:outputText>
                             </p:column>
-                            <p:column style="width: 45px">
-                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
+                            <p:column style="width: 50px">
+                                <p:commandButton title="Editar"
+                                                 icon="fa fa-edit"
+                                                 resetValues="true"
                                                  update=":formCadParam:tabCadParam :frmDialogParam"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{parametro}" target="#{parametroController.objeto}"/>
                                 </p:commandButton>
                             </p:column>
-
+                            <f:facet name="footer">
+                                <p:commandButton value="Novo"
+                                                 icon="fa fa-plus-circle"
+                                                 oncomplete="PF('dlg').show();"
+                                                 resetValues="true"
+                                                 actionListener="#{parametroController.objetoLimpo()}"
+                                                 style="max-width: 250px"
+                                                 styleClass="secondary flat"
+                                                 update=":formCadParam:tabCadParam :frmDialogParam"/>
+                            </f:facet>
                         </p:dataTable>
-                        <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
-                                             actionListener="#{parametroController.objetoLimpo()}" style="max-width: 180px"
-                                             update=":formCadParam:tabCadParam :frmDialogParam"/>
-                        </f:facet>
-                    </p:panel>
-                </p:scrollPanel>
+                    </div>
+                </div>
             </h:form>
 
             <p:dialog header="Ajuste de parâmetros" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
                       draggable="false" showEffect="clip" hideEffect="clip" position="center">
                 <h:form id="frmDialogParam">
-                    <!--Grid de formulario-->
-                    <p:panelGrid id="pngCadParam" columns="2" columnClasses="ui-grid-col-7,ui-grid-col-5"
-                                 layout="grid" styleClass="ui-panelgrid-blank">
-
-                        <p:outputLabel for="timeAg" value="Tempo de Ger. Agenda"/>
-                        <p:inputMask id="timeAg" mask="99:99:99" required="true"
-                                     requiredMessage="Tempo de Ger. é Obrigatório!"
-                                     value="#{parametroController.objeto.tempoGerAgeda}">
-                            <f:convertDateTime pattern="HH:mm:ss"/>
-                        </p:inputMask>
-                        <p:outputLabel for="comPad" value="Comissão Padrão"/>
-                        <p:inputText id="comPad" maxlength="3" required="true"
-                                     requiredMessage="Comissão é Obrigatório!"
-                                     value="#{parametroController.objeto.comissaoPadrao}"/>
-                        <p:outputLabel for="fecCaixa" value="Hora Base Fechamento de caixa"/>
-                        <p:inputMask id="fecCaixa" mask="99:99:99" required="true"
-                                     requiredMessage="Hora Base é Obrigatório!"
-                                     value="#{parametroController.objeto.harioFechamentoCaixa}">
-                            <f:convertDateTime pattern="HH:mm:ss"/>
-                        </p:inputMask>
+                    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputMask id="timeAg" mask="99:99:99" required="true"
+                                         requiredMessage="Tempo de Ger. é Obrigatório!"
+                                         value="#{parametroController.objeto.tempoGerAgeda}">
+                                <f:convertDateTime pattern="HH:mm:ss"/>
+                            </p:inputMask>
+                            <p:outputLabel for="timeAg" value="Tempo de Ger. Agenda"/>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText id="comPad" maxlength="3" required="true"
+                                         requiredMessage="Comissão é Obrigatório!"
+                                         value="#{parametroController.objeto.comissaoPadrao}"/>
+                            <p:outputLabel for="comPad" value="Comissão Padrão"/>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputMask id="fecCaixa" mask="99:99:99" required="true"
+                                         requiredMessage="Hora Base é Obrigatório!"
+                                         value="#{parametroController.objeto.harioFechamentoCaixa}">
+                                <f:convertDateTime pattern="HH:mm:ss"/>
+                            </p:inputMask>
+                            <p:outputLabel for="fecCaixa" value="Hora Base Fech. do CX"/>
+                        </h:panelGroup>
                     </p:panelGrid>
-                    <!--Botão de salvar-->
                     <center>
-                        <p:panelGrid columns="1" columnClasses="ui-grid-col2"
-                                     layout="grid" styleClass="ui-panelgrid-blank">
-                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
-                                             actionListener="#{parametroController.salvarRegistro(event)}"
-                                             update=":sms :formCadParam:tabCadParam :frmDialogParam"/>
-                        </p:panelGrid>
+                        <p:commandButton value="Salvar"
+                                         icon="fa fa-save"
+                                         actionListener="#{parametroController.salvarRegistro(event)}"
+                                         update=":sms :formCadParam:tabCadParam :frmDialogParam"/>
                     </center>
                 </h:form>
             </p:dialog>

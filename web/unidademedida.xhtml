@@ -7,15 +7,26 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="./WEB-INF/template.xhtml">
 
+    <ui:define name="title">Cadastro de unidade de medida</ui:define>
+
     <ui:define name="content">
-        <p:growl id="sms" autoUpdate="true"/>
-        <div class="ui-fluid">
+
+        <p:growl id="sms" autoUpdate="true" life="1000"/>
+
+        <div class="ui-g ui-fluid">
             <h:form id="formCadUnMedida">
-                <p:scrollPanel mode="native" style="height:450px">
-                    <p:panel header="Relação - Unidade de Medida">
-                        <p:dataTable id="tabCadUnMedida" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="unmedida" rowHover="true"
-                                     value="#{unidademedidaController.objetoDao.all}" rows="5">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Relação de unidade de medida</h1>
+                        <p:dataTable id="tabCadUnMedida"
+                                     emptyMessage="Nenhum registro encontrado!"
+                                     paginator="true" 
+                                     reflow="true"
+                                     paginatorPosition="bottom"
+                                     var="unmedida"
+                                     rowHover="true"
+                                     value="#{unidademedidaController.objetoDao.all}"
+                                     rows="5">
                             <p:column headerText="ID" sortBy="#{unmedida.id}" filterBy="#{unmedida.id}" style="width: 80px">
                                 <h:outputText value="#{unmedida.id}"/>
                             </p:column>
@@ -25,44 +36,53 @@
                             <p:column headerText="Descrição" filterBy="#{unmedida.descricao}">
                                 <h:outputText value="#{unmedida.descricao}"/>
                             </p:column>
-                            <p:column style="width: 45px">
-                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o"
+                            <p:column style="width: 50px">
+                                <p:commandButton title="Editar"
+                                                 icon="fa fa-edit"
+                                                 resetValues="true"
                                                  update=":formCadUnMedida:tabCadUnMedida :frmDialogCadUnMed"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{unmedida}" target="#{unidademedidaController.objeto}"/>
                                 </p:commandButton>
                             </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton  value="Novo"
+                                                  icon="fa fa-plus-circle" 
+                                                  oncomplete="PF('dlg').show();"
+                                                  resetValues="true"
+                                                  actionListener="#{unidademedidaController.objetoLimpo()}"
+                                                  style="max-width: 250px"
+                                                  styleClass="secondary flat"
+                                                  update=":frmDialogCadUnMed :frmDialogCadUnMed"/>
+                            </f:facet>
                         </p:dataTable>
-                        <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
-                                             actionListener="#{unidademedidaController.objetoLimpo()}" style="max-width: 180px"
-                                             update=":frmDialogCadUnMed:pngCadUnMed :frmDialogCadUnMed:pngCadUnMed"/>
-                        </f:facet>
-                    </p:panel>
-                </p:scrollPanel>
+                    </div>
+                </div>
             </h:form>
 
             <!--Dialogo de cadastro-->
-            <p:dialog header="Cadastro - Unidade de Medida" widgetVar="dlg" modal="true" appendTo="@(body)"
+            <p:dialog header="Cadastro - Un. de Medida" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="clip" hideEffect="clip" position="center">
+                      draggable="false" showEffect="clip" hideEffect="clip">
+
                 <h:form id="frmDialogCadUnMed">
-                    <p:panelGrid id="pngCadUnMed" columns="2" columnClasses="ui-grid-col-2,ui-grid-col-10"
-                                 layout="grid" styleClass="ui-panelgrid-blank">
-                        <p:outputLabel for="slg" value="Sigla"/>
-                        <p:inputText id="slg" maxlength="3" size="10" value="#{unidademedidaController.objeto.sigla}"
-                                     required="true" requiredMessage="Sigla é obrigatória!"/>
-                        <p:outputLabel for="desc" value="Descrição"/>
-                        <p:inputText id="desc" maxlength="255" size="50" value="#{unidademedidaController.objeto.descricao}"
-                                     required="true" requiredMessage="Descrição é obrigatória!"/>
+                    <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText id="slg" maxlength="3" value="#{unidademedidaController.objeto.sigla}"
+                                         required="true" requiredMessage="Sigla é obrigatória!"/>
+                            <p:outputLabel for="slg" value="Sigla"/>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText id="desc" maxlength="50" value="#{unidademedidaController.objeto.descricao}"
+                                         required="true" requiredMessage="Descrição é obrigatória!"/>
+                            <p:outputLabel for="desc" value="Descrição"/>
+                        </h:panelGroup>
                     </p:panelGrid>
                     <center>
-                        <p:panelGrid columns="1" columnClasses="ui-grid-col3"
-                                     layout="grid" styleClass="ui-panelgrid-blank">
-                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                            <p:commandButton value="Salvar"
+                                             icon="fa fa-floppy-o"
                                              actionListener="#{unidademedidaController.salvarRegistro(event)}"
                                              update=":sms :formCadUnMedida:tabCadUnMedida :frmDialogCadUnMed"/>
-                        </p:panelGrid>
                     </center>
                 </h:form>
             </p:dialog>
