@@ -7,16 +7,25 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="./WEB-INF/template.xhtml">
 
-    <ui:define name="content">
-        <p:growl id="sms" autoUpdate="true"/>
+    <ui:define name="title">Cadastro de clientes</ui:define>
 
-        <div class="ui-fluid">
+    <ui:define name="content">
+        <p:growl id="sms" autoUpdate="true" life="1000"/>
+
+        <div class="ui-g ui-fluid">
             <h:form id="formCadCliente">
-                <p:scrollPanel mode="native" style="height:500px">
-                    <p:panel header="Relação - Clientes">
-                        <p:dataTable id="tabCadCliente" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="cliente"
-                                     value="#{clienteController.objetoDao.all}" rows="5" rowHover="true">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Relação de Clientes</h1>
+                        <p:dataTable id="tabCadCliente"
+                                     emptyMessage="Nenhum registro encontrado!"
+                                     paginator="true" 
+                                     reflow="true"
+                                     paginatorPosition="bottom"
+                                     var="cliente"
+                                     rowHover="true"
+                                     value="#{clienteController.objetoDao.all}"
+                                     rows="5">
                             <p:column style="width:50px">
                                 <p:rowToggler />
                             </p:column>
@@ -79,8 +88,8 @@
                                              actionListener="#{clienteController.objetoLimpo()}" style="max-width: 180px"
                                              update=":formCadCliente:tabCadCliente :frmDialogCadCliente"/>
                         </f:facet>
-                    </p:panel>
-                </p:scrollPanel>
+                    </div>
+                </div>
             </h:form>
 
             <!--Dialogo de cadastro-->
