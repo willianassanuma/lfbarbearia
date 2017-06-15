@@ -92,7 +92,7 @@
                         <p:outputLabel for="unMed" value="Unidade de Medida"/>
                         <p:selectOneMenu id="unMed" required="true" converter="classeConverter"
                                          value="#{insumoController.objeto.idUnidadeMedida}" filter="true"
-                                         requiredMessage="Selecione Unidade de Medida!">
+                                         requiredMessage="Selecione Unidade de Medida!" autoWidth="false">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
                             <f:selectItems value="#{unidademedidaController.objetoDao.all}" var="unMedida"
                                            itemValue="#{unMedida}" itemLabel="#{unMedida.sigla} - #{unMedida.descricao}"/>

@@ -11,121 +11,119 @@
 
 
     <ui:define name="content">
-        <h:form>
-            <p:growl id="sms" autoUpdate="true" life="1000"/>
-            <div class="ui-g ui-fluid">
-                <h:form id="formCadUsuario">
-                    <div class="ui-g-12">
-                        <div class="card card-w-title">
-                            <h1>Relação de Usuários</h1>
-                            <p:dataTable id="tabCadUsuario"
-                                         emptyMessage="Nenhum registro encontrado!"
-                                         paginator="true" 
-                                         reflow="true" 
-                                         paginatorPosition="bottom"
-                                         var="usuario"
-                                         rowHover="true"
-                                         value="#{usuarioController.objetoDao.all}"
-                                         rows="5">
-                                <p:column headerText="ID" sortBy="#{usuario.id}" filterBy="#{usuario.id}" style="width: 80px">
-                                    <h:outputText value="#{usuario.id}"/>
-                                </p:column>
-                                <p:column headerText="Nome" filterBy="#{usuario.nome}">
-                                    <h:outputText value="#{usuario.nome}"/>
-                                </p:column>
-                                <p:column headerText="Nome de Usuário" filterBy="#{usuario.nomeUsuario}">
-                                    <h:outputText value="#{usuario.nomeUsuario}"/>
-                                </p:column>
-                                <p:column headerText="Senha" filterBy="#{usuario.senha}">
-                                    <h:outputText value="#{usuario.senha}"/>
-                                </p:column>
-                                <p:column headerText="Perfil de Acesso" filterBy="#{usuario.idPerfilAcesso.descricao}">
-                                    <h:outputText value="#{usuario.idPerfilAcesso.descricao}"/>
-                                </p:column>
-                                <p:column headerText="Status" filterBy="#{usuario.status}">
-                                    <h:outputText value="#{usuario.status == true ? 'ATIVO' : 'INATIVO'}"/>
-                                </p:column>
-                                <!--Botão Editar-->
-                                <p:column style="width: 50px">
-                                    <p:commandButton title="Editar"
-                                                     icon="fa fa-edit"
-                                                     resetValues="true"
-                                                     update=":formCadUsuario:tabCadUsuario :frmDialogCadUsuario"
-                                                     oncomplete="PF('dlg').show();" >
-                                        <f:setPropertyActionListener value="#{usuario}" target="#{usuarioController.objeto}" />
-                                    </p:commandButton>
-                                </p:column>
-                                <!--Botão Novo-->
-                                <f:facet name="footer">
-                                    <p:commandButton value="Novo"
-                                                     icon="fa fa-plus-circle"
-                                                     oncomplete="PF('dlg').show();"
-                                                     resetValues="true"
-                                                     actionListener="#{usuarioController.objetoLimpo()}"
-                                                     style="max-width: 250px"
-                                                     styleClass="secondary flat"
-                                                     update=":formCadUsuario:tabCadUsuario :frmDialogCadUsuario"/>
-                                </f:facet>
-                            </p:dataTable>
-                        </div>
+        <p:growl id="sms" autoUpdate="true" life="1000"/>
+        <div class="ui-g ui-fluid">
+            <h:form id="formCadUsuario">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Relação de Usuários</h1>
+                        <p:dataTable id="tabCadUsuario"
+                                     emptyMessage="Nenhum registro encontrado!"
+                                     paginator="true" 
+                                     reflow="true" 
+                                     paginatorPosition="bottom"
+                                     var="usuario"
+                                     rowHover="true"
+                                     value="#{usuarioController.objetoDao.all}"
+                                     rows="5">
+                            <p:column headerText="ID" sortBy="#{usuario.id}" filterBy="#{usuario.id}" style="width: 80px">
+                                <h:outputText value="#{usuario.id}"/>
+                            </p:column>
+                            <p:column headerText="Nome" filterBy="#{usuario.nome}">
+                                <h:outputText value="#{usuario.nome}"/>
+                            </p:column>
+                            <p:column headerText="Nome de Usuário" filterBy="#{usuario.nomeUsuario}">
+                                <h:outputText value="#{usuario.nomeUsuario}"/>
+                            </p:column>
+                            <p:column headerText="Senha" filterBy="#{usuario.senha}">
+                                <h:outputText value="#{usuario.senha}"/>
+                            </p:column>
+                            <p:column headerText="Perfil de Acesso" filterBy="#{usuario.idPerfilAcesso.descricao}">
+                                <h:outputText value="#{usuario.idPerfilAcesso.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Status" filterBy="#{usuario.status}">
+                                <h:outputText value="#{usuario.status == true ? 'ATIVO' : 'INATIVO'}"/>
+                            </p:column>
+                            <!--Botão Editar-->
+                            <p:column style="width: 50px">
+                                <p:commandButton title="Editar"
+                                                 icon="fa fa-edit"
+                                                 resetValues="true"
+                                                 update=":formCadUsuario:tabCadUsuario :frmDialogCadUsuario"
+                                                 oncomplete="PF('dlg').show();" >
+                                    <f:setPropertyActionListener value="#{usuario}" target="#{usuarioController.objeto}" />
+                                </p:commandButton>
+                            </p:column>
+                            <!--Botão Novo-->
+                            <f:facet name="footer">
+                                <p:commandButton value="Novo"
+                                                 icon="fa fa-plus-circle"
+                                                 oncomplete="PF('dlg').show();"
+                                                 resetValues="true"
+                                                 actionListener="#{usuarioController.objetoLimpo()}"
+                                                 style="max-width: 250px"
+                                                 styleClass="secondary flat"
+                                                 update=":formCadUsuario:tabCadUsuario :frmDialogCadUsuario"/>
+                            </f:facet>
+                        </p:dataTable>
                     </div>
-                </h:form>
-                <!--Dialogo de cadastro-->
-                <p:dialog header="Cadastro - Usuário" widgetVar="dlg" modal="true" appendTo="@(body)"
-                          responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                          draggable="false" showEffect="clip" hideEffect="clip">
+                </div>
+            </h:form>
+            <!--Dialogo de cadastro-->
+            <p:dialog header="Cadastro - Usuário" widgetVar="dlg" modal="true" appendTo="@(body)"
+                      responsive="true" closeOnEscape="true" closable="true" resizable="false"
+                      draggable="false" showEffect="clip" hideEffect="clip">
 
-                    <h:form id="frmDialogCadUsuario">
-                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
-                            <h:panelGroup styleClass="md-inputfield">
-                                <p:inputText id="nome" maxlength="255" value="#{usuarioController.objeto.nome}"
-                                             required="true" requiredMessage="Nome é obrigatório!"/>
-                                <p:outputLabel for="nome" value="Nome"/>
-                            </h:panelGroup>
-                            <h:panelGroup styleClass="md-inputfield">
-                                <p:inputText id="nomeUsuario" maxlength="255" value="#{usuarioController.objeto.nomeUsuario}"
-                                             required="true" requiredMessage="Nome de Usuário é obrigatório!"/>
-                                <p:outputLabel for="nomeUsuario" value="Nome de usuário"/>
-                            </h:panelGroup>
-                            <h:panelGroup styleClass="md-inputfield">
-                                <p:password id="pass" maxlength="255" required="true"
-                                            requiredMessage="Insira uma senha!"/>
-                                <p:outputLabel for="pass" value="Senha"/>
-                            </h:panelGroup>
-                            <h:panelGroup styleClass="md-inputfield">
-                                <p:password id="Vpass" maxlength="255" value="#{usuarioController.objeto.senha}"
-                                            rendered="true" requiredMessage="Senha de confirmação é obrigatória"/>
-                                <p:outputLabel for="Vpass" value="Confirmação de Senha"/>
-                            </h:panelGroup>
-                        </p:panelGrid>
-                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
-                            <p:outputLabel for="status" value="Status"/>
-                            <p:selectOneMenu id="status" required="true"
-                                             value="#{usuarioController.objeto.status}"
-                                             requiredMessage="Status é obrigatório!" filter="true">
-                                <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
-                                <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
-                                <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
-                            </p:selectOneMenu>
-                            <p:outputLabel for="perfAcesso" value="Perfil de Acesso"/>
-                            <p:selectOneMenu id="perfAcesso" required="true" 
-                                             value="#{usuarioController.objeto.idPerfilAcesso}" filter="true"
-                                             requiredMessage="Selecione Perfil de acesso!" converter="classeConverter">
-                                <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
-                                <f:selectItems value="#{perfilAcessoController.objetoDao.all}" var="perfAcesso"
-                                               itemValue="#{perfAcesso}" itemLabel="#{perfAcesso.descricao}"/>
-                            </p:selectOneMenu>                        
-                        </p:panelGrid>
-                        <center>
-                            <p:commandButton value="Salvar"
-                                             icon="fa fa-save"
-                                             actionListener="#{usuarioController.salvarRegistro(event)}"
-                                             update=":sms :formCadUsuario:tabCadUsuario :frmDialogCadUsuario"/>
-                        </center>
-                    </h:form>
-                </p:dialog>
-            </div>
-        </h:form>
+                <h:form id="frmDialogCadUsuario">
+                    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText id="nome" maxlength="255" value="#{usuarioController.objeto.nome}"
+                                         required="true" requiredMessage="Nome é obrigatório!"/>
+                            <p:outputLabel for="nome" value="Nome"/>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText id="nomeUsuario" maxlength="255" value="#{usuarioController.objeto.nomeUsuario}"
+                                         required="true" requiredMessage="Nome de Usuário é obrigatório!"/>
+                            <p:outputLabel for="nomeUsuario" value="Nome de usuário"/>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:password id="pass" maxlength="255" required="true"
+                                        requiredMessage="Insira uma senha!"/>
+                            <p:outputLabel for="pass" value="Senha"/>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:password id="Vpass" maxlength="255" value="#{usuarioController.objeto.senha}"
+                                        rendered="true" requiredMessage="Senha de confirmação é obrigatória"/>
+                            <p:outputLabel for="Vpass" value="Confirmação de Senha"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                        <p:outputLabel for="status" value="Status"/>
+                        <p:selectOneMenu id="status" required="true"
+                                         value="#{usuarioController.objeto.status}"
+                                         requiredMessage="Status é obrigatório!" filter="true">
+                            <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                            <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
+                            <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel for="perfAcesso" value="Perfil de Acesso"/>
+                        <p:selectOneMenu id="perfAcesso" required="true" 
+                                         value="#{usuarioController.objeto.idPerfilAcesso}" filter="true"
+                                         requiredMessage="Selecione Perfil de acesso!" converter="classeConverter">
+                            <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                            <f:selectItems value="#{perfilAcessoController.objetoDao.all}" var="perfAcesso"
+                                           itemValue="#{perfAcesso}" itemLabel="#{perfAcesso.descricao}"/>
+                        </p:selectOneMenu>                        
+                    </p:panelGrid>
+                    <center>
+                        <p:commandButton value="Salvar"
+                                         icon="fa fa-save"
+                                         actionListener="#{usuarioController.salvarRegistro(event)}"
+                                         update=":sms :formCadUsuario:tabCadUsuario :frmDialogCadUsuario"/>
+                    </center>
+                </h:form>
+            </p:dialog>
+        </div>
     </ui:define>
 
 </ui:composition>

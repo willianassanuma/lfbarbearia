@@ -26,185 +26,180 @@
                                      rowHover="true"
                                      value="#{clienteController.objetoDao.all}"
                                      rows="5">
-                            <p:column style="width:50px">
-                                <p:rowToggler />
-                            </p:column>
-                            <p:column headerText="ID" sortBy="#{cliente.id}" filterBy="#{cliente.id}" style="width: 80px">
+                            <p:column headerText="ID" sortBy="#{cliente.id}" filterBy="#{cliente.id}">
                                 <h:outputText value="#{cliente.id}"/>
                             </p:column>
-                            <p:column headerText="Nome" filterBy="#{cliente.nomeCLiente}" style="width: 600px">
+                            <p:column headerText="Nome" filterBy="#{cliente.nomeCLiente}">
                                 <h:outputText value="#{cliente.nomeCLiente}"/>
                             </p:column>
+                            <p:column headerText="Apelido" filterBy="#{cliente.apelido}">
+                                <h:outputText value="#{cliente.apelido}"/>
+                            </p:column>
+                            <p:column headerText="Frequencia de comp." filterBy="#{cliente.frequencia}">
+                                <h:outputText value="#{cliente.frequencia}"/>
+                            </p:column>
+                            <p:column headerText="Data de Nascimento" filterBy="#{cliente.dataNascimento}">
+                                <h:outputText value="#{cliente.dataNascimento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" locale="br"/>
+                                </h:outputText>
+                            </p:column>
                             <!--Botão Editar-->
-                            <p:column style="width: 45px">
-                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o" resetValues="true"
+                            <p:column style="width: 50px">
+                                <p:commandButton title="Editar"
+                                                 icon="fa fa-edit"
+                                                 resetValues="true"
                                                  update=":formCadCliente:tabCadCliente :frmDialogCadCliente"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{cliente}" target="#{clienteController.objeto}"/>
                                 </p:commandButton>
                             </p:column>
-                            <!--Tabela com expansão de dados-->
-                            <p:rowExpansion id="expDados">
-                                <p:panelGrid  columns="4" columnClasses="ui-grid-col-3,ui-grid-col-6, ui-grid-col-3,ui-grid-col-6"
-                                              layout="grid" styleClass="ui-panelgrid-blank">
-                                    <h:outputText value="Frequencia de comp.:"/>
-                                    <h:outputText value="#{cliente.frequencia}"/>
-                                    <h:outputText value="Apelido:" />
-                                    <h:outputText value="#{cliente.apelido}" />
-                                    <h:outputText value="CPF" />
-                                    <h:outputText value="#{cliente.cpf}" />
-                                    <h:outputText value="Telefone Celular:" />
-                                    <h:outputText value="#{cliente.telefoneCelular}" />
-                                    <h:outputText value="Tefone Comercial:" />
-                                    <h:outputText value="#{cliente.telefoneComercial}" />
-                                    <h:outputText value="Data de Nascimento:" />
-                                    <h:outputText value="#{cliente.dataNascimento}">
-                                        <f:convertDateTime pattern="dd/MM/yyyy" locale="br"/>
-                                    </h:outputText>
-                                    <h:outputText value="Sexo:" />
-                                    <h:outputText value="#{cliente.sexo == 'M' ? 'MASCULINO' : 'FEMININO'}"/>
-                                    <h:outputText value="Endereço:" />
-                                    <h:outputText value="#{cliente.endereco}" />
-                                    <h:outputText value="Numero:" />
-                                    <h:outputText value="#{cliente.numero}" />
-                                    <h:outputText value="bairro:" />
-                                    <h:outputText value="#{cliente.bairro}" />
-                                    <h:outputText value="Cidade:" />
-                                    <h:outputText value="#{cliente.idCidade.idEstado.sigla} - #{cliente.idCidade.cidade}" />
-                                    <h:outputText value="Complemento:" />
-                                    <h:outputText value="#{cliente.complemento}"/>
-                                    <h:outputText value="E-mail:" />
-                                    <h:outputText value="#{cliente.email}" />
-                                    <h:outputText value="Status:" />
-                                    <h:outputText value="#{cliente.status == true ? 'ATIVO' : 'INATIVO'}"/>
-                                    <h:outputText value="Obs:" />
-                                    <h:outputText value="#{cliente.observacao}" />
-
-                                </p:panelGrid>
-                            </p:rowExpansion>
+                            <f:facet name="footer">
+                                <p:commandButton value="Novo"
+                                                 icon="fa fa-plus-circle" 
+                                                 oncomplete="PF('dlg').show();"
+                                                 resetValues="true"
+                                                 actionListener="#{clienteController.objetoLimpo()}"
+                                                 style="max-width: 250px"
+                                                 styleClass="secondary flat"
+                                                 update=":formCadCliente:tabCadCliente :frmDialogCadCliente"/>
+                            </f:facet>
                         </p:dataTable>
-                        <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
-                                             actionListener="#{clienteController.objetoLimpo()}" style="max-width: 180px"
-                                             update=":formCadCliente:tabCadCliente :frmDialogCadCliente"/>
-                        </f:facet>
                     </div>
                 </div>
             </h:form>
 
             <!--Dialogo de cadastro-->
-            <p:dialog header="Cadastro - Clientes" widgetVar="dlg" modal="true" appendTo="@(body)"
+            <p:dialog header="Cadastro de Clientes" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="clip" hideEffect="clip" position="center" style="max-width: 650px">
+                      draggable="false" showEffect="clip" hideEffect="clip">
                 <h:form id="frmDialogCadCliente">
                     <p:tabView widgetVar="wiz">
                         <!--Dados de Identificação-->
                         <p:tab id="identificacao" title="Identificação">
-                            <p:panel header="Dados de Identificação">
-                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
-                                             layout="grid" styleClass="ui-panelgrid-blank">
-
-                                    <p:outputLabel for="ape" value="Apelido: "/>
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="ape" maxlength="255" value="#{clienteController.objeto.apelido}" />
-                                    <p:outputLabel for="nome" value="Nome"/>
+                                    <p:outputLabel for="ape" value="Apelido: "/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="nome" maxlength="255" value="#{clienteController.objeto.nomeCLiente}"
                                                  required="true" requiredMessage="Nome é obrigatório!"/>
-                                    <p:outputLabel for="cpf" value="CPF"/>
+                                    <p:outputLabel for="nome" value="Nome"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputMask id="cpf" value="#{clienteController.objeto.cpf}" mask="999.999.999-99"
                                                  required="true" requiredMessage="CPF é obrigatório"/>
-
-                                    <p:outputLabel for="nasc" value="Data de Nascimento"/>
+                                    <p:outputLabel for="cpf" value="CPF"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:calendar id="nasc" value="#{clienteController.objeto.dataNascimento}"
-                                                locale="pt"  pattern="dd/MM/yy" mask="99/99/99" placeholder="__/__/__" 
+                                                locale="pt"  pattern="dd/MM/yy" mask="99/99/99"
                                                 required="true" requiredMessage="Data de nascimento é obrigatório"/>
-                                    <p:outputLabel for="sexo" value="Sexo"/>
-                                    <p:selectOneMenu id="sexo" required="true"
-                                                     value="#{clienteController.objeto.sexo}" filter="true"
-                                                     requiredMessage="Sexo é obrigatório!" >
-                                        <f:selectItem  itemLabel="Selecione ... " noSelectionOption="false"/>
-                                        <f:selectItem  itemLabel="MASCULINO" itemValue="M"/>
-                                        <f:selectItem  itemLabel="FEMININO" itemValue="F"/>
-                                    </p:selectOneMenu>
-                                </p:panelGrid>
-                            </p:panel>
+                                    <p:outputLabel for="nasc" value="Data de Nascimento"/>
+                                </h:panelGroup>
+                            </p:panelGrid>
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <p:outputLabel for="sexo" value="Sexo"/>
+                                <p:selectOneMenu id="sexo" required="true"
+                                                 value="#{clienteController.objeto.sexo}" filter="true"
+                                                 requiredMessage="Sexo é obrigatório!" >
+                                    <f:selectItem  itemLabel="Selecione ... " noSelectionOption="false"/>
+                                    <f:selectItem  itemLabel="MASCULINO" itemValue="M"/>
+                                    <f:selectItem  itemLabel="FEMININO" itemValue="F"/>
+                                </p:selectOneMenu>
+                            </p:panelGrid>
                         </p:tab>
 
                         <!--Dados de Contato-->
                         <p:tab id="contato" title="Contato">
-                            <p:panel header="Dados para contato">
-                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
-                                             layout="grid" styleClass="ui-panelgrid-blank">
-                                    <p:outputLabel for="foneCel" value="Telefone Celular"/>
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputMask id="foneCel" value="#{clienteController.objeto.telefoneCelular}" mask="(99)99999-9999"
                                                  required="true" requiredMessage="Telefone celular é obrigatório!"/>
-                                    <p:outputLabel for="foneCom" value="Telefone Comercial"/>
+                                    <p:outputLabel for="foneCel" value="Telefone Celular"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputMask id="foneCom" value="#{clienteController.objeto.telefoneComercial}" mask="(99)9999-9999"/>
-                                    <p:outputLabel for="email" value="E-mail"/>
+                                    <p:outputLabel for="foneCom" value="Telefone Comercial"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="email" maxlength="255" value="#{clienteController.objeto.email}"
                                                  required="true" requiredMessage="E-Mail é Obrigatório!"/>
-                                </p:panelGrid>
-                            </p:panel>
+                                    <p:outputLabel for="email" value="E-mail"/>
+                                </h:panelGroup>
+                            </p:panelGrid>
+
                         </p:tab>
                         <!--Dados de Localização-->
                         <p:tab id="localizacao" title="Localização">
-                            <p:panel header="Dados de localizaçao">
-                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
-                                             layout="grid" styleClass="ui-panelgrid-blank">
-                                    <p:outputLabel for="end" value="Endereço"/>
+
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="end" maxlength="255" value="#{clienteController.objeto.endereco}"
                                                  required="true" requiredMessage="Endereço é Obrigatório!"/>
-                                    <p:outputLabel for="numero" value="Numero"/>
+                                    <p:outputLabel for="end" value="Endereço"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="numero" value="#{clienteController.objeto.numero}"
                                                  required="true" requiredMessage="Numero é Obrigatório!"/>
-                                    <p:outputLabel for="bairro" value="Bairro"/>
+                                    <p:outputLabel for="numero" value="Numero"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="bairro" value="#{clienteController.objeto.bairro}"
                                                  required="true" requiredMessage="Bairro é Obrigatório!"/>
-                                    <p:outputLabel for="cid" value="Cidade"/>
-                                    <p:selectOneMenu id="cid" required="true" converter="classeConverter"
-                                                     value="#{clienteController.objeto.idCidade}" filter="true"
-                                                     requiredMessage="Cidade é obrigatório!">
-                                        <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true" />
-                                        <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
-                                                       itemLabel="#{cidade.cidade}"  itemValue="#{cidade}"/>
-                                    </p:selectOneMenu>
-                                    <p:outputLabel for="comp" value="Complemento"/>
+                                    <p:outputLabel for="bairro" value="Bairro"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="comp" maxlength="50" value="#{clienteController.objeto.complemento}"/>
+                                    <p:outputLabel for="comp" value="Complemento"/>
+                                </h:panelGroup>
 
-                                    <p:outputLabel for="status" value="Status"/>
-                                    <p:selectOneMenu id="status" required="true"
-                                                     value="#{clienteController.objeto.status}"
-                                                     requiredMessage="Status é obrigatório!" filter="true">
-                                        <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
-                                        <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
-                                        <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
-                                    </p:selectOneMenu>
 
-                                </p:panelGrid>
-                            </p:panel>
+                            </p:panelGrid>
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <p:outputLabel for="cid" value="Cidade"/>
+                                <p:selectOneMenu id="cid" required="true" converter="classeConverter"
+                                                 value="#{clienteController.objeto.idCidade}" filter="true"
+                                                 requiredMessage="Cidade é obrigatório!">
+                                    <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true" />
+                                    <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
+                                                   itemLabel="#{cidade.cidade}"  itemValue="#{cidade}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel for="status" value="Status"/>
+                                <p:selectOneMenu id="status" required="true"
+                                                 value="#{clienteController.objeto.status}"
+                                                 requiredMessage="Status é obrigatório!" filter="true">
+                                    <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                                    <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
+                                    <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
+                                </p:selectOneMenu>
+                            </p:panelGrid>
                         </p:tab>
                         <!--Observação-->
                         <p:tab id="observacao" title="Observação">
-                            <p:panel header="Observação">
-                                <p:panelGrid columns="1" columnClasses="ui-grid-col-12"
-                                             layout="grid" styleClass="ui-panelgrid-blank">
-                                    <p:outputLabel for="obs" value="Observação"/>
-                                    <p:inputTextarea rows="7" cols="50" counter="obs" maxlength="300"
-                                                     counterTemplate="{0} Caracteres Restante."
-                                                     autoResize="true"
-                                                     addLine="true"
-                                                     value="#{clienteController.objeto.observacao}"/>
-                                    <h:outputText/>
-                                    <h:outputText id="obs"/>
-                                </p:panelGrid>
-                                <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <p:outputLabel for="obs" value="Observação"/>
+                                <p:inputTextarea counter="obs" maxlength="300" style="width: 100%"
+                                                 rows="3"
+                                                 counterTemplate="{0} Caracteres Restante."
+                                                 autoResize="true"
+                                                 addLine="true"
+                                                 value="#{clienteController.objeto.observacao}"/>
+                                <h:outputText/>
+                                <h:outputText id="obs"/>
+                            </p:panelGrid>
+                            <center>
+                                <p:commandButton value="Salvar"
+                                                 icon="fa fa-save"
                                                  actionListener="#{clienteController.salvarRegistro(event)}"
                                                  update=":sms :formCadCliente:tabCadCliente :frmDialogCadCliente"/>
-                            </p:panel>
+                            </center>
                         </p:tab>
+
                     </p:tabView>
                 </h:form>
             </p:dialog>
-        </div>
+        </div>  
     </ui:define>
 
 </ui:composition>
