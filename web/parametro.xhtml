@@ -80,9 +80,7 @@
                             <p:outputLabel for="timeAg" value="Tempo de Ger. Agenda"/>
                         </h:panelGroup>
                         <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText id="comPad" maxlength="3" required="true"
-                                         requiredMessage="Comissão é Obrigatório!"
-                                         value="#{parametroController.objeto.comissaoPadrao}"/>
+                            <p:spinner id="comPad" value="#{parametroController.objeto.comissaoPadrao}" maxlength="4" suffix="%" min="0" max="100"/>
                             <p:outputLabel for="comPad" value="Comissão Padrão"/>
                         </h:panelGroup>
                         <h:panelGroup styleClass="md-inputfield">

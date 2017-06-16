@@ -7,173 +7,176 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="./WEB-INF/template.xhtml">
 
+    <ui:define name="title">Cadastro de fornecedor</ui:define>
+
     <ui:define name="content">
-        <p:growl id="sms" autoUpdate="true"/>
-        
-        <div class="ui-fluid">
+        <p:growl id="sms" autoUpdate="true" life="1000"/>
+
+        <div class="ui-g ui-fluid">
+
             <h:form id="formCadForn">
-                <p:scrollPanel mode="native" style="height:500px">
-                    <p:panel header="Relação - Fornecedores">
-                        <p:dataTable id="tabCadFornecedor" emptyMessage="Nenhum registro encontrado!" paginator="true" 
-                                     reflow="true" paginatorPosition="bottom" var="fornecedor" rowHover="true"
-                                     value="#{fornecedorController.objetoDao.all}" rows="5">
-                            <p:column style="width:50px">
-                                <p:rowToggler />
-                            </p:column>
-                            <p:column headerText="ID" sortBy="#" filterBy="#" style="width: 80px">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Relação de fornecedores</h1>
+                        <p:dataTable id="tabCadFornecedor"
+                                     emptyMessage="Nenhum registro encontrado!"
+                                     paginator="true"
+                                     reflow="true"
+                                     paginatorPosition="bottom"
+                                     var="fornecedor"
+                                     rowHover="true"
+                                     value="#{fornecedorController.objetoDao.all}"
+                                     rows="5">
+                            <p:column headerText="ID" sortBy="#{fornecedor.id}" filterBy="#{fornecedor.id}">
                                 <h:outputText value="#{fornecedor.id}"/>
                             </p:column>
-                            <p:column headerText="Nome Fantasia" filterBy="#" style="width: 600px">
+                            <p:column headerText="Nome Fantasia" filterBy="#{fornecedor.nomeFantasia}">
                                 <h:outputText value="#{fornecedor.nomeFantasia}"/>
                             </p:column>
-
+                            <p:column headerText="Razão social" filterBy="#{fornecedor.razaoSocial}">
+                                <h:outputText value="#{fornecedor.razaoSocial}"/>
+                            </p:column>
+                            <p:column headerText="Telefone Celular" filterBy="#{fornecedor.telefoneCelular}">
+                                <h:outputText value="#{fornecedor.telefoneCelular}"/>
+                            </p:column>
+                            <p:column headerText="Tefone Comercial" filterBy="#{fornecedor.telefoneComercial}">
+                                <h:outputText value="#{fornecedor.telefoneComercial}"/>
+                            </p:column>
                             <!--Botão Editar-->
-                            <p:column style="width: 45px">
-                                <p:commandButton title="Editar" icon="fa fa-pencil-square-o" resetValues="true"
+                            <p:column style="width: 50px">
+                                <p:commandButton title="Editar"
+                                                 icon="fa fa-edit"
+                                                 resetValues="true"
                                                  update=":formCadForn:tabCadFornecedor :frmDialogCadForn"
                                                  oncomplete="PF('dlg').show();">
                                     <f:setPropertyActionListener value="#{fornecedor}" target="#{fornecedorController.objeto}"/>
                                 </p:commandButton>
                             </p:column>
-
-                            <!--Tabela com expansão de dados-->
-                            <p:rowExpansion id="expDados">
-                                <p:panelGrid  columns="4" columnClasses="ui-grid-col-3,ui-grid-col-6, ui-grid-col-3,ui-grid-col-6"
-                                              layout="grid" styleClass="ui-panelgrid-blank">
-                                    <h:outputText value="Razão social:"/>
-                                    <h:outputText value="#{fornecedor.razaoSocial}"/>
-                                    <h:outputText value="CNPJ:" />
-                                    <h:outputText value="#{fornecedor.cnpj}" />
-                                    <h:outputText value="Insc. Estadual" />
-                                    <h:outputText value="#{fornecedor.inscricaoEstadual}" />
-                                    <h:outputText value="Telefone Celular:" />
-                                    <h:outputText value="#{fornecedor.telefoneCelular}" />
-                                    <h:outputText value="Tefone Comercial:" />
-                                    <h:outputText value="#{fornecedor.telefoneComercial}" />
-                                    <h:outputText value="Endereço:" />
-                                    <h:outputText value="#{fornecedor.endereco}" />
-                                    <h:outputText value="Numero:" />
-                                    <h:outputText value="#{fornecedor.numero}" />
-                                    <h:outputText value="bairro:" />
-                                    <h:outputText value="#{fornecedor.bairro}" />
-                                    <h:outputText value="Cidade:" />
-                                    <h:outputText value="#{fornecedor.idCidade.cidade}" />
-                                    <h:outputText value="Complemento:" />
-                                    <h:outputText value="#{fornecedor.complemento}" />
-                                    <h:outputText value="E-mail:" />
-                                    <h:outputText value="#{fornecedor.email}" />
-                                    <h:outputText value="Status:" />
-                                    <h:outputText value="#{fornecedor.status == true ? 'ATIVO':'INATIVO'}" />
-                                    <h:outputText value="Obs:" />
-                                    <h:outputText value="#{fornecedor.observacao}" />
-
-                                </p:panelGrid>
-                            </p:rowExpansion>
+                            <f:facet name="footer">
+                                <p:commandButton value="Novo"
+                                                 icon="fa fa-plus-circle"
+                                                 oncomplete="PF('dlg').show();"
+                                                 resetValues="true"
+                                                 actionListener="#{fornecedorController.objetoLimpo()}"
+                                                 style="max-width: 250px"
+                                                 styleClass="secondary flat"
+                                                 update=":formCadForn:tabCadFornecedor :frmDialogCadForn"/>
+                            </f:facet>
                         </p:dataTable>
-                        <f:facet name="footer">
-                            <p:commandButton icon="fa fa-file" value="Novo" oncomplete="PF('dlg').show();" resetValues="true"
-                                             actionListener="#{fornecedorController.objetoLimpo()}" style="max-width: 180px"
-                                             update=":formCadForn:tabCadFornecedor :frmDialogCadForn"/>
-                        </f:facet>
-                    </p:panel>
-                </p:scrollPanel>
+                    </div>
+                </div>
             </h:form>
 
             <!--Dialogo de cadastro-->
             <p:dialog header="Cadastro - Fornecedor" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
-                      draggable="false" showEffect="clip" hideEffect="clip" position="center" style="max-width: 650px">
+                      draggable="false" showEffect="clip" hideEffect="clip">
                 <h:form id="frmDialogCadForn">
                     <p:tabView widgetVar="wiz">
                         <!--Dados de Identificação-->
                         <p:tab id="identificacao" title="Identificação">
-                            <p:panel header="Dados de Identificação">
-                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
-                                             layout="grid" styleClass="ui-panelgrid-blank">
-                                    <p:outputLabel for="nomeFant" value="Nome Fantasia"/>
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="nomeFant" maxlength="255" value="#{fornecedorController.objeto.nomeFantasia}"
                                                  required="true" requiredMessage="Nome fantasia é obrigatório!"/>
-                                    <p:outputLabel for="raSocial" value="Razão social"/>
+                                    <p:outputLabel for="nomeFant" value="Nome Fantasia"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="raSocial" maxlength="255" value="#{fornecedorController.objeto.razaoSocial}"
                                                  required="true" requiredMessage="Razão social é obrigatória!"/>
-                                    <p:outputLabel for="cnpj" value="CNPJ"/>
+                                    <p:outputLabel for="raSocial" value="Razão social"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputMask id="cnpj" value="#{fornecedorController.objeto.cnpj}" mask="99.999.999/9999-99"
                                                  required="true" requiredMessage="CNPJ é obrigatório"/>
-                                    <p:outputLabel for="inscEst" value="Inscrição estadual"/>
+                                    <p:outputLabel for="cnpj" value="CNPJ"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="inscEst" value="#{fornecedorController.objeto.inscricaoEstadual}"
                                                  required="true" requiredMessage="Inscrição Estadual é obrigatória"/>
-                                </p:panelGrid>
-                            </p:panel>
+                                    <p:outputLabel for="inscEst" value="Inscrição estadual"/>
+                                </h:panelGroup>
+                            </p:panelGrid>
                         </p:tab>
                         <!--Dados de Contato-->
                         <p:tab id="contato" title="Contato">
-                            <p:panel header="Dados para contato">
-                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
-                                             layout="grid" styleClass="ui-panelgrid-blank">
-                                    <p:outputLabel for="foneCel" value="Telefone Celular"/>
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputMask id="foneCel" value="#{fornecedorController.objeto.telefoneCelular}" mask="(99)99999-9999"
                                                  required="true" requiredMessage="Telefone celular é obrigatório!"/>
-                                    <p:outputLabel for="foneCom" value="Telefone Comercial"/>
+                                    <p:outputLabel for="foneCel" value="Telefone Celular"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputMask id="foneCom" value="#{fornecedorController.objeto.telefoneComercial}" mask="(99)9999-9999"/>
-                                    <p:outputLabel for="email" value="E-mail"/>
+                                    <p:outputLabel for="foneCom" value="Telefone Comercial"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="email" maxlength="255" value="#{fornecedorController.objeto.email}"
                                                  required="true" requiredMessage="E-Mail é Obrigatório!"/>
-                                </p:panelGrid>
-                            </p:panel>
+                                    <p:outputLabel for="email" value="E-mail"/>
+                                </h:panelGroup>
+                            </p:panelGrid>
                         </p:tab>
                         <!--Dados de Localização-->
                         <p:tab id="localizacao" title="Localização">
-                            <p:panel header="Dados de localizaçao">
-                                <p:panelGrid columns="2" columnClasses="ui-grid-col-5,ui-grid-col-7"
-                                             layout="grid" styleClass="ui-panelgrid-blank">
-                                    <p:outputLabel for="end" value="Endereço"/>
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="end" maxlength="255" value="#{fornecedorController.objeto.endereco}"
                                                  required="true" requiredMessage="Endereço é Obrigatório!"/>
-                                    <p:outputLabel for="numero" value="Numero"/>
-                                    <p:inputText id="numero" value="#{fornecedorController.objeto.numero}"
+                                    <p:outputLabel for="end" value="Endereço"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText id="numero" type="number" value="#{fornecedorController.objeto.numero}"
                                                  required="true" requiredMessage="Numero é Obrigatório!"/>
-                                    <p:outputLabel for="bairro" value="Bairro"/>
+                                    <p:outputLabel for="numero" value="Numero"/>
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="bairro" value="#{fornecedorController.objeto.bairro}"
                                                  required="true" requiredMessage="Bairro é Obrigatório!"/>   
-                                    <p:outputLabel for="cid" value="Cidade"/>
-                                    <p:selectOneMenu id="cid" required="true"
-                                                     value="#{fornecedorController.objeto.idCidade}" filter="true"
-                                                     requiredMessage="Cidade é obrigatório!" converter="classeConverter">
-                                        <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true" />
-                                        <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
-                                                       itemLabel="#{cidade.cidade}" itemValue="#{cidade}"/>
-                                    </p:selectOneMenu>
-                                    <p:outputLabel for="comp" value="Complemento"/>
+                                    <p:outputLabel for="bairro" value="Bairro"/>    
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="comp" maxlength="50" value="#{fornecedorController.objeto.complemento}"/>
-                                    <p:outputLabel for="status" value="Status"/>
-                                    <p:selectOneMenu id="status" required="true"
-                                                     value="#{fornecedorController.objeto.status}"
-                                                     requiredMessage="Status é obrigatório!" filter="true">
-                                        <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
-                                        <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
-                                        <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
-                                    </p:selectOneMenu>
-                                </p:panelGrid>
-                            </p:panel>
+                                    <p:outputLabel for="comp" value="Complemento"/>
+                                </h:panelGroup>
+                            </p:panelGrid>
+                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <p:outputLabel for="cid" value="Cidade"/>
+                                <p:selectOneMenu id="cid" required="true"
+                                                 value="#{fornecedorController.objeto.idCidade}" filter="true"
+                                                 requiredMessage="Cidade é obrigatório!" converter="classeConverter">
+                                    <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true" />
+                                    <f:selectItems value="#{cidadeController.objetoDao.all}" var="cidade"
+                                                   itemLabel="#{cidade.cidade}" itemValue="#{cidade}"/>
+                                </p:selectOneMenu>
+                                <p:outputLabel for="status" value="Status"/>
+                                <p:selectOneMenu id="status" required="true"
+                                                 value="#{fornecedorController.objeto.status}"
+                                                 requiredMessage="Status é obrigatório!" filter="true">
+                                    <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
+                                    <f:selectItem  itemLabel="ATIVO" itemValue="true"/>
+                                    <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
+                                </p:selectOneMenu>
+                            </p:panelGrid>
                         </p:tab>
                         <!--Observação-->
                         <p:tab id="observacao" title="Observação">
-                            <p:panel header="Observação">
-                                <p:panelGrid columns="1" columnClasses="ui-grid-col-12"
-                                             layout="grid" styleClass="ui-panelgrid-blank">
-                                    <p:outputLabel for="obs" value="Observação"/>
-                                    <p:inputTextarea rows="7" cols="40" counter="obs" maxlength="300"
-                                                     counterTemplate="{0} Caracteres Restante."
-                                                     autoResize="true"
-                                                     addLine="true"
-                                                     value="#{fornecedorController.objeto.observacao}"/>
-                                    <h:outputText/>
-                                    <h:outputText id="obs"/>
-                                </p:panelGrid>
-                                <p:commandButton value="Salvar" icon="fa fa-floppy-o"
+                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                <p:outputLabel for="obs" value="Observação"/>
+                                <p:inputTextarea counter="obs" maxlength="300" style="width: 100%"
+                                                 counterTemplate="{0} Caracteres Restante."
+                                                 autoResize="true"
+                                                 addLine="true"
+                                                 value="#{fornecedorController.objeto.observacao}"/>
+                                <h:outputText/>
+                                <h:outputText id="obs"/>
+                            </p:panelGrid>
+                            <center>
+                                <p:commandButton value="Salvar"
+                                                 icon="fa fa-save"
                                                  actionListener="#{fornecedorController.salvarRegistro(event)}"
                                                  update=":sms :formCadForn:tabCadFornecedor :frmDialogCadForn"/>
-                            </p:panel>
+                            </center>
                         </p:tab>
                     </p:tabView>
                 </h:form>

@@ -86,8 +86,7 @@
                             <p:outputLabel for="desc" value="Descrição"/>
                         </h:panelGroup>
                         <h:panelGroup styleClass="md-inputfield">
-                            <p:inputMask id="com" value="#{servicoController.objeto.comissaoServico}"
-                                         mask="999" required="true" requiredMessage="Comissão é obrigatória!" />
+                            <p:spinner id="com" value="#{servicoController.objeto.comissaoServico}" maxlength="4" suffix="%" min="0" max="100"/>
                             <p:outputLabel for="com" value="Comissão"/>
                         </h:panelGroup>
                         <h:panelGroup styleClass="md-inputfield">

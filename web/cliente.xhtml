@@ -140,8 +140,8 @@
                                     <p:outputLabel for="end" value="Endereço"/>
                                 </h:panelGroup>
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText id="numero" value="#{clienteController.objeto.numero}"
-                                                 required="true" requiredMessage="Numero é Obrigatório!"/>
+                                    <p:inputText id="numero" type="number" value="#{clienteController.objeto.numero}"
+                                                   required="true" requiredMessage="Numero é Obrigatório!"/>
                                     <p:outputLabel for="numero" value="Numero"/>
                                 </h:panelGroup>
                                 <h:panelGroup styleClass="md-inputfield">
@@ -195,7 +195,6 @@
                                                  update=":sms :formCadCliente:tabCadCliente :frmDialogCadCliente"/>
                             </center>
                         </p:tab>
-
                     </p:tabView>
                 </h:form>
             </p:dialog>

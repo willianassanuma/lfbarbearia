@@ -7,45 +7,44 @@
                 template="./WEB-INF/template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="content">
-        
-        <p:growl id="sms" autoUpdate="true"/>
-        <div class="card card-w-title">
-            <h1>Agenda</h1>
-            <h:form>
-                <p:panel style="height: max-content">
-                    <!--Whidt = 592px / heigth 568px-->
-                    <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
-                                widgetVar="schd" locale="pt" view="agendaWeek" allDaySlot="false"
-                                ignoreTimezone="true">
-                        <p:ajax event="dateSelect" oncomplete="PF('dlg').show();" resetValues="true" />
-                    </p:schedule>
-                </p:panel>
-            </h:form>
+    <ui:define name="title">Agenda</ui:define>
 
+    <ui:define name="content">
+        <p:growl id="sms" autoUpdate="true" life="1000"/>
+        <div class="ui-g">
+            <h:form id="frmAgenda">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+                        <h1>Agenda</h1>
+                        <!--Whidt = 592px / heigth 568px-->
+                        <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
+                                    widgetVar="schd" locale="pt" view="agendaWeek" allDaySlot="false"
+                                    ignoreTimezone="true">
+                            <p:ajax event="dateSelect" oncomplete="PF('dlg').show();" resetValues="true" />
+                        </p:schedule>
+                    </div>
+                </div>
+            </h:form>
             <!--Dialogo do formulário-->
             <p:dialog header="Incluir Horário" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
                       draggable="false" showEffect="clip" hideEffect="clip"> 
                 <h:form>
-                    <p:panelGrid id="pngCadCid" columns="2" columnClasses="ui-grid-col-4, ui-grid-col-8"
-                                 layout="grid" styleClass="ui-panelgrid-blank">
+                    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
                         <p:outputLabel for="prof" value="Profissional:"/>
-                        <p:selectOneMenu id="prof" required="true" converter="classeConverter"
+                        <p:selectOneMenu id="prof" required="true" converter="classeConverter" autoWidth="false"
                                          value="#{agendaController.objeto.idProfissional}" filter="true" 
                                          requiredMessage="Profissional é obrigatório!">
-                            <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true" />
+                            <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true"/>
                             <f:selectItems  value="#{profissionalController.objetoDao.all}" var="profissional"
                                             itemLabel="#{profissional.nomeProf}"  itemValue="#{profissional}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <center>
-                        <p:panelGrid columns="1" columnClasses="ui-grid-col2"
-                                     layout="grid" styleClass="ui-panelgrid-blank">
-                            <p:commandButton value="Salvar" icon="fa fa-floppy-o"
-                                             actionListener="#{agendaController.salvarRegistro(event)}"
-                                             update=":sms @form"/>
-                        </p:panelGrid>
+                        <p:commandButton value="Salvar"
+                                         icon="fa fa-floppy-o"
+                                         actionListener="#{agendaController.salvarRegistro(event)}"
+                                         update=":sms @form"/>
                     </center>
                 </h:form>
             </p:dialog>

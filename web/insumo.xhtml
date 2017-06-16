@@ -106,12 +106,12 @@
                             <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                    <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
                         <p:outputLabel for="obs" value="Observação"/>
-                        <p:inputTextarea rows="3" counter="obs" maxlength="300"
+                        <p:inputTextarea rows="3" counter="obs" maxlength="300" style="width: 100%"
                                          counterTemplate="{0} Caracteres Restante."
                                          value="#{insumoController.objeto.observacao}"
-                                         addLine="true"/>
+                                         addLine="true" />
                         <h:outputText/>
                         <h:outputText id="obs" />
                     </p:panelGrid>
