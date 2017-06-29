@@ -17,7 +17,7 @@
                     <div class="card card-w-title">
                         <h1>Agenda</h1>
                         <!--Whidt = 592px / heigth 568px-->
-                        <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
+                        <p:schedule id="schedule" value="#{agendaController.modelSchedule}" draggable="true"
                                     widgetVar="schd" locale="pt" view="agendaWeek" allDaySlot="false"
                                     ignoreTimezone="true">
                             <p:ajax event="dateSelect" oncomplete="PF('dlg').show();" resetValues="true" />
