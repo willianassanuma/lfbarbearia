@@ -12,7 +12,7 @@
     <!--Primefaces theme-->
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>ultima-mine</param-value>
+        <param-value>ultima-dark-blue</param-value>
     </context-param>
     <context-param>
         <param-name>primefaces.FONT_AWESOME</param-name>

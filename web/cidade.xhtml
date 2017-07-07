@@ -10,7 +10,28 @@
     <ui:define name="title">Cadastro de cidade</ui:define>
 
     <ui:define name="content">
-        <p:growl id="sms" autoUpdate="true" life="1000"/>
+        <style type="text/css">
+            .ui-growl .ui-growl-info{
+                background-color: #1e88e5 !important;
+                color: #ffffff !important;
+            }
+            
+            .ui-growl .ui-growl-error{
+                background-color: #b71c1c !important;
+                color: #ffffff !important;
+            }
+            
+            .ui-growl .ui-growl-warn{
+                background-color: #ff9800 !important;
+                color: #ffffff !important;
+            }
+            
+            .ui-growl .ui-growl-fatal{
+                background-color: #424242 !important;
+                color: #ffffff !important;
+            }
+        </style>
+        <p:growl id="sms" autoUpdate="true" life="1000" severity="warn,info,error,fatal"/>
         <div class="ui-g ui-fluid">
             <h:form id="formCadCidade">
                 <div class="ui-g-12">
