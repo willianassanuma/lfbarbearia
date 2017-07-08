@@ -1,0 +1,19 @@
+.ui-growl .ui-growl-info{
+    background-color: #0070C0 !important;
+    color: #ffffff !important;
+}
+
+.ui-growl .ui-growl-error{
+    background-color: #FF4B4B !important;
+    color: #ffffff !important;
+}
+
+.ui-growl .ui-growl-warn{
+    background-color: #FF8205 !important;
+    color: #ffffff !important;
+}
+
+.ui-growl .ui-growl-fatal{
+    background-color: #424242 !important;
+    color: #ffffff !important;
+}
