@@ -90,7 +90,7 @@
                     </p:panelGrid>
                     <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
                         <p:outputLabel for="unMed" value="Unidade de Medida"/>
-                        <p:selectOneMenu id="unMed" required="true" converter="classeConverter"
+                        <p:selectOneMenu id="unMed" required="true" converter="classeConverter" style="width: 100%;"
                                          value="#{insumoController.objeto.idUnidadeMedida}" filter="true"
                                          requiredMessage="Selecione Unidade de Medida!" autoWidth="false">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
@@ -98,7 +98,7 @@
                                            itemValue="#{unMedida}" itemLabel="#{unMedida.sigla} - #{unMedida.descricao}"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="status" value="Status"/>
-                        <p:selectOneMenu id="status" required="true"
+                        <p:selectOneMenu id="status" required="true" style="width: 100%;"
                                          value="#{insumoController.objeto.status}" filter="true"
                                          requiredMessage="Status é obrigatório!">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>

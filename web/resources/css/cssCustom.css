@@ -1,3 +1,4 @@
+/*Customização de Mensagens - GROWL's */
 .ui-growl .ui-growl-info{
     background-color: #0070C0 !important;
     color: #ffffff !important;
@@ -17,3 +18,6 @@
     background-color: #424242 !important;
     color: #ffffff !important;
 }
+
+/*Customização do SCROLLPANEL */
+

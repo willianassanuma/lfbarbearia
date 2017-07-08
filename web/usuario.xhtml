@@ -20,7 +20,7 @@
                         <p:dataTable id="tabCadUsuario"
                                      emptyMessage="Nenhum registro encontrado!"
                                      paginator="true" 
-                                     reflow="true" 
+                                     reflow="true"
                                      paginatorPosition="bottom"
                                      var="usuario"
                                      rowHover="true"
@@ -99,7 +99,7 @@
                     </p:panelGrid>
                     <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
                         <p:outputLabel for="status" value="Status"/>
-                        <p:selectOneMenu id="status" required="true"
+                        <p:selectOneMenu id="status" required="true" style="width: 100%;"
                                          value="#{usuarioController.objeto.status}"
                                          requiredMessage="Status é obrigatório!" filter="true">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
@@ -107,7 +107,7 @@
                             <f:selectItem  itemLabel="INATIVO" itemValue="false"/>
                         </p:selectOneMenu>
                         <p:outputLabel for="perfAcesso" value="Perfil de Acesso"/>
-                        <p:selectOneMenu id="perfAcesso" required="true" 
+                        <p:selectOneMenu id="perfAcesso" required="true" style="width: 100%;"
                                          value="#{usuarioController.objeto.idPerfilAcesso}" filter="true"
                                          requiredMessage="Selecione Perfil de acesso!" converter="classeConverter">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>

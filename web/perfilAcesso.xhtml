@@ -68,14 +68,14 @@
                 <h:form id="frmDialogCadPerfAcesso">
                     <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
                         <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText id="desc" maxlength="255" value="#{perfilAcessoController.objeto.descricao}"
+                            <p:inputText id="desc" maxlength="255" style="width: 100%;" value="#{perfilAcessoController.objeto.descricao}"
                                          required="true" requiredMessage="Descrição é obrigatória!"/>
                             <p:outputLabel for="desc" value="Descrição"/>
                         </h:panelGroup>
                     </p:panelGrid>
                     <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
                         <p:outputLabel for="status" value="Status"/>
-                        <p:selectOneMenu id="status" required="true"
+                        <p:selectOneMenu id="status" required="true" style="width: 100%;"
                                          value="#{perfilAcessoController.objeto.status}"
                                          requiredMessage="Status é obrigatório!" filter="true">
                             <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>

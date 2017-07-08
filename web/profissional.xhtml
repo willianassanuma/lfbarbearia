@@ -130,7 +130,7 @@
                             </p:panelGrid>
                             <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
                                 <p:outputLabel for="cid" value="Cidade"/>
-                                <p:selectOneMenu id="cid" required="true" converter="classeConverter"
+                                <p:selectOneMenu id="cid" required="true" converter="classeConverter" style="width: 100%;"
                                                  value="#{profissionalController.objeto.idCidade}" filter="true"
                                                  requiredMessage="Cidade é obrigatório!">
                                     <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true" />
@@ -138,7 +138,7 @@
                                                    itemLabel="#{cidade.cidade}"  itemValue="#{cidade}"/>
                                 </p:selectOneMenu>
                                 <p:outputLabel for="status" value="Status"/>
-                                <p:selectOneMenu id="status" required="true"
+                                <p:selectOneMenu id="status" required="true" style="width: 100%;"
                                                  value="#{profissionalController.objeto.status}"
                                                  requiredMessage="Status é obrigatório!" filter="true">
                                     <f:selectItem  itemLabel="Selecione ... " noSelectionOption="true"/>
