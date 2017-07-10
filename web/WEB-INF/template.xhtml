@@ -18,40 +18,41 @@
         <h:outputScript name="js/ripple.js" library="ultima-layout" />
         <h:outputScript name="js/swipe.js" library="ultima-layout" />
         <h:outputScript name="translateCalendar.js" library="js"/>
+        <link rel="shortcut icon" href="../resources/img/shortCut.png" type="image/x-icon"/>
         <ui:insert name="head"/>
     </h:head>
 
     <h:body styleClass="main-body layout-compact">
-        
+
         <!--<div class="layout-wrapper menu-layout-overlay">-->
         <div class="layout-wrapper menu-layout-static">
             <ui:include src="./topbar.xhtml" />
             <ui:include src="./menu.xhtml" />
-            
+
             <div class="layout-main ">
                 <ui:insert name="content"/>
-                
+
                 <ui:include src="./footer.xhtml" />
             </div>
         </div>
-        
-        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
-           <f:facet name="start">
-               <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
-           </f:facet>
 
-           <f:facet name="complete">
-               <h:outputText value="" />
-           </f:facet>
-       </p:ajaxStatus>
-        
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+            <f:facet name="start">
+                <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+
 
         <h:outputStylesheet name="css/nanoscroller.css" library="ultima-layout" />
         <h:outputStylesheet name="css/animate.css" library="ultima-layout" />
         <h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
         <h:outputStylesheet name="css/layout-dark-blue.css" library="ultima-layout" />
         <h:outputStylesheet name="cssCustom.css" library="css" />
-        
+
     </h:body>
 
 </html>
