@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Marcos
+ * @author Terminal 150
  */
 @Entity
 @Table(name = "profissional")
@@ -38,7 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Profissional.findAll", query = "SELECT p FROM Profissional p")
     , @NamedQuery(name = "Profissional.findById", query = "SELECT p FROM Profissional p WHERE p.id = :id")
     , @NamedQuery(name = "Profissional.findByNomeProf", query = "SELECT p FROM Profissional p WHERE p.nomeProf = :nomeProf")
-    , @NamedQuery(name = "Profissional.findByComissao", query = "SELECT p FROM Profissional p WHERE p.comissao = :comissao")
     , @NamedQuery(name = "Profissional.findByEndereco", query = "SELECT p FROM Profissional p WHERE p.endereco = :endereco")
     , @NamedQuery(name = "Profissional.findByNumero", query = "SELECT p FROM Profissional p WHERE p.numero = :numero")
     , @NamedQuery(name = "Profissional.findByBairro", query = "SELECT p FROM Profissional p WHERE p.bairro = :bairro")
@@ -61,10 +60,6 @@ public class Profissional implements Serializable, InterfaceEntidades {
     @Size(min = 1, max = 255)
     @Column(name = "nomeProf")
     private String nomeProf;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "comissao")
-    private float comissao;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -121,10 +116,9 @@ public class Profissional implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Profissional(Integer id, String nomeProf, float comissao, String endereco, int numero, String bairro, String email, boolean status, String telefoneCelular) {
+    public Profissional(Integer id, String nomeProf, String endereco, int numero, String bairro, String email, boolean status, String telefoneCelular) {
         this.id = id;
         this.nomeProf = nomeProf;
-        this.comissao = comissao;
         this.endereco = endereco;
         this.numero = numero;
         this.bairro = bairro;
@@ -147,14 +141,6 @@ public class Profissional implements Serializable, InterfaceEntidades {
 
     public void setNomeProf(String nomeProf) {
         this.nomeProf = nomeProf;
-    }
-
-    public float getComissao() {
-        return comissao;
-    }
-
-    public void setComissao(float comissao) {
-        this.comissao = comissao;
     }
 
     public String getEndereco() {

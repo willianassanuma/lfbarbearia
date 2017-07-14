@@ -29,9 +29,6 @@
                             <p:column headerText="ID" sortBy="#{profissional.id}" filterBy="#{profissional.id}">
                                 <h:outputText value="#{profissional.id}"/>
                             </p:column>
-                            <p:column headerText="Comissão" filterBy="#{profissional.comissao}">
-                                <h:outputText value="#{profissional.comissao}"/>
-                            </p:column>
                             <p:column headerText="Nome" filterBy="#{profissional.nomeProf}">
                                 <h:outputText value="#{profissional.nomeProf}"/>
                             </p:column>
@@ -75,10 +72,6 @@
                         <!--Dados de Identificação-->
                         <p:tab id="identificacao" title="Identificação">
                             <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
-                                <h:panelGroup styleClass="md-inputfield">
-                                    <p:spinner id="com" value="#{profissionalController.objeto.comissao}" maxlength="4" suffix="%" min="0" max="100"/>
-                                    <p:outputLabel for="com" value="Comissão"/>
-                                </h:panelGroup>
                                 <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText id="nome" maxlength="255" value="#{profissionalController.objeto.nomeProf}"
                                                  required="true" requiredMessage="Nome é obrigatório!"/>

@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Marcos
+ * @author Terminal 150
  */
 @Entity
 @Table(name = "parametro")
@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Parametro.findAll", query = "SELECT p FROM Parametro p")
     , @NamedQuery(name = "Parametro.findById", query = "SELECT p FROM Parametro p WHERE p.id = :id")
     , @NamedQuery(name = "Parametro.findByTempoGerAgeda", query = "SELECT p FROM Parametro p WHERE p.tempoGerAgeda = :tempoGerAgeda")
-    , @NamedQuery(name = "Parametro.findByComissaoPadrao", query = "SELECT p FROM Parametro p WHERE p.comissaoPadrao = :comissaoPadrao")
     , @NamedQuery(name = "Parametro.findByHarioFechamentoCaixa", query = "SELECT p FROM Parametro p WHERE p.harioFechamentoCaixa = :harioFechamentoCaixa")})
 public class Parametro implements Serializable, InterfaceEntidades {
 
@@ -49,10 +48,6 @@ public class Parametro implements Serializable, InterfaceEntidades {
     private Date tempoGerAgeda;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "comissaoPadrao")
-    private float comissaoPadrao;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "harioFechamentoCaixa")
     @Temporal(TemporalType.DATE)
     private Date harioFechamentoCaixa;
@@ -64,10 +59,9 @@ public class Parametro implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Parametro(Integer id, Date tempoGerAgeda, float comissaoPadrao, Date harioFechamentoCaixa) {
+    public Parametro(Integer id, Date tempoGerAgeda, Date harioFechamentoCaixa) {
         this.id = id;
         this.tempoGerAgeda = tempoGerAgeda;
-        this.comissaoPadrao = comissaoPadrao;
         this.harioFechamentoCaixa = harioFechamentoCaixa;
     }
 
@@ -85,14 +79,6 @@ public class Parametro implements Serializable, InterfaceEntidades {
 
     public void setTempoGerAgeda(Date tempoGerAgeda) {
         this.tempoGerAgeda = tempoGerAgeda;
-    }
-
-    public float getComissaoPadrao() {
-        return comissaoPadrao;
-    }
-
-    public void setComissaoPadrao(float comissaoPadrao) {
-        this.comissaoPadrao = comissaoPadrao;
     }
 
     public Date getHarioFechamentoCaixa() {

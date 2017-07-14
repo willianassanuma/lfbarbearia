@@ -34,9 +34,6 @@
                                     <f:convertDateTime pattern="HH:mm:ss"/>
                                 </h:outputText>
                             </p:column>
-                            <p:column headerText="Com. Padrão">
-                                <h:outputText value="#{parametro.comissaoPadrao}"/>
-                            </p:column>
                             <p:column headerText="Hor. Fech. Caixa">
                                 <h:outputText value="#{parametro.harioFechamentoCaixa}">
                                     <f:convertDateTime pattern="HH:mm:ss"/>
@@ -78,10 +75,6 @@
                                 <f:convertDateTime pattern="HH:mm:ss"/>
                             </p:inputMask>
                             <p:outputLabel for="timeAg" value="Tempo de Ger. Agenda"/>
-                        </h:panelGroup>
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:spinner id="comPad" value="#{parametroController.objeto.comissaoPadrao}" maxlength="4" suffix="%" min="0" max="100"/>
-                            <p:outputLabel for="comPad" value="Comissão Padrão"/>
                         </h:panelGroup>
                         <h:panelGroup styleClass="md-inputfield">
                             <p:inputMask id="fecCaixa" mask="99:99:99" required="true"

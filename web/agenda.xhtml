@@ -61,8 +61,13 @@
                         <h1>Agenda de:</h1>
                         <!--Whidt = 592px / heigth 568px-->
                         <p:schedule id="schedule" value="#{agendaController.modelSchedule}"
-                                    widgetVar="schd" locale="pt" view="agendaWeek" allDaySlot="false"
-                                    ignoreTimezone="true">
+                                    widgetVar="schedule"
+                                    locale="pt"
+                                    view="agendaWeek"
+                                    allDaySlot="false"
+                                    axisFormat="HH:mm"
+                                    timeZone="GMT-3"
+                                    rightHeaderTemplate="agendaWeek">
                             <p:ajax event="dateSelect" oncomplete="PF('dlg').show();" resetValues="true" />
                         </p:schedule>
                     </div>

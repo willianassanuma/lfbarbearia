@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,12 +25,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Marcos
+ * @author Terminal 150
  */
 @Entity
 @Table(name = "agenda")
@@ -37,7 +39,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Agenda.findAll", query = "SELECT a FROM Agenda a")
     , @NamedQuery(name = "Agenda.findById", query = "SELECT a FROM Agenda a WHERE a.id = :id")
-    , @NamedQuery(name = "Agenda.findByDataHoraDaAgenda", query = "SELECT a FROM Agenda a WHERE a.dataHoraDaAgenda = :dataHoraDaAgenda")})
+    , @NamedQuery(name = "Agenda.findByDataHoraDeAgendamento", query = "SELECT a FROM Agenda a WHERE a.dataHoraDeAgendamento = :dataHoraDeAgendamento")
+    , @NamedQuery(name = "Agenda.findByStatusAgendamento", query = "SELECT a FROM Agenda a WHERE a.statusAgendamento = :statusAgendamento")
+    , @NamedQuery(name = "Agenda.findByHoraDeInicio", query = "SELECT a FROM Agenda a WHERE a.horaDeInicio = :horaDeInicio")
+    , @NamedQuery(name = "Agenda.findByHoraDeFim", query = "SELECT a FROM Agenda a WHERE a.horaDeFim = :horaDeFim")})
 public class Agenda implements Serializable, InterfaceEntidades {
 
     private static final long serialVersionUID = 1L;
@@ -48,16 +53,31 @@ public class Agenda implements Serializable, InterfaceEntidades {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "dataHoraDaAgenda")
+    @Column(name = "dataHoraDeAgendamento")
     @Temporal(TemporalType.DATE)
-    private Date dataHoraDaAgenda;
+    private Date dataHoraDeAgendamento;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "statusAgendamento")
+    private String statusAgendamento;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "horaDeInicio")
+    @Temporal(TemporalType.TIME)
+    private Date horaDeInicio;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "horaDeFim")
+    @Temporal(TemporalType.TIME)
+    private Date horaDeFim;
+    @ManyToMany(mappedBy = "agendaCollection")
+    private Collection<Cliente> clienteCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAgenda")
     private Collection<Contasreceber> contasreceberCollection;
     @JoinColumn(name = "idProfissional", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Profissional idProfissional;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agenda")
-    private Collection<AgendaCliente> agendaClienteCollection;
 
     public Agenda() {
     }
@@ -66,9 +86,12 @@ public class Agenda implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Agenda(Integer id, Date dataHoraDaAgenda) {
+    public Agenda(Integer id, Date dataHoraDeAgendamento, String statusAgendamento, Date horaDeInicio, Date horaDeFim) {
         this.id = id;
-        this.dataHoraDaAgenda = dataHoraDaAgenda;
+        this.dataHoraDeAgendamento = dataHoraDeAgendamento;
+        this.statusAgendamento = statusAgendamento;
+        this.horaDeInicio = horaDeInicio;
+        this.horaDeFim = horaDeFim;
     }
 
     public Integer getId() {
@@ -79,12 +102,45 @@ public class Agenda implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Date getDataHoraDaAgenda() {
-        return dataHoraDaAgenda;
+    public Date getDataHoraDeAgendamento() {
+        return dataHoraDeAgendamento;
     }
 
-    public void setDataHoraDaAgenda(Date dataHoraDaAgenda) {
-        this.dataHoraDaAgenda = dataHoraDaAgenda;
+    public void setDataHoraDeAgendamento(Date dataHoraDeAgendamento) {
+        this.dataHoraDeAgendamento = dataHoraDeAgendamento;
+    }
+
+    public String getStatusAgendamento() {
+        return statusAgendamento;
+    }
+
+    public void setStatusAgendamento(String statusAgendamento) {
+        this.statusAgendamento = statusAgendamento;
+    }
+
+    public Date getHoraDeInicio() {
+        return horaDeInicio;
+    }
+
+    public void setHoraDeInicio(Date horaDeInicio) {
+        this.horaDeInicio = horaDeInicio;
+    }
+
+    public Date getHoraDeFim() {
+        return horaDeFim;
+    }
+
+    public void setHoraDeFim(Date horaDeFim) {
+        this.horaDeFim = horaDeFim;
+    }
+
+    @XmlTransient
+    public Collection<Cliente> getClienteCollection() {
+        return clienteCollection;
+    }
+
+    public void setClienteCollection(Collection<Cliente> clienteCollection) {
+        this.clienteCollection = clienteCollection;
     }
 
     @XmlTransient
@@ -102,15 +158,6 @@ public class Agenda implements Serializable, InterfaceEntidades {
 
     public void setIdProfissional(Profissional idProfissional) {
         this.idProfissional = idProfissional;
-    }
-
-    @XmlTransient
-    public Collection<AgendaCliente> getAgendaClienteCollection() {
-        return agendaClienteCollection;
-    }
-
-    public void setAgendaClienteCollection(Collection<AgendaCliente> agendaClienteCollection) {
-        this.agendaClienteCollection = agendaClienteCollection;
     }
 
     @Override

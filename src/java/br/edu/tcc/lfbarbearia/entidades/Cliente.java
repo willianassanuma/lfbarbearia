@@ -9,17 +9,17 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Marcos
+ * @author Terminal 150
  */
 @Entity
 @Table(name = "cliente")
@@ -125,11 +125,14 @@ public class Cliente implements Serializable, InterfaceEntidades {
     @Size(max = 255)
     @Column(name = "apelido")
     private String apelido;
+    @JoinTable(name = "agenda_cliente", joinColumns = {
+        @JoinColumn(name = "idCliente", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idAgenda", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Agenda> agendaCollection;
     @JoinColumn(name = "idCidade", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idCidade;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
-    private Collection<AgendaCliente> agendaClienteCollection;
 
     public Cliente() {
     }
@@ -281,21 +284,21 @@ public class Cliente implements Serializable, InterfaceEntidades {
         this.apelido = apelido;
     }
 
+    @XmlTransient
+    public Collection<Agenda> getAgendaCollection() {
+        return agendaCollection;
+    }
+
+    public void setAgendaCollection(Collection<Agenda> agendaCollection) {
+        this.agendaCollection = agendaCollection;
+    }
+
     public Cidade getIdCidade() {
         return idCidade;
     }
 
     public void setIdCidade(Cidade idCidade) {
         this.idCidade = idCidade;
-    }
-
-    @XmlTransient
-    public Collection<AgendaCliente> getAgendaClienteCollection() {
-        return agendaClienteCollection;
-    }
-
-    public void setAgendaClienteCollection(Collection<AgendaCliente> agendaClienteCollection) {
-        this.agendaClienteCollection = agendaClienteCollection;
     }
 
     @Override
