@@ -29,8 +29,6 @@ public class ProfissionalController extends BaseController<Profissional, Integer
         this.selecionarServico = selecionarServico;
     }
 
-    
-
     public ProfissionalController() {
     }
 

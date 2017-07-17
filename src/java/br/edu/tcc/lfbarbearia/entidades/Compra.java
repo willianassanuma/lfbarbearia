@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Terminal 150
+ * @author Marcos
  */
 @Entity
 @Table(name = "compra")
@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Compra.findAll", query = "SELECT c FROM Compra c")
     , @NamedQuery(name = "Compra.findById", query = "SELECT c FROM Compra c WHERE c.id = :id")
     , @NamedQuery(name = "Compra.findByData", query = "SELECT c FROM Compra c WHERE c.data = :data")})
-public class Compra implements Serializable, InterfaceEntidades {
+public class Compra implements Serializable, InterfaceEntidades{
 
     private static final long serialVersionUID = 1L;
     @Id

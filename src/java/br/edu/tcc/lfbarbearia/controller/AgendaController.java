@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
 import br.edu.tcc.lfbarbearia.entidades.Agenda;
+import br.edu.tcc.lfbarbearia.entidades.Servico;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleModel;
 
@@ -20,6 +21,15 @@ public class AgendaController extends BaseController<Agenda, Integer> implements
     @EJB
     private AgendaDao agendaDao;
     
+    private Servico[] selecionarServicoNaAgenda;
+
+    public Servico[] getSelecionarServicoNaAgenda() {
+        return selecionarServicoNaAgenda;
+    }
+
+    public void setSelecionarServicoNaAgenda(Servico[] selecionarServicoNaAgenda) {
+        this.selecionarServicoNaAgenda = selecionarServicoNaAgenda;
+    }
     
     //Cria no prostConstruct o modelo do Schedule
     private ScheduleModel modelSchedule;

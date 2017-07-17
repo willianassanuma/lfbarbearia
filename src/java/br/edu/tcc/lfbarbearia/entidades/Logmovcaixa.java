@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Terminal 150
+ * @author Marcos
  */
 @Entity
 @Table(name = "logmovcaixa")

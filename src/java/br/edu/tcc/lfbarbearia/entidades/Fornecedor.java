@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Terminal 150
+ * @author Marcos
  */
 @Entity
 @Table(name = "fornecedor")
@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Fornecedor.findByObservacao", query = "SELECT f FROM Fornecedor f WHERE f.observacao = :observacao")
     , @NamedQuery(name = "Fornecedor.findByTelefoneComercial", query = "SELECT f FROM Fornecedor f WHERE f.telefoneComercial = :telefoneComercial")
     , @NamedQuery(name = "Fornecedor.findByTelefoneCelular", query = "SELECT f FROM Fornecedor f WHERE f.telefoneCelular = :telefoneCelular")})
-public class Fornecedor implements Serializable, InterfaceEntidades {
+public class Fornecedor implements Serializable, InterfaceEntidades{
 
     private static final long serialVersionUID = 1L;
     @Id

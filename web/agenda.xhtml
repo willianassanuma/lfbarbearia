@@ -15,42 +15,42 @@
             <!--Formulário de preenchimento inicial-->
             <div class="ui-g-12">
                 <h:form id="frmOpcoes">
-                    <div class="ui-g-12">
-                        <div class="card card-w-title">
-                            <h3>Opções iniciais de agenda</h3>
-                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group"
-                                         columnClasses="ui-grid-col-2,ui-grid-col-4">
-                                <p:outputLabel for="prof" value="Profissional:"/>
-                                <p:selectOneMenu id="prof" required="true" converter="classeConverter" style="width: 50%"
-                                                 value="#{agendaController.objeto.idProfissional}" filter="true" 
-                                                 requiredMessage="Seleção de profissional é obrigatório!">
-                                    <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true"/>
-                                    <f:selectItems  value="#{profissionalController.objetoDao.all}" var="profissional"
-                                                    itemLabel="#{profissional.nomeProf}"  itemValue="#{profissional}"/>
-                                </p:selectOneMenu>
-                            </p:panelGrid>
-                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group"
-                                         columnClasses="ui-grid-col-2,ui-grid-col-4">
-                                <p:outputLabel for="servPrest" value="Serviços Prestados pelo profissional:"/>
-                                <p:selectOneMenu id="servPrest" required="true" converter="classeConverter" style="width: 50%"
-                                                 value="#" filter="true" 
-                                                 requiredMessage="Opções serviço é obrigatório!">
-                                    <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true"/>
-                                    <f:selectItems  value="#" var="servicos"
-                                                    itemLabel="#"  itemValue="#"/>
-                                </p:selectOneMenu>
-                            </p:panelGrid>
 
-                            <!--Somente Botões para teste-->
-                            <center>
-                                <p:commandButton value="Salvar"
-                                                 icon="fa fa-floppy-o"
-                                                 actionListener="#{agendaController.salvarRegistro(event)}"
-                                                 update=":sms @form"/>
-                            </center>
+                    <div class="card card-w-title">
+                        <h3>Opções iniciais de agenda</h3>
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group"
+                                     columnClasses="ui-grid-col-2,ui-grid-col-4">
+                            <p:outputLabel for="prof" value="Profissional:"/>
+                            <p:selectOneMenu id="prof" required="true" converter="classeConverter" style="width: 50%"
+                                             value="#{agendaController.objeto.idProfissional}" filter="true" 
+                                             requiredMessage="Seleção de profissional é obrigatório!">
+                                <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true"/>
+                                <f:selectItems  value="#{profissionalController.objetoDao.all}" var="profissional"
+                                                itemLabel="#{profissional.nomeProf}"  itemValue="#{profissional}"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group"
+                                     columnClasses="ui-grid-col-2,ui-grid-col-4">
+                            <p:outputLabel for="servPrest" value="Serviços Prestados pelo profissional:"/>
+                            <p:selectManyCheckbox id="servPrest" value="#{agendaController.selecionarServicoNaAgenda}" layout="responsive" columns="3"
+                                                  converter="classeConverter"
+                                                  required="true" requiredMessage="Serviço é necessário estar preenchido">
+                                <!--Value tem que receber uma consutla hql do banco trazendo os dados do profissional selecionado-->
+                                <f:selectItems value="#{servicoController.objetoDao.all}"
+                                               var="servico" itemLabel="#{servico.descricaoServico}" itemValue="#{servico}" />
+                            </p:selectManyCheckbox>
+                        </p:panelGrid>
 
-                        </div>
+                        <!--Somente Botões para teste-->
+                        <center>
+                            <p:commandButton value="Salvar"
+                                             icon="fa fa-floppy-o"
+                                             actionListener="#{agendaController.salvarRegistro(event)}"
+                                             update=":sms @form"/>
+                        </center>
+
                     </div>
+
                 </h:form>
             </div>
 
