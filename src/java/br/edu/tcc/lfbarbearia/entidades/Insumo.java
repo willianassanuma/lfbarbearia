@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Marcos
+ * @author Terminal 150
  */
 @Entity
 @Table(name = "insumo")
@@ -68,8 +68,6 @@ public class Insumo implements Serializable, InterfaceEntidades {
     private Collection<Fornecedor> fornecedorCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
     private Collection<Movestoque> movestoqueCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<Item> itemCollection;
     @JoinColumn(name = "idUnidadeMedida", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Unidademedida idUnidadeMedida;
@@ -144,15 +142,6 @@ public class Insumo implements Serializable, InterfaceEntidades {
 
     public void setMovestoqueCollection(Collection<Movestoque> movestoqueCollection) {
         this.movestoqueCollection = movestoqueCollection;
-    }
-
-    @XmlTransient
-    public Collection<Item> getItemCollection() {
-        return itemCollection;
-    }
-
-    public void setItemCollection(Collection<Item> itemCollection) {
-        this.itemCollection = itemCollection;
     }
 
     public Unidademedida getIdUnidadeMedida() {

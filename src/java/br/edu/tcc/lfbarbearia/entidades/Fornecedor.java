@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Marcos
+ * @author Terminal 150
  */
 @Entity
 @Table(name = "fornecedor")
@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Fornecedor.findByObservacao", query = "SELECT f FROM Fornecedor f WHERE f.observacao = :observacao")
     , @NamedQuery(name = "Fornecedor.findByTelefoneComercial", query = "SELECT f FROM Fornecedor f WHERE f.telefoneComercial = :telefoneComercial")
     , @NamedQuery(name = "Fornecedor.findByTelefoneCelular", query = "SELECT f FROM Fornecedor f WHERE f.telefoneCelular = :telefoneCelular")})
-public class Fornecedor implements Serializable, InterfaceEntidades{
+public class Fornecedor implements Serializable, InterfaceEntidades {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -119,11 +119,6 @@ public class Fornecedor implements Serializable, InterfaceEntidades{
         @JoinColumn(name = "idInsumo", referencedColumnName = "id")})
     @ManyToMany
     private Collection<Insumo> insumoCollection;
-    @JoinTable(name = "fornecedor_contaspagar", joinColumns = {
-        @JoinColumn(name = "idFornecedor", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "idContasAPagar", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Contaspagar> contaspagarCollection;
     @JoinColumn(name = "idCidade", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Cidade idCidade;
@@ -268,15 +263,6 @@ public class Fornecedor implements Serializable, InterfaceEntidades{
 
     public void setInsumoCollection(Collection<Insumo> insumoCollection) {
         this.insumoCollection = insumoCollection;
-    }
-
-    @XmlTransient
-    public Collection<Contaspagar> getContaspagarCollection() {
-        return contaspagarCollection;
-    }
-
-    public void setContaspagarCollection(Collection<Contaspagar> contaspagarCollection) {
-        this.contaspagarCollection = contaspagarCollection;
     }
 
     public Cidade getIdCidade() {

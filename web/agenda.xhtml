@@ -17,7 +17,7 @@
                 <h:form id="frmOpcoes">
 
                     <div class="card card-w-title">
-                        <h3>Opções iniciais de agenda</h3>
+                        <h3>Escolha seu profissional e o serviço desejado!</h3>
                         <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group"
                                      columnClasses="ui-grid-col-2,ui-grid-col-4">
                             <p:outputLabel for="prof" value="Profissional:"/>
@@ -34,7 +34,7 @@
                             <p:outputLabel for="servPrest" value="Serviços Prestados pelo profissional:"/>
                             <p:selectManyCheckbox id="servPrest" value="#{agendaController.selecionarServicoNaAgenda}" layout="responsive" columns="3"
                                                   converter="classeConverter"
-                                                  required="true" requiredMessage="Serviço é necessário estar preenchido">
+                                                  required="true" requiredMessage="Necessário ao menos um serviço estar selecionado">
                                 <!--Value tem que receber uma consutla hql do banco trazendo os dados do profissional selecionado-->
                                 <f:selectItems value="#{servicoController.objetoDao.all}"
                                                var="servico" itemLabel="#{servico.descricaoServico}" itemValue="#{servico}" />
@@ -43,7 +43,7 @@
 
                         <!--Somente Botões para teste-->
                         <center>
-                            <p:commandButton value="Salvar"
+                            <p:commandButton value="Buscar Horários Disponiveis"
                                              icon="fa fa-floppy-o"
                                              actionListener="#{agendaController.salvarRegistro(event)}"
                                              update=":sms @form"/>
@@ -78,9 +78,43 @@
             <p:dialog header="Incluir Horário" widgetVar="dlg" modal="true" appendTo="@(body)"
                       responsive="true" closeOnEscape="true" closable="true" resizable="false"
                       draggable="false" showEffect="clip" hideEffect="clip"> 
+                <!--Formulário de inclusão de horários
+                    ***** Na hora de implementar a agenda, é necessario que alguns campos
+                    venha preenchidos automaticamente, hora de inicio e fim, data da agenda
+                    status da agenda, agendado, confirmado, cancelado, em execução-->
                 <h:form>
-
-
+                    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                        <p:outputLabel for="cliente" value="Cliente:"/>
+                        <p:selectOneMenu id="cliente" required="true" converter="classeConverter" style="width: 100%"
+                                         value="#{agendaController.objeto.clienteCollection}" filter="true" 
+                                         requiredMessage="Informe cliente!">
+                            <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true"/>
+                            <f:selectItems  value="#{clienteController.objetoDao.all}" var="cliente"
+                                            itemLabel="#{cliente.nomeCLiente}"  itemValue="#{cliente}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputMask id="horaDeInicio" value="#{agendaController.objeto.horaDeInicio}"
+                                         mask="99:99:99" required="true" requiredMessage="Hora de Inicio não pode ser vazia">
+                                <f:convertDateTime pattern="HH:mm:ss"/>
+                            </p:inputMask>
+                            <p:outputLabel for="horaDeInicio" value="Hora de Inicio"/>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputMask id="horaDeFim" value="#{agendaController.objeto.horaDeFim}"
+                                         mask="99:99:99" required="true" requiredMessage="Hora de Término não pode ser vazia">
+                                <f:convertDateTime pattern="HH:mm:ss"/>
+                            </p:inputMask>
+                            <p:outputLabel for="horaDeFim" value="Hora de Término"/>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                    <center>
+                        <p:commandButton value="Salvar"
+                                         icon="fa fa-floppy-o"
+                                         actionListener="#{agendaController.salvarRegistro(event)}"
+                                         update=":sms @form"/>
+                    </center>
                 </h:form>
             </p:dialog>
         </div>

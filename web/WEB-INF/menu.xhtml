@@ -45,22 +45,27 @@
                             <p:menuitem id="profissional" value="Profissional" icon="&#xE7FE;" outcome="profissional.xhtml" ajax="false"/>
                             <p:menuitem id="estado" value="Estado" icon="&#xE567;" outcome="estado.xhtml" ajax="false"/>
                             <p:menuitem id="cidade" value="Cidade" icon="&#xE564;" outcome="cidade.xhtml" ajax="false"/>
-                            <p:menuitem id="condPag" value="Condições de pagamento" icon="&#xE8A1;" outcome="condPagamento.xhtml" ajax="false"/>
                             <p:menuitem id="insumos" value="Insumos" icon="&#xE149;" outcome="insumo.xhtml" ajax="false"/>
                             <p:menuitem id="unMedida" value="Unidade de medida" icon="&#xE3B8;" outcome="unidademedida.xhtml" ajax="false"/>
                             <p:menuitem id="servico" value="Serviços" icon="&#xE14E;" outcome="servico.xhtml" ajax="false"/>
                         </p:submenu>
                         <p:submenu id="agenda" label="Agenda" icon="&#xE8B5;">
-                            <p:menuitem id="agendamento" value="Agendar" icon="&#xE8A3;" outcome="agenda.xhtml" ajax="false"/>
+                            <p:menuitem id="agendamento" value="Agenda" icon="&#xE8A3;" outcome="agenda.xhtml" ajax="false"/>
                         </p:submenu>
-                        <p:submenu id="finaca" label="Finanças" icon="&#xE870;">
-                            <p:menuitem id="financas" value="Finanças" icon="&#xE01D;" ajax="false"/>
+                        <p:submenu id="finaca" label="Finanças" icon="&#xE8E5;">
+                            <p:menuitem id="financas" value="Valores a receber" icon="&#xE01D;" ajax="false"/>
                         </p:submenu>
-                        <p:submenu id="movEstoque" label="Mov. Estoque" icon="&#xE8D1;">
-                            <p:menuitem id="est" value="Estoque" icon="&#xE88C;" ajax="false"/>
+                        <p:submenu id="estoque" label="Estoque" icon="&#xE8D1;">
+                            <p:menuitem id="entSaidEstoque" value="Entrada/Saída de Estoque" icon="&#xE642;" ajax="false"/>
+                            <p:menuitem id="movEstoque" value="Mov. de Estoque" icon="&#xE627;" ajax="false"/>
                         </p:submenu>
-                        <p:submenu id="relato" label="Relatórios" icon="&#xE24D;">
-                            <p:menuitem id="rel" value="Cliente" icon="&#xE85E;" ajax="false"/>
+                        <p:submenu id="relatorio" label="Relatórios" icon="&#xE85D;">
+                            <p:menuitem id="relCliente" value="Cliente" icon="&#xE85E;" ajax="false"/>
+                            <p:menuitem id="relProf" value="Profissional" icon="&#xE85E;" ajax="false"/>
+                            <p:menuitem id="relForn" value="Fornecedor" icon="&#xE85E;" ajax="false"/>
+                            <p:menuitem id="relEstoque" value="Estoque" icon="&#xE85E;" ajax="false"/>
+                            <p:menuitem id="relFreq" value="Cliente/Frequencia" icon="&#xE85E;" ajax="false"/>
+                            <p:menuitem id="relCaixa" value="Fluxo de Caixa" icon="&#xE85E;" ajax="false"/>
                         </p:submenu>
                         <p:submenu id="config" label="Configurações" icon="&#xE869;">
                             <p:menuitem id="par" value="Parâmetro" icon="&#xE8B8;" outcome="parametro.xhtml" ajax="false"/>

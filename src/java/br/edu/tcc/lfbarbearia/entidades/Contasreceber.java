@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Marcos
+ * @author Terminal 150
  */
 @Entity
 @Table(name = "contasreceber")
@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Contasreceber.findAll", query = "SELECT c FROM Contasreceber c")
     , @NamedQuery(name = "Contasreceber.findById", query = "SELECT c FROM Contasreceber c WHERE c.id = :id")
     , @NamedQuery(name = "Contasreceber.findByValor", query = "SELECT c FROM Contasreceber c WHERE c.valor = :valor")
-    , @NamedQuery(name = "Contasreceber.findByQtdeParcela", query = "SELECT c FROM Contasreceber c WHERE c.qtdeParcela = :qtdeParcela")
-    , @NamedQuery(name = "Contasreceber.findByDataVencimento", query = "SELECT c FROM Contasreceber c WHERE c.dataVencimento = :dataVencimento")
+    , @NamedQuery(name = "Contasreceber.findByDataRecebimento", query = "SELECT c FROM Contasreceber c WHERE c.dataRecebimento = :dataRecebimento")
     , @NamedQuery(name = "Contasreceber.findByStatus", query = "SELECT c FROM Contasreceber c WHERE c.status = :status")})
 public class Contasreceber implements Serializable, InterfaceEntidades {
 
@@ -52,13 +51,9 @@ public class Contasreceber implements Serializable, InterfaceEntidades {
     private float valor;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "qtdeParcela")
-    private int qtdeParcela;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "dataVencimento")
+    @Column(name = "dataRecebimento")
     @Temporal(TemporalType.DATE)
-    private Date dataVencimento;
+    private Date dataRecebimento;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -67,9 +62,6 @@ public class Contasreceber implements Serializable, InterfaceEntidades {
     @JoinColumn(name = "idAgenda", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Agenda idAgenda;
-    @JoinColumn(name = "idCondPagamento", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Condpagamento idCondPagamento;
 
     public Contasreceber() {
     }
@@ -78,11 +70,10 @@ public class Contasreceber implements Serializable, InterfaceEntidades {
         this.id = id;
     }
 
-    public Contasreceber(Integer id, float valor, int qtdeParcela, Date dataVencimento, String status) {
+    public Contasreceber(Integer id, float valor, Date dataRecebimento, String status) {
         this.id = id;
         this.valor = valor;
-        this.qtdeParcela = qtdeParcela;
-        this.dataVencimento = dataVencimento;
+        this.dataRecebimento = dataRecebimento;
         this.status = status;
     }
 
@@ -102,20 +93,12 @@ public class Contasreceber implements Serializable, InterfaceEntidades {
         this.valor = valor;
     }
 
-    public int getQtdeParcela() {
-        return qtdeParcela;
+    public Date getDataRecebimento() {
+        return dataRecebimento;
     }
 
-    public void setQtdeParcela(int qtdeParcela) {
-        this.qtdeParcela = qtdeParcela;
-    }
-
-    public Date getDataVencimento() {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(Date dataVencimento) {
-        this.dataVencimento = dataVencimento;
+    public void setDataRecebimento(Date dataRecebimento) {
+        this.dataRecebimento = dataRecebimento;
     }
 
     public String getStatus() {
@@ -132,14 +115,6 @@ public class Contasreceber implements Serializable, InterfaceEntidades {
 
     public void setIdAgenda(Agenda idAgenda) {
         this.idAgenda = idAgenda;
-    }
-
-    public Condpagamento getIdCondPagamento() {
-        return idCondPagamento;
-    }
-
-    public void setIdCondPagamento(Condpagamento idCondPagamento) {
-        this.idCondPagamento = idCondPagamento;
     }
 
     @Override
