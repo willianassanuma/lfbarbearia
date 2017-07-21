@@ -78,6 +78,11 @@ public class Agenda implements Serializable, InterfaceEntidades {
     @JoinColumn(name = "idProfissional", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Profissional idProfissional;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "dataDaAgenda")
+    @Temporal(TemporalType.DATE)
+    private Date dataDaAgenda;
 
     public Agenda() {
     }
@@ -134,6 +139,14 @@ public class Agenda implements Serializable, InterfaceEntidades {
         this.horaDeFim = horaDeFim;
     }
 
+    public Date getDataDaAgenda() {
+        return dataDaAgenda;
+    }
+
+    public void setDataDaAgenda(Date dataDaAgenda) {
+        this.dataDaAgenda = dataDaAgenda;
+    }
+
     @XmlTransient
     public Collection<Cliente> getClienteCollection() {
         return clienteCollection;
@@ -184,5 +197,5 @@ public class Agenda implements Serializable, InterfaceEntidades {
     public String toString() {
         return "br.edu.tcc.lfbarbearia.entidades.Agenda[ id=" + id + " ]";
     }
-    
+
 }

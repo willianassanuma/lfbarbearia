@@ -86,7 +86,7 @@
                     <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
                         <p:outputLabel for="cliente" value="Cliente:"/>
                         <p:selectOneMenu id="cliente" required="true" converter="classeConverter" style="width: 100%"
-                                         value="#{agendaController.objeto.clienteCollection}" filter="true" 
+                                         value="#{agendaController.objeto}" filter="true" 
                                          requiredMessage="Informe cliente!">
                             <f:selectItem   itemLabel="Selecione ... " noSelectionOption="true"/>
                             <f:selectItems  value="#{clienteController.objetoDao.all}" var="cliente"
@@ -95,15 +95,21 @@
                     </p:panelGrid>
                     <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
                         <h:panelGroup styleClass="md-inputfield">
+                            <p:calendar id="dataAgenda" value="#{agendaController.objeto.dataDaAgenda}"
+                                        locale="pt"  pattern="dd/MM/yy" mask="99/99/99"
+                                        required="true" requiredMessage="Informe data de agenda"/>
+                            <p:outputLabel for="dataAgenda" value="Data do Agendamento"/>
+                        </h:panelGroup>
+                        <h:panelGroup styleClass="md-inputfield">
                             <p:inputMask id="horaDeInicio" value="#{agendaController.objeto.horaDeInicio}"
-                                         mask="99:99:99" required="true" requiredMessage="Hora de Inicio não pode ser vazia">
+                                         mask="99:99:99" required="true" requiredMessage="Informe hora de inicio">
                                 <f:convertDateTime pattern="HH:mm:ss"/>
                             </p:inputMask>
                             <p:outputLabel for="horaDeInicio" value="Hora de Inicio"/>
                         </h:panelGroup>
                         <h:panelGroup styleClass="md-inputfield">
                             <p:inputMask id="horaDeFim" value="#{agendaController.objeto.horaDeFim}"
-                                         mask="99:99:99" required="true" requiredMessage="Hora de Término não pode ser vazia">
+                                         mask="99:99:99" required="true" requiredMessage="Informe hora de término">
                                 <f:convertDateTime pattern="HH:mm:ss"/>
                             </p:inputMask>
                             <p:outputLabel for="horaDeFim" value="Hora de Término"/>
